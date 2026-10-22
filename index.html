@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>זרמומיה | ופתאום הכול עובד</title>
+<meta name="description" content="זרמומיה – תפעול, אוטומציות ו־AI לעסקים קטנים ומתפתחים. מוצאים איפה הלידים והזמן הולכים לאיבוד, ובונים את התיקון עם הכלים שכבר יש לכם.">
+<meta property="og:title" content="זרמומיה | ופתאום הכול עובד">
+<meta property="og:description" content="מהליד הראשון ועד תהליך עבודה שרץ לבד.">
+<meta property="og:image" content="https://zarmumia.co.il/assets/case-review.jpg">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preload" href="fonts/assistant.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:Assistant;src:url(fonts/assistant.woff2) format("woff2");font-weight:200 800;font-display:swap}
+:root{
+  --teal:#0E6B66;--teal-d:#08423F;--teal-m:#14857F;--teal-t:#DCEBE7;
+  --amber:#D9822B;--amber-l:#F2A65A;--amber-t:#F9E3CB;
+  --cream:#F7EFE4;--paper:#FBF7F1;--ink:#1C2726;--mute:#5F6B69;--line:#E4D9C9;
+  --display:Assistant,Arial,sans-serif;--body:Assistant,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.7;font-size:19px;overflow-x:hidden}
+a{color:inherit}
+img,svg{display:block;max-width:100%}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.skip{position:absolute;right:-999px;top:8px;background:var(--amber);color:#fff;padding:8px 14px;border-radius:8px;z-index:100}
+.skip:focus{right:8px}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:6px}
+h1,h2,h3,.display{font-weight:800!important;letter-spacing:-.02em}
+
+/* ---------- zellige pattern (Moroccan tile) ---------- */
+.tile{background-color:var(--teal);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23F2A65A' stroke-opacity='.55' stroke-width='1.4'%3E%3Cpath d='M28 6l6.5 15.5L50 28l-15.5 6.5L28 50l-6.5-15.5L6 28l15.5-6.5z'/%3E%3Crect x='19' y='19' width='18' height='18' transform='rotate(45 28 28)'/%3E%3Cpath d='M0 0l6 6M56 0l-6 6M0 56l6-6M56 56l-6-6'/%3E%3C/g%3E%3C/svg%3E");}
+.tile-band{height:28px}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:50;background:rgba(251,247,241,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{height:42px;transform:rotate(-10deg)}
+.brand span{font-family:var(--display);font-size:26px;color:var(--teal);line-height:1}
+.links{display:flex;gap:28px;font-size:16px}
+.links a{text-decoration:none;color:var(--mute);position:relative}
+.links a::after{content:"";position:absolute;right:0;bottom:-4px;height:2px;width:0;background:var(--amber);transition:width .25s}
+.links a:hover{color:var(--teal)}.links a:hover::after{width:100%}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--amber);color:#fff;text-decoration:none;font-weight:700;border-radius:14px;padding:13px 24px;font-size:17px;border:0;cursor:pointer;box-shadow:0 4px 0 #B2661C;transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translateY(2px);box-shadow:0 2px 0 #B2661C}
+.btn.teal{background:var(--teal);box-shadow:0 4px 0 var(--teal-d)}
+.btn.teal:hover{box-shadow:0 2px 0 var(--teal-d)}
+.btn.line{background:transparent;color:var(--teal);box-shadow:none;border:2px solid var(--teal)}
+.btn.sm{padding:9px 18px;font-size:15px;border-radius:12px}
+@media(max-width:880px){.links{display:none}}
+
+/* ---------- hero: poster ---------- */
+.hero{position:relative;padding:56px 0 0;overflow:hidden}
+.hero .edge{position:absolute;top:0;bottom:0;left:0;width:clamp(26px,5vw,72px)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--teal);font-weight:700;font-size:16px;margin-bottom:10px}
+.eyebrow i{width:10px;height:10px;border-radius:50%;background:var(--amber);display:block}
+.poster{position:relative}
+.hero h1{font-weight:800;font-size:clamp(78px,15.5vw,236px);line-height:.86;letter-spacing:-.045em;color:var(--teal-d);margin:0 0 30px;position:relative;z-index:1}
+.hero h1 .l2{display:block;padding-right:clamp(40px,12vw,190px)}
+.hero h1 em{font-style:normal;color:var(--amber);position:relative;white-space:nowrap}
+.hero h1 em svg{position:absolute;right:-2%;bottom:.02em;width:104%;height:.16em}
+.hero h1 em svg path{stroke:var(--amber);stroke-width:8;fill:none;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:420;animation:draw 1.1s .5s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hero .gk{position:absolute;z-index:2;width:clamp(110px,16vw,250px);left:clamp(4px,7vw,110px);top:clamp(-30px,-2vw,-10px);transform:rotate(-38deg);filter:drop-shadow(0 14px 14px rgba(8,66,63,.25));animation:crawl 6s ease-in-out infinite}
+@keyframes crawl{0%,100%{transform:rotate(-38deg) translate(0,0)}50%{transform:rotate(-33deg) translate(-10px,-12px)}}
+.under{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;padding-left:clamp(30px,6vw,90px)}
+.hero p.sub{font-size:clamp(20px,2vw,24px);color:var(--mute);max-width:620px;margin-bottom:28px;line-height:1.55}
+.hero p.sub b{color:var(--ink);font-weight:700}
+.ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.sticky{width:250px;background:#FFF4D6;padding:20px 22px 22px;transform:rotate(3deg);box-shadow:0 18px 30px -14px rgba(8,66,63,.35);font-size:16px;line-height:1.45;color:#5b4a2b;position:relative;margin-bottom:8px}
+.sticky::before{content:"";position:absolute;top:-12px;right:50%;width:90px;height:24px;margin-right:-45px;background:rgba(14,107,102,.25);transform:rotate(-4deg)}
+.sticky b{display:block;color:var(--teal-d);font-size:18px;margin-bottom:4px}
+@media(max-width:880px){.poster{margin-top:56px}.hero .gk{width:92px;top:-74px;left:4px}.under{grid-template-columns:1fr;padding-left:0}.sticky{margin:10px auto 0;transform:rotate(2deg)}.hero .edge{display:none}.hero h1 .l2{padding-right:0}}
+/* crawling scroll gecko */
+.walker{position:fixed;left:clamp(8px,1.6vw,22px);top:90px;width:34px;z-index:40;pointer-events:none;opacity:.9;transition:transform .15s linear}
+.walker img{width:34px;transform:rotate(180deg)}
+.walker.flip img{transform:rotate(0)}
+@media(max-width:1000px){.walker{display:none}}
+
+.marquee{margin-top:72px;border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;background:var(--cream)}
+.marquee div{display:inline-flex;gap:46px;padding:16px 0;animation:mq 38s linear infinite;font-family:var(--display);font-size:22px;color:var(--teal)}
+.marquee span::after{content:"✦";color:var(--amber);margin-right:46px}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(50%)}}
+
+section{padding:100px 0}
+.kicker{display:flex;align-items:center;gap:10px;color:var(--amber);font-weight:700;font-size:15px;margin-bottom:12px}
+.kicker::before{content:"";width:28px;height:2px;background:var(--amber)}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(40px,6vw,78px);line-height:1;color:var(--teal-d);margin-bottom:18px}
+.lead{font-size:20px;color:var(--mute);max-width:700px}
+
+/* ---------- signature: the lead's journey ---------- */
+.journey{background:var(--teal-d);color:#fff;position:relative;overflow:hidden}
+.journey h2{color:#fff}
+.journey .lead{color:#B9D5D1}
+.switch{display:inline-flex;background:rgba(255,255,255,.08);border-radius:16px;padding:6px;margin:30px 0 46px;gap:6px}
+.switch button{font:inherit;font-weight:700;font-size:17px;border:0;background:transparent;color:#B9D5D1;padding:11px 22px;border-radius:12px;cursor:pointer;transition:background .2s,color .2s}
+.switch button[aria-pressed="true"]{background:var(--amber);color:#fff}
+.switch button.after[aria-pressed="true"]{background:#fff;color:var(--teal-d)}
+.track{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.track::before{content:"";position:absolute;top:34px;right:6%;left:6%;height:4px;border-radius:4px;transition:all .5s;background:repeating-linear-gradient(to left,var(--amber-l) 0 18px,transparent 18px 34px)}
+.journey.fixed .track::before{background:linear-gradient(to left,var(--amber-l),#fff)}
+.runner{position:absolute;top:24px;right:6%;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 0 0 6px rgba(255,255,255,.18);opacity:0;transition:opacity .3s}
+.journey.fixed .runner{opacity:1;animation:run 5s ease-in-out infinite}
+@keyframes run{0%{right:6%}90%,100%{right:calc(94% - 24px)}}
+.journey:not(.fixed) .runner{animation:none}
+.stop{position:relative;text-align:center}
+.dot{width:72px;height:72px;margin:0 auto 16px;border-radius:22px;display:flex;align-items:center;justify-content:center;background:#164F4B;border:2px solid rgba(255,255,255,.18);transition:all .4s;position:relative;z-index:2}
+.dot svg{width:30px;height:30px;stroke:#fff}
+.journey.fixed .dot{background:var(--teal-m);border-color:#fff}
+.stop h3{font-size:18px;margin-bottom:10px}
+.note{font-size:15px;line-height:1.5;border-radius:14px;padding:12px 12px;min-height:92px;transition:all .35s}
+.note .b{display:block;color:#FFD3A6}
+.note .a{display:none;color:#fff}
+.note{background:rgba(217,130,43,.14);border:1px dashed rgba(242,166,90,.6)}
+.journey.fixed .note{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25)}
+.journey.fixed .note .b{display:none}.journey.fixed .note .a{display:block}
+.verdict{margin-top:40px;font-family:var(--display);font-size:clamp(24px,3vw,34px)}
+.verdict .b{color:var(--amber-l)}.verdict .a{display:none}
+.journey.fixed .verdict .b{display:none}.journey.fixed .verdict .a{display:inline}
+@media(max-width:880px){.track{grid-template-columns:1fr;gap:14px}.track::before,.runner{display:none}.stop{display:grid;grid-template-columns:64px 1fr;gap:14px;text-align:right;align-items:start}.dot{width:56px;height:56px;margin:0;border-radius:16px}.note{min-height:0}}
+
+/* ---------- services as an editorial index ---------- */
+.idx{margin-top:40px;border-top:2px solid var(--teal-d)}
+.row{display:grid;grid-template-columns:90px 1.1fr 1.6fr;gap:24px;align-items:baseline;padding:30px 0;border-bottom:1px solid var(--line);transition:background .25s,padding .25s}
+.row:hover{background:var(--cream);padding-inline:18px}
+.row .n{font-family:var(--display);font-size:40px;color:var(--amber);line-height:1}
+.row h3{font-family:var(--display);font-weight:800;font-size:30px;color:var(--teal-d);line-height:1.15}
+.row p{color:var(--mute)}
+.row p b{color:var(--ink)}
+@media(max-width:780px){.row{grid-template-columns:56px 1fr}.row p{grid-column:2}}
+
+/* ---------- process ---------- */
+.process{background:var(--cream)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:46px;border-radius:24px;overflow:hidden;border:1px solid var(--line)}
+.step{background:var(--paper);padding:30px 26px;border-left:1px solid var(--line)}
+.step:last-child{border-left:0;background:var(--teal);color:#fff}
+.step .w{font-size:14px;font-weight:700;color:var(--amber)}
+.step:last-child .w{color:var(--amber-l)}
+.step h3{font-family:var(--display);font-weight:800;font-size:26px;margin:6px 0 8px;color:var(--teal-d)}
+.step:last-child h3{color:#fff}
+.step p{color:var(--mute);font-size:16px}
+.step:last-child p{color:#CFE4E1}
+@media(max-width:880px){.steps{grid-template-columns:1fr 1fr}.step{border-bottom:1px solid var(--line)}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* ---------- work: papers on the desk ---------- */
+.work{background:var(--teal-d);color:#fff;position:relative;overflow:hidden}
+.work h2{color:#fff}.work .lead{color:#B9D5D1}
+.desk{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:56px}
+.paper{display:block;text-decoration:none;color:inherit;transition:transform .35s}
+.paper .sh{display:block;background:#fff;padding:10px;border-radius:4px;box-shadow:0 26px 40px -18px rgba(0,0,0,.55);transform:rotate(var(--r));transition:transform .35s}
+.paper .sh img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:2px}
+.paper:hover .sh,.paper:focus-visible .sh{transform:rotate(0) translateY(-8px)}
+.paper:nth-child(1){--r:-3deg}.paper:nth-child(2){--r:2deg;margin-top:40px}.paper:nth-child(3){--r:-1.5deg}
+.paper h3{font-size:26px;margin:22px 0 4px}
+.paper p{color:#B9D5D1;font-size:17px}
+.paper .go{display:inline-block;margin-top:8px;color:var(--amber-l);font-weight:700}
+.more{margin-top:46px;display:flex;gap:14px;flex-wrap:wrap}
+.work .btn.line{color:#fff;border-color:rgba(255,255,255,.6)}
+@media(max-width:880px){.desk{grid-template-columns:1fr;gap:40px}.paper:nth-child(2){margin-top:0}.paper .sh img{aspect-ratio:4/3}}
+
+/* ---------- story ---------- */
+.story .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.lives{position:relative;padding-right:34px}
+.lives::before{content:"";position:absolute;right:11px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--amber),var(--teal))}
+.life{position:relative;margin-bottom:26px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px 26px}
+.life::before{content:"";position:absolute;right:-31px;top:28px;width:18px;height:18px;border-radius:50%;background:var(--amber);border:4px solid var(--paper)}
+.life.now::before{background:var(--teal)}
+.life small{font-weight:700;color:var(--amber);font-size:14px}
+.life.now small{color:var(--teal)}
+.life h3{font-family:var(--display);font-weight:800;font-size:26px;color:var(--teal-d);margin:2px 0 6px}
+.life p{color:var(--mute);font-size:17px}
+.quote{font-family:var(--display);font-size:clamp(26px,3.2vw,38px);line-height:1.25;color:var(--teal-d)}
+.quote em{font-style:normal;color:var(--amber)}
+.sig{margin-top:22px;color:var(--mute);font-size:17px}
+.sig b{color:var(--ink)}
+@media(max-width:880px){.story .wrap{grid-template-columns:1fr}}
+
+/* ---------- privacy ---------- */
+.privacy{padding:0 0 100px}
+.pbox{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:28px;padding:40px;position:relative;overflow:hidden}
+.pbox::after{content:"";position:absolute;inset:0 auto 0 0;width:16px}
+.shield{width:110px;height:110px;border-radius:30px;display:flex;align-items:center;justify-content:center}
+.pbox h2{font-size:clamp(28px,3.4vw,40px)}
+.pbox ul{list-style:none;display:grid;gap:8px}
+.pbox li{padding-right:30px;position:relative;color:var(--mute)}
+.pbox li::before{content:"✓";position:absolute;right:0;top:0;color:var(--teal);font-weight:700}
+@media(max-width:700px){.pbox{grid-template-columns:1fr;padding:28px}}
+
+/* ---------- cta ---------- */
+.cta{position:relative;color:#fff;text-align:center;padding:110px 0;overflow:hidden}
+.cta .veil{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(8,66,63,.94),rgba(8,66,63,.82))}
+.cta .wrap{position:relative}
+.cta h2{color:#fff;font-size:clamp(38px,5.4vw,66px)}
+.cta p{font-size:20px;max-width:620px;margin:0 auto 34px;color:#D6E8E5}
+
+footer{background:var(--teal-d);color:#9FC3BE;padding:30px 0;font-size:15px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+footer .brand span{color:#fff}
+footer a{color:#fff}
+
+.wa{position:fixed;left:20px;bottom:20px;z-index:60;width:58px;height:58px;border-radius:18px;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(0,0,0,.22)}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}.hero h1 em svg path{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="זרמומיה – לראש העמוד"><img src="assets/gecko_teal.png" alt=""><span>זרמומיה</span></a>
+    <nav class="links" aria-label="ניווט ראשי">
+      <a href="#journey">מסע הליד</a>
+      <a href="#services">מה אנחנו עושים</a>
+      <a href="#work">דוגמאות עבודה</a>
+      <a href="#story">הסיפור</a>
+    </nav>
+    <a class="btn sm" href="https://wa.me/972547892320" target="_blank" rel="noopener">דברו איתי</a>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top" style="padding-bottom:0">
+  <div class="edge tile" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="eyebrow"><i></i>תפעול, אוטומציות ו־AI לעסקים קטנים ומתפתחים</div>
+    <div class="poster">
+      <img class="gk" src="assets/gecko_teal.png" alt="" aria-hidden="true">
+      <h1>ופתאום<span class="l2"><em>הכול<svg viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path d="M4 22 C 70 6, 150 30, 296 10"/></svg></em> עובד.</span></h1>
+    </div>
+    <div class="under">
+      <div>
+        <p class="sub">רוב העסקים לא צריכים <b>עוד לידים</b>. הם צריכים שהלידים שכבר מגיעים <b>לא ייפלו בדרך</b>. אנחנו מוצאים איפה זה נתקע, ובונים את התיקון – עם הכלים שכבר יש לכם.</p>
+        <div class="ctas">
+          <a class="btn" href="https://wa.me/972547892320?text=%D7%94%D7%99%D7%99%20%D7%A4%D7%90%D7%A0%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%99%D7%9B%D7%A8%D7%95%D7%AA" target="_blank" rel="noopener">לשיחת היכרות</a>
+          <a class="btn line" href="#journey">איפה הלידים נעלמים?</a>
+        </div>
+      </div>
+      <aside class="sticky"><b>למה שממית?</b>במסורת היהודית־מרוקאית, זרמומיה על הקיר היא סימן למזל טוב בבית. אצלנו היא גם סימן שמישהו שם לב לפרטים.</aside>
+    </div>
+  </div>
+  <div class="marquee" aria-hidden="true"><div>
+    <span>אבחון שירות ותפעול</span><span>מעקב לידים אוטומטי</span><span>סיכומי שיחה ב־AI</span><span>דשבורד מנכ״ל</span><span>דפי נחיתה שמחוברים ל־CRM</span><span>ייעוץ עסקי וארגוני</span>
+    <span>אבחון שירות ותפעול</span><span>מעקב לידים אוטומטי</span><span>סיכומי שיחה ב־AI</span><span>דשבורד מנכ״ל</span><span>דפי נחיתה שמחוברים ל־CRM</span><span>ייעוץ עסקי וארגוני</span>
+  </div></div>
+</section>
+
+<section class="journey" id="journey" aria-labelledby="j-h">
+  <div class="wrap">
+    <div class="kicker">מסע הליד</div>
+    <h2 id="j-h">ככה ליד עובר אצלכם היום.<br>וככה הוא יכול לעבור.</h2>
+    <p class="lead">חמש תחנות בין "השארתי פרטים" ל"לקוח שממליץ". בכל אחת מהן כסף יכול להיעלם – או להגיע.</p>
+    <div class="switch" role="group" aria-label="השוואה">
+      <button type="button" class="before" aria-pressed="true">לפני</button>
+      <button type="button" class="after" aria-pressed="false">אחרי זרמומיה</button>
+    </div>
+    <div class="track">
+      <span class="runner" aria-hidden="true"></span>
+      <div class="stop"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v12H5l-1 4z"/></svg></div><div><h3>פנייה נכנסת</h3><p class="note"><span class="b">הפנייה נוחתת במייל או בוואטסאפ של מישהו, ונשכחת.</span><span class="a">כל פנייה נכנסת לבד ל־CRM ומשויכת לנציג.</span></p></div></div>
+      <div class="stop"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-3 2a11 11 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></div><div><h3>מענה ראשון</h3><p class="note"><span class="b">"נחזור אליך מחר" – ואף אחד לא חוזר.</span><span class="a">תזכורת אוטומטית, והתראה למנהל כשליד לא נענה.</span></p></div></div>
+      <div class="stop"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h5"/></svg></div><div><h3>שיחה ותיעוד</h3><p class="note"><span class="b">מה נאמר ומה הצעד הבא – רק בראש של הנציג.</span><span class="a">סיכום שיחה ב־AI נשמר בכרטיס, עם הצעד הבא.</span></p></div></div>
+      <div class="stop"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div><div><h3>סגירה</h3><p class="note"><span class="b">אין תמונת מצב: כמה בדרך, איפה נתקע, כמה כסף.</span><span class="a">דשבורד מנכ״ל: המשפך, צווארי הבקבוק והכסף – בדף אחד.</span></p></div></div>
+      <div class="stop"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></div><div><h3>לקוח שממליץ</h3><p class="note"><span class="b">חודשים של שקט, ושיחות "מה קורה עם התיק שלי?"</span><span class="a">עדכוני סטטוס אוטומטיים, ובקשת המלצה ברגע הנכון.</span></p></div></div>
+    </div>
+    <p class="verdict"><span class="b">כל תחנה כזו היא כסף שהולך לאיבוד.</span><span class="a">ופתאום הכול עובד.</span></p>
+  </div>
+</section>
+
+<section id="services" aria-labelledby="s-h">
+  <div class="wrap">
+    <div class="kicker">מה אנחנו עושים</div>
+    <h2 id="s-h">ארגז הכלים</h2>
+    <p class="lead">לא מוכרים מערכת. מסתכלים על העסק דרך השרשרת, ובוחרים את התיקון הנכון. קודם בודקים מה הכלים שכבר יש לכם יודעים לעשות.</p>
+    <div class="idx">
+      <div class="row reveal"><span class="n">01</span><h3>אבחון שירות ותפעול</h3><p>מבט מבחוץ על התהליך, המערכות והמספרים. מקבלים <b>דו"ח ממצאים ותוכנית עבודה</b> עם סדר עדיפויות.</p></div>
+      <div class="row reveal"><span class="n">02</span><h3>אוטומציות ו־CRM</h3><p>מעקב לידים, תזכורות, ניתוב פניות ו<b>סיכומי שיחה ב־AI</b> – על המערכת שכבר יש לכם.</p></div>
+      <div class="row reveal"><span class="n">03</span><h3>דשבורד מנכ״ל</h3><p>כל העסק במבט אחד: <b>המשפך, צווארי הבקבוק והכסף שבדרך</b>. דף אחד שמתעדכן לבד.</p></div>
+      <div class="row reveal"><span class="n">04</span><h3>אתרים ודפי נחיתה</h3><p>דפים שמחוברים <b>ישירות ל־CRM ולאוטומציות</b>, כך שכל פנייה נקלטת ומקבלת מענה.</p></div>
+      <div class="row reveal"><span class="n">05</span><h3>ייעוץ עסקי וארגוני</h3><p>תהליכים, תחומי אחריות ו<b>גבולות החלטה</b> – כדי שלא כל דבר קטן יעבור דרככם.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process" aria-labelledby="p-h">
+  <div class="wrap">
+    <div class="kicker">איך זה עובד</div>
+    <h2 id="p-h">ארבעה צעדים, בלי הפתעות</h2>
+    <div class="steps">
+      <div class="step"><span class="w">צעד 1</span><h3>היכרות</h3><p>שיחה קצרה ושאלון: איך העסק עובד היום ומה הכי כואב.</p></div>
+      <div class="step"><span class="w">צעד 2</span><h3>אבחון</h3><p>עוברים על התהליך, המערכות והמספרים, ומקבלים ממצאים ותוכנית.</p></div>
+      <div class="step"><span class="w">צעד 3</span><h3>ביצוע</h3><p>בונים – קודם בפיילוט קטן, ואחרי שזה עובד, לכולם.</p></div>
+      <div class="step"><span class="w">צעד 4</span><h3>ליווי</h3><p>נשארים עד שהדרך החדשה הופכת להרגל, ומודדים שזה באמת עובד.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work" aria-labelledby="w-h">
+  <div class="wrap">
+    <div class="kicker">דוגמאות מהעבודה</div>
+    <h2 id="w-h">ככה זה נראה על השולחן</h2>
+    <p class="lead">מסמכים אמיתיים מעבודות אמיתיות – בעברית, בלי פרטים מזהים. אפשר לפתוח ולקרוא.</p>
+    <div class="desk">
+      <a class="paper" href="work/review.html"><span class="sh"><img src="assets/case-review.jpg" alt="עמוד מתוך דו״ח אבחון שירות ותפעול" loading="lazy"></span><h3>אבחון שירות ותפעול</h3><p>משרד להחזרי מס: 7 נקודות כאב, דשבורד מנכ״ל ותוכנית של 7 שבועות.</p><span class="go">לקריאת הדו״ח ←</span></a>
+      <a class="paper" href="work/landing.html"><span class="sh"><img src="assets/case-landing.jpg" alt="דף נחיתה למשרד להחזרי מס" loading="lazy"></span><h3>דף נחיתה שמחובר ל־CRM</h3><p>כל פנייה נכנסת ישר למערכת, עם מעקב אוטומטי.</p><span class="go">לצפייה בדף ←</span></a>
+      <a class="paper" href="work/org.html"><span class="sh"><img src="assets/case-org.jpg" alt="מסמך עזרה ראשונה ארגונית" loading="lazy"></span><h3>עזרה ראשונה ארגונית</h3><p>שני סניפים, מפת החלטות למנהלים ודיווח יומי אחד.</p><span class="go">לקריאת המסמך ←</span></a>
+    </div>
+    <div class="more">
+      <a class="btn" href="https://zarmumia.github.io/ceo-dashboard/" target="_blank" rel="noopener">לדשבורד הדגמה חי</a>
+      <a class="btn line" href="https://github.com/zarmumia" target="_blank" rel="noopener">הכלים שבנינו ב־GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="story" aria-labelledby="st-h" style="background:var(--cream)">
+  <div class="wrap">
+    <div>
+      <div class="kicker">הסיפור</div>
+      <h2 id="st-h" class="quote">שממית יודעת <em>להתחדש</em>.<br>גם זרמומיה.</h2>
+      <p class="sig">זרמומיה הוקמה על ידי <b>פאני בן עמי רבינוביץ'</b> – לשעבר סמנכ"לית שירות ותפעול, ושותפה מייסדת בסטארטאפ תשלומים.</p>
+    </div>
+    <div class="lives">
+      <div class="life reveal"><small>הגלגול הראשון</small><h3>שיווק אסטרטגי</h3><p>זרמומיה התחילה כסטודיו לשיווק (Sharp Marketing): אסטרטגיה, קמפיינים, תוכן ומיתוג. שם למדנו ששיווק טוב מביא לידים – אבל אם הליד לא מקבל מענה, לא מתועד ולא מגיע לסגירה, הכסף הולך לאיבוד בדרך.</p></div>
+      <div class="life now reveal"><small>הגלגול הנוכחי</small><h3>מהשיווק אל התפעול</h3><p>היום זרמומיה מחברת בין השיווק לתפעול: אבחון, אוטומציות, דשבורד וליווי – כדי שכל ליד יגיע עד הסוף.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="tile tile-band" aria-hidden="true"></div>
+
+<section class="privacy" style="padding-top:100px" aria-labelledby="pr-h">
+  <div class="wrap">
+    <div class="pbox reveal">
+      <div class="shield tile" aria-hidden="true"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <div>
+        <h2 id="pr-h">פרטיות מהיום הראשון</h2>
+        <ul>
+          <li>מינימום מידע מזהה יוצא מהמערכות שלכם</li>
+          <li>עובדים עם משתמש אישי משלנו – לא עם הסיסמה שלכם</li>
+          <li>כל אוטומציה נבדקת מול חוק הגנת הפרטיות, כולל תיקון 13</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta tile" aria-labelledby="c-h">
+  <div class="veil"></div>
+  <div class="wrap">
+    <h2 id="c-h">בואו נמצא איפה זה נתקע.</h2>
+    <p>שיחה קצרה, בלי התחייבות. נבין איך העסק עובד היום, ונגיד בכנות אם ואיך אפשר לעזור.</p>
+    <a class="btn" href="https://wa.me/972547892320?text=%D7%94%D7%99%D7%99%20%D7%A4%D7%90%D7%A0%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%99%D7%9B%D7%A8%D7%95%D7%AA" target="_blank" rel="noopener">דברו איתי בוואטסאפ</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="assets/gecko_white.png" alt=""><span>זרמומיה</span></a>
+    <div>ופתאום הכול עובד. · כפר סבא · <a href="https://www.linkedin.com/company/zarmumia" target="_blank" rel="noopener">LinkedIn</a></div>
+    <div>© 2026 זרמומיה</div>
+  </div>
+</footer>
+
+<div class="walker" aria-hidden="true"><img src="assets/gecko_teal.png" alt=""></div>
+<a class="wa" href="https://wa.me/972547892320" target="_blank" rel="noopener" aria-label="שליחת הודעה בוואטסאפ">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
+</a>
+
+<script>
+const j=document.getElementById('journey');
+const [b,a]=j.querySelectorAll('.switch button');
+function set(fixed){j.classList.toggle('fixed',fixed);a.setAttribute('aria-pressed',fixed);b.setAttribute('aria-pressed',!fixed)}
+b.onclick=()=>set(false);a.onclick=()=>set(true);
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const w=document.querySelector('.walker');let last=0;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){addEventListener('scroll',()=>{const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;const t=Math.min(1,y/max)*(innerHeight-170);w.style.transform=`translateY(${t}px)`;w.classList.toggle('flip',y<last);last=y},{passive:true})}
+</script>
+</body>
+</html>
