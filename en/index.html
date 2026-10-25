@@ -521,5 +521,11 @@ try{localStorage.setItem('zm_consent',v);}catch(e){}
 if(v==='yes')gtag('consent','update',{analytics_storage:'granted'});
 b.hidden=true;});})();
 </script>
+<script>
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a');if(!a||typeof gtag!=='function')return;
+var h=a.getAttribute('href')||'',l=((a.textContent||'').trim()||a.getAttribute('aria-label')||'').slice(0,40);
+if(h.indexOf('wa.me/')>-1)gtag('event','whatsapp_click',{link_text:l});
+else if(/check\.html$/.test(h))gtag('event','check_open',{link_text:l});});
+</script>
 </body>
 </html>
