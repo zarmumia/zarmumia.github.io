@@ -70,6 +70,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,247,241,.92);backdro
 @keyframes blink{0%,93%,100%{transform:scaleY(1)}95%{transform:scaleY(.12)}}
 .gk .tail{transform-box:fill-box;transform-origin:13% 0%;animation:wag 3.2s ease-in-out infinite}
 @keyframes wag{0%,100%{transform:rotate(0)}50%{transform:rotate(-6deg)}}
+@media(min-width:881px) and (max-width:1300px){.hero .gk{left:30%;top:-60px}}
 @keyframes crawl{0%,100%{transform:rotate(140deg) translate(0,0)}50%{transform:rotate(137deg) translate(-5px,4px)}}
 .under{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;padding-left:clamp(44px,9vw,140px)}
 .hero p.sub{font-size:clamp(20px,2vw,24px);color:var(--mute);max-width:620px;margin-bottom:28px;line-height:1.55}
@@ -78,7 +79,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,247,241,.92);backdro
 .sticky{width:250px;background:#FFF4D6;padding:20px 22px 22px;transform:rotate(3deg);box-shadow:0 18px 30px -14px rgba(8,66,63,.35);font-size:16px;line-height:1.45;color:#5b4a2b;position:relative;margin-bottom:8px}
 .sticky::before{content:"";position:absolute;top:-12px;right:50%;width:90px;height:24px;margin-right:-45px;background:rgba(14,107,102,.25);transform:rotate(-4deg)}
 .sticky b{display:block;color:var(--teal-d);font-size:18px;margin-bottom:4px}
-@media(max-width:880px){.poster{margin-top:104px}.hero .gk{width:80px;top:-118px;left:8%}.under{grid-template-columns:1fr;padding-left:0}.sticky{margin:10px auto 0;transform:rotate(2deg)}.hero .edge{display:none}.hero h1 .l2{padding-right:0}}
+@media(max-width:880px){.poster{margin-top:222px}.hero .gk{width:112px;top:-196px;left:calc(50% - 56px)}.under{grid-template-columns:1fr;padding-left:0}.sticky{margin:10px auto 0;transform:rotate(2deg)}.hero .edge{display:none}.hero h1 .l2{padding-right:0}}
 /* crawling scroll gecko */
 .walker{position:fixed;left:clamp(8px,1.6vw,22px);top:90px;width:34px;z-index:40;pointer-events:none;opacity:.9;transition:transform .15s linear}
 .walker img{width:34px;transform:rotate(180deg)}
