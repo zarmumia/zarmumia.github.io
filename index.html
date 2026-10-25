@@ -137,6 +137,28 @@ h2{font-family:var(--display);font-weight:800;font-size:clamp(40px,6vw,78px);lin
 .row p b{color:var(--ink)}
 @media(max-width:780px){.row{grid-template-columns:56px 1fr}.row p{grid-column:2}}
 
+/* ---------- AI: a live feed, not a feature list ---------- */
+.ai .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:start}
+.ai .lead{margin-bottom:28px}
+.rules{display:grid;gap:14px;margin-top:8px}
+.rule{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}
+.rule i{width:44px;height:44px;border-radius:14px;background:var(--teal-t);display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800;color:var(--teal-d);font-size:18px}
+.rule b{display:block;color:var(--teal-d);font-size:19px}
+.rule span{color:var(--mute);font-size:16px}
+.feed{position:relative;display:grid;gap:14px;padding:26px;border-radius:30px;background:var(--teal-d);box-shadow:0 30px 60px -30px rgba(8,66,63,.6)}
+.feed .top{position:relative;display:flex;justify-content:space-between;align-items:center;color:#CFE4E1;font-size:14px;font-weight:700;padding:0 4px 4px}
+.feed .top em{font-style:normal;display:inline-flex;align-items:center;gap:8px}
+.feed .top em::before{content:"";width:9px;height:9px;border-radius:50%;background:#4ADE80;box-shadow:0 0 0 4px rgba(74,222,128,.2)}
+.msg{position:relative;background:#fff;border-radius:18px;padding:14px 16px 14px 18px;display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:start}
+.msg:nth-child(odd){margin-inline-start:22px}.msg:nth-child(even){margin-inline-end:22px}
+.msg .ic{width:38px;height:38px;border-radius:12px;background:var(--amber-t);display:flex;align-items:center;justify-content:center}
+.msg .ic svg{width:20px;height:20px;stroke:#9A5715}
+.msg small{display:flex;justify-content:space-between;gap:10px;font-size:13px;font-weight:700;color:var(--amber);margin-bottom:2px}
+.msg small time{color:#9AA6A4;font-weight:500}
+.msg p{font-size:15.5px;line-height:1.45;color:var(--ink)}
+.msg p b{color:var(--teal-d)}
+@media(max-width:880px){.ai .wrap{grid-template-columns:1fr;gap:36px}.msg:nth-child(odd),.msg:nth-child(even){margin-inline:0}.feed{padding:18px}}
+
 /* ---------- process ---------- */
 .process{background:var(--cream)}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:46px;border-radius:24px;overflow:hidden;border:1px solid var(--line)}
@@ -184,6 +206,9 @@ h2{font-family:var(--display);font-weight:800;font-size:clamp(40px,6vw,78px);lin
 .origin p{font-size:18px;color:var(--ink);line-height:1.65}
 .origin p+p{margin-top:8px;color:var(--mute)}
 .origin b{color:var(--teal-d)}
+.founder{display:flex;align-items:center;gap:18px;margin-top:22px}
+.founder img{flex:none;width:96px;height:96px;border-radius:50%;box-shadow:0 0 0 4px var(--paper),0 0 0 7px var(--amber),0 14px 24px -12px rgba(8,66,63,.4)}
+.founder .sig{margin-top:0}
 .sig{margin-top:22px;color:var(--mute);font-size:17px}
 .sig b{color:var(--ink)}
 @media(max-width:880px){.story .wrap{grid-template-columns:1fr}}
@@ -226,9 +251,11 @@ footer a{color:#fff}
     <a class="brand" href="#top" aria-label="זרמומיה – לראש העמוד"><img src="assets/gecko_teal.png" alt=""><span>זרמומיה</span></a>
     <nav class="links" aria-label="ניווט ראשי">
       <a href="#journey">מסע הליד</a>
+      <a href="#ai">AI לעסק</a>
       <a href="#services">מה אנחנו עושים</a>
       <a href="#work">דוגמאות עבודה</a>
       <a href="#story">הסיפור</a>
+      <a href="check.html">בדיקה מהירה</a>
     </nav>
     <a class="btn sm" href="https://wa.me/972547892320" target="_blank" rel="noopener">דברו איתי</a>
   </div>
@@ -245,18 +272,18 @@ footer a{color:#fff}
     </div>
     <div class="under">
       <div>
-        <p class="sub">רוב העסקים לא צריכים <b>עוד לידים</b>. הם צריכים שהלידים שכבר מגיעים <b>לא ייפלו בדרך</b>. אנחנו מוצאים איפה זה נתקע, ובונים את התיקון – עם הכלים שכבר יש לכם.</p>
+        <p class="sub">רוב העסקים לא צריכים <b>עוד לידים</b>. הם צריכים שהלידים שכבר מגיעים <b>לא ייפלו בדרך</b>. אנחנו מוצאים איפה זה נתקע, ובונים את התיקון – עם <b>AI ואוטומציות</b> על הכלים שכבר יש לכם.</p>
         <div class="ctas">
           <a class="btn" href="https://wa.me/972547892320?text=%D7%94%D7%99%D7%99%20%D7%A4%D7%90%D7%A0%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%99%D7%9B%D7%A8%D7%95%D7%AA" target="_blank" rel="noopener">לשיחת היכרות</a>
-          <a class="btn line" href="#journey">איפה הלידים נעלמים?</a>
+          <a class="btn line" href="check.html">בדיקה של 2 דקות: איפה זה נתקע?</a>
         </div>
       </div>
       <aside class="sticky"><b>למה זרמומיה?</b>בתרבות המרוקאית, זרמומיה היא לטאה קטנה שמביאה מזל לבית. <a href="#story" style="color:var(--teal);font-weight:700">לסיפור המלא ←</a></aside>
     </div>
   </div>
   <div class="marquee" aria-hidden="true"><div>
-    <span>אבחון שירות ותפעול</span><span>מעקב לידים אוטומטי</span><span>סיכומי שיחה ב־AI</span><span>דשבורד מנכ״ל</span><span>דפי נחיתה שמחוברים ל־CRM</span><span>ייעוץ עסקי וארגוני</span>
-    <span>אבחון שירות ותפעול</span><span>מעקב לידים אוטומטי</span><span>סיכומי שיחה ב־AI</span><span>דשבורד מנכ״ל</span><span>דפי נחיתה שמחוברים ל־CRM</span><span>ייעוץ עסקי וארגוני</span>
+    <span>אבחון שירות ותפעול</span><span>עוזרי AI לעסק</span><span>מעקב לידים אוטומטי</span><span>סיכומי שיחה ב־AI</span><span>דשבורד מנכ״ל</span><span>דפי נחיתה שמחוברים ל־CRM</span><span>ייעוץ עסקי וארגוני</span>
+    <span>אבחון שירות ותפעול</span><span>עוזרי AI לעסק</span><span>מעקב לידים אוטומטי</span><span>סיכומי שיחה ב־AI</span><span>דשבורד מנכ״ל</span><span>דפי נחיתה שמחוברים ל־CRM</span><span>ייעוץ עסקי וארגוני</span>
   </div></div>
 </section>
 
@@ -278,6 +305,31 @@ footer a{color:#fff}
       <div class="stop"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></div><div><h3>לקוח שממליץ</h3><p class="note"><span class="b">חודשים של שקט, ושיחות "מה קורה עם התיק שלי?"</span><span class="a">עדכוני סטטוס אוטומטיים, ובקשת המלצה ברגע הנכון.</span></p></div></div>
     </div>
     <p class="verdict"><span class="b">כל תחנה כזו היא כסף שהולך לאיבוד.</span><span class="a">ופתאום הכול עובד.</span></p>
+    <p style="margin-top:22px"><a class="btn" href="check.html">איפה זה נתקע אצלכם? בדיקה של 2 דקות ←</a></p>
+  </div>
+</section>
+
+<section class="ai" id="ai" aria-labelledby="ai-h">
+  <div class="wrap">
+    <div>
+      <div class="kicker">AI לעסק</div>
+      <h2 id="ai-h">AI שעובד אצלכם,<br>לא עליכם.</h2>
+      <p class="lead">לא עוד צ׳אטבוט שמבלבל לקוחות. עוזרים שקטים שעושים את העבודה השחורה ברקע – ומשאירים לכם את מה שדורש בן אדם.</p>
+      <div class="rules">
+        <div class="rule reveal"><i>1</i><div><b>על הכלים שכבר יש לכם</b><span>מתחברים ל־CRM, לוואטסאפ ולמייל הקיימים. בלי מערכת חדשה ללמוד.</span></div></div>
+        <div class="rule reveal"><i>2</i><div><b>אדם מאשר כל דבר רגיש</b><span>ה־AI מכין ומציע. הודעה ללקוח, החלטה או כסף – עוברים דרככם.</span></div></div>
+        <div class="rule reveal"><i>3</i><div><b>פרטיות לפי החוק</b><span>מינימום מידע מזהה יוצא מהמערכות שלכם, בהתאם לחוק הגנת הפרטיות.</span></div></div>
+      </div>
+    </div>
+    <div class="feed reveal"aria-label="דוגמאות למה שה־AI עושה ביום רגיל">
+      <div class="top"><span>יום רגיל בעסק</span><em>עובד ברקע</em></div>
+      <div class="msg"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M5 12H2M22 12h-3M6.3 6.3 4.2 4.2M17.7 6.3l2.1-2.1"/><circle cx="12" cy="13" r="5"/></svg></span><div><small>סיכום בוקר לבעלים<time>07:30</time></small><p>אתמול: 14 פניות, 11 נענו, 3 נסגרו. <b>דחוף היום:</b> 2 תיקים שתקועים מעל שבועיים.</p></div></div>
+      <div class="msg"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v12H5l-1 4z"/></svg></span><div><small>סינון פניות בוואטסאפ<time>09:12</time></small><p>פנייה חדשה ענתה על 3 שאלות סינון – <b>כנראה רלוונטית</b>. הועברה לנציג עם כל הפרטים.</p></div></div>
+      <div class="msg"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h5"/></svg></span><div><small>סיכום שיחה ל־CRM<time>10:45</time></small><p>הלקוחה מבקשת הצעת מחיר לשני סניפים. <b>צעד הבא:</b> לשלוח הצעה עד מחר ב־12:00.</p></div></div>
+      <div class="msg"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h3l3-8 4 16 3-8h5"/></svg></span><div><small>בקרת איכות שיחות<time>13:20</time></small><p>ב־4 משיחות המכירה היום לא נקבע צעד הבא. <b>הצעה:</b> לסיים כל שיחה בתאריך ושעה.</p></div></div>
+      <div class="msg"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/></svg></span><div><small>רדיפת מסמכים<time>15:05</time></small><p>חסר טופס 106 בתיק של לקוח ותיק. <b>תזכורת שנייה</b> נשלחה אליו בוואטסאפ.</p></div></div>
+      <div class="msg"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><small>עדכון סטטוס ללקוח<time>17:40</time></small><p>"התיק שלך הוגש. נעדכן ברגע שתתקבל תשובה." – <b>אושר על ידי הנציגה</b> ונשלח.</p></div></div>
+    </div>
   </div>
 </section>
 
@@ -288,10 +340,11 @@ footer a{color:#fff}
     <p class="lead">לא מוכרים מערכת. מסתכלים על העסק דרך השרשרת, ובוחרים את התיקון הנכון. קודם בודקים מה הכלים שכבר יש לכם יודעים לעשות.</p>
     <div class="idx">
       <div class="row reveal"><span class="n">01</span><h3>אבחון שירות ותפעול</h3><p>מבט מבחוץ על התהליך, המערכות והמספרים. מקבלים <b>דו"ח ממצאים ותוכנית עבודה</b> עם סדר עדיפויות.</p></div>
-      <div class="row reveal"><span class="n">02</span><h3>אוטומציות ו־CRM</h3><p>מעקב לידים, תזכורות, ניתוב פניות ו<b>סיכומי שיחה ב־AI</b> – על המערכת שכבר יש לכם.</p></div>
-      <div class="row reveal"><span class="n">03</span><h3>דשבורד מנכ״ל</h3><p>כל העסק במבט אחד: <b>המשפך, צווארי הבקבוק והכסף שבדרך</b>. דף אחד שמתעדכן לבד.</p></div>
-      <div class="row reveal"><span class="n">04</span><h3>אתרים ודפי נחיתה</h3><p>דפים שמחוברים <b>ישירות ל־CRM ולאוטומציות</b>, כך שכל פנייה נקלטת ומקבלת מענה.</p></div>
-      <div class="row reveal"><span class="n">05</span><h3>ייעוץ עסקי וארגוני</h3><p>תהליכים, תחומי אחריות ו<b>גבולות החלטה</b> – כדי שלא כל דבר קטן יעבור דרככם.</p></div>
+      <div class="row reveal"><span class="n">02</span><h3>AI לעסק</h3><p>עוזרי AI שעושים את העבודה השחורה: מסכמים שיחות, מסננים פניות, רודפים אחרי מסמכים ומכינים <b>סיכום בוקר לבעלים</b> – ואדם מאשר כל דבר רגיש.</p></div>
+      <div class="row reveal"><span class="n">03</span><h3>אוטומציות ו־CRM</h3><p>מעקב לידים, תזכורות, ניתוב פניות ו<b>עדכוני סטטוס אוטומטיים</b> – על המערכת שכבר יש לכם.</p></div>
+      <div class="row reveal"><span class="n">04</span><h3>דשבורד מנכ״ל</h3><p>כל העסק במבט אחד: <b>המשפך, צווארי הבקבוק והכסף שבדרך</b>. דף אחד שמתעדכן לבד.</p></div>
+      <div class="row reveal"><span class="n">05</span><h3>אתרים ודפי נחיתה</h3><p>דפים שמחוברים <b>ישירות ל־CRM ולאוטומציות</b>, כך שכל פנייה נקלטת ומקבלת מענה.</p></div>
+      <div class="row reveal"><span class="n">06</span><h3>ייעוץ עסקי וארגוני</h3><p>תהליכים, תחומי אחריות ו<b>גבולות החלטה</b> – כדי שלא כל דבר קטן יעבור דרככם.</p></div>
     </div>
   </div>
 </section>
@@ -335,7 +388,8 @@ footer a{color:#fff}
         <p><b>מה זה זרמומיה?</b> בתרבות המרוקאית, זרמומיה היא לטאה קטנה – שממית הבית – שמביאה מזל. כשהיא מופיעה על הקיר, זה סימן טוב: הבית שמור, ויש בו ברכה.</p>
         <p>ככה בדיוק אנחנו עובדים: נכנסים בשקט, לא תופסים מקום, שמים לב לפרטים הקטנים – ופתאום הכול עובד.</p>
       </div>
-      <p class="sig">זרמומיה הוקמה על ידי <b>פאני בן עמי רבינוביץ'</b> – לשעבר סמנכ"לית שירות ותפעול, ושותפה מייסדת בסטארטאפ תשלומים.</p>
+      <div class="founder"><img src="assets/fanny.png" alt="פאני בן עמי רבינוביץ', מייסדת זרמומיה" width="96" height="96" loading="lazy">
+      <p class="sig">זרמומיה הוקמה על ידי <b>פאני בן עמי רבינוביץ'</b> – לשעבר סמנכ"לית שירות ותפעול, ושותפה מייסדת בסטארטאפ תשלומים.</p></div>
     </div>
     <div class="lives">
       <div class="life reveal"><small>הגלגול הראשון</small><h3>שיווק אסטרטגי</h3><p>זרמומיה התחילה כסטודיו לשיווק (Sharp Marketing): אסטרטגיה, קמפיינים, תוכן ומיתוג. שם למדנו ששיווק טוב מביא לידים – אבל אם הליד לא מקבל מענה, לא מתועד ולא מגיע לסגירה, הכסף הולך לאיבוד בדרך.</p></div>
