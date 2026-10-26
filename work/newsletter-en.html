@@ -1,0 +1,84 @@
+<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo: Newsletter from your call notes | Zarmumia</title><meta name="robots" content="noindex"><link rel="icon" href="../assets/favicon.png"><link rel="stylesheet" href="doc.css">
+<style>
+.nl{border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:8px}
+.nl .mast{background:var(--paper);border-bottom:1px solid var(--line);padding:22px 28px;display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.nl .mast b{font-size:24px;color:var(--teal-d)}
+.nl .mast span{color:var(--mute);font-size:15px}
+.nl article{padding:24px 28px;border-bottom:1px solid var(--line)}
+.nl article .q{font-size:14px;font-weight:800;color:var(--amber)}
+.nl article h3{font-size:23px;color:var(--teal-d);margin:2px 0 8px;line-height:1.3}
+.nl article p{font-size:17px;margin-bottom:8px}
+.nl article ul{margin:0 22px 8px 0;font-size:17px}
+.nl .news{padding:22px 28px;background:var(--tint)}
+.nl .news h3{font-size:20px;color:var(--teal-d);margin-bottom:8px}
+.nl .news li{list-style:none;margin:10px 0;font-size:16px}
+.nl .news li b{display:block;font-size:17px}
+.nl .news li span{color:var(--mute);font-size:14px}
+.ok{display:flex;gap:14px;align-items:center;border:2px solid var(--teal2);background:#F3FAF9;border-radius:14px;padding:14px 20px;margin-top:18px}
+.ok .v{width:34px;height:34px;border-radius:50%;background:var(--teal);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.held{font-size:15px;color:var(--mute)}
+.callout{border-right:0;border-left:6px solid var(--teal)}.meta{text-align:right}.nl article ul{margin:0 0 8px 22px}
+</style></head><body>
+<a class="back" href="../en/#work">← Back to Zarmumia</a>
+<div class="sheet">
+<div class="top">
+  <div class="brand"><img src="../assets/gecko_teal.png" alt=""><div><div class="wm">Zarmumia</div><div class="sl">And suddenly, everything works.</div></div></div>
+  <div class="meta">Newsletter from your call notes<br>Sample business: a tax-refund office<br>October 2026</div>
+</div>
+<span class="label">Demo – all data is fictional</span>
+<div class="hero"><div class="ring"></div>
+  <div class="kick">What clients ask becomes content</div>
+  <h1>A newsletter written from your calls</h1>
+  <p>Even without recordings: the call notes your team already writes are enough</p>
+</div>
+
+<h2><span class="n">1</span>Behind the scenes</h2>
+<div class="sub">The AI never read a single call. It got redacted summaries and counted topics.</div>
+<div class="grid g4">
+  <div class="stat"><div class="v">41</div><div class="l">call summaries from the last month</div></div>
+  <div class="stat"><div class="v">3</div><div class="l">questions that came up 10+ times – and were written</div></div>
+  <div class="stat a"><div class="v">2</div><div class="l">topics that came up too rarely – and were left out</div></div>
+  <div class="stat"><div class="v">1</div><div class="l">person who approved it before sending</div></div>
+</div>
+<p class="held" style="margin-top:10px">A topic is written only if it came up in at least 10 calls, so no article can describe one client's case.</p>
+
+<h2><span class="n">2</span>The newsletter clients received</h2>
+<div class="sub">A draft the AI prepared, and the owner checked, edited and approved</div>
+<div class="nl">
+  <div class="mast"><b>Monthly client update</b><span>The tax-refund office · October</span></div>
+  <article>
+    <div class="q">Came up in 13 calls this month</div>
+    <h3>Worked for two employers? Here's how it affects your refund</h3>
+    <p>With two employers in the same year and no tax coordination, more tax than needed is often withheld. It's one of the most common reasons for a refund.</p>
+    <p>To calculate it, we need <b>Form 106 from every employer</b> – even a short or summer job.</p>
+    <ul><li>Don't have the form? Ask the payroll department.</li><li>Employer no longer exists? Tell us and we'll work out the next step together.</li></ul>
+  </article>
+  <article>
+    <div class="q">Came up in 11 calls this month</div>
+    <h3>We filed. Now what?</h3>
+    <p>After filing, the case is with the tax authority, and handling time varies. The quiet doesn't mean something is stuck.</p>
+    <p>What you can do: make sure we have your current bank details, and reply quickly if we ask for another document. We'll update you on every status change.</p>
+  </article>
+  <article>
+    <div class="q">Came up in 10 calls this month</div>
+    <h3>Donation receipts: money left on the table</h3>
+    <p>Donations to a recognized institution earn a tax credit. Many people keep the receipts and forget to send them.</p>
+    <p>Gather receipts from recent years and send them over. We'll check which qualify and include them.</p>
+  </article>
+  <div class="news">
+    <h3>In the news</h3>
+    <ul>
+      <li><b>Reminder: refunds can be claimed up to six years back</b>A chance to check years you thought were closed. <span>Source: link to the original article</span></li>
+      <li><b>The tax year is ending soon</b>Time to collect receipts and documents before the January rush. <span>Source: link to the original article</span></li>
+    </ul>
+  </div>
+</div>
+<div class="ok"><span class="v">✓</span><div><b>Approved for sending by the owner.</b> Before approval, the system checked for identifying details, for sentences copied from call notes, and that every fact flagged for checking was checked.</div></div>
+
+<div class="callout" style="margin-top:22px"><div class="t">How it works for you</div>
+Call notes from your CRM are redacted, the AI finds the recurring questions and drafts articles, and adds relevant news from your field. <b>Nothing goes out without your approval.</b> The code is <a href="https://github.com/zarmumia/call-insights-newsletter" style="color:var(--teal)">open source on GitHub</a>.</div>
+
+<div class="foot"><span>Zarmumia · Operations, marketing, automation & AI for small businesses</span><span>Demo with fictional data</span></div>
+</div>
+</body></html>
