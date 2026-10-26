@@ -1,32 +1,51 @@
 <!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Demo: Newsletter from your call notes | Zarmumia</title><meta name="robots" content="noindex"><link rel="icon" href="../assets/favicon.png"><link rel="stylesheet" href="doc.css">
 <style>
-.nl{border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:8px}
-.nl .mast{background:var(--paper);border-bottom:1px solid var(--line);padding:22px 28px;display:flex;justify-content:space-between;align-items:baseline;gap:16px}
-.nl .mast b{font-size:24px;color:var(--teal-d)}
-.nl .mast span{color:var(--mute);font-size:15px}
-.nl article{padding:24px 28px;border-bottom:1px solid var(--line)}
-.nl article .q{font-size:14px;font-weight:800;color:var(--amber)}
-.nl article h3{font-size:23px;color:var(--teal-d);margin:2px 0 8px;line-height:1.3}
-.nl article p{font-size:17px;margin-bottom:8px}
-.nl article ul{margin:0 22px 8px 0;font-size:17px}
-.nl .news{padding:22px 28px;background:var(--tint)}
-.nl .news h3{font-size:20px;color:var(--teal-d);margin-bottom:8px}
-.nl .news li{list-style:none;margin:10px 0;font-size:16px}
-.nl .news li b{display:block;font-size:17px}
-.nl .news li span{color:var(--mute);font-size:14px}
+.inbox{margin-top:10px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#F3F1EC}
+.inbox .hdr{background:#fff;border-bottom:1px solid var(--line);padding:16px 22px;font-size:15px;color:var(--mute);line-height:1.7}
+.inbox .hdr b{color:var(--ink)}
+.inbox .hdr .subj{font-size:20px;color:var(--ink);font-weight:800;margin-bottom:4px}
+.mail{max-width:620px;margin:26px auto;background:#fff;border-radius:6px;box-shadow:0 10px 30px -18px rgba(0,0,0,.35);overflow:hidden;font-size:16.5px;line-height:1.65}
+.mail .mast{background:#1F3A5F;color:#fff;padding:22px 28px;display:flex;align-items:center;gap:14px}
+.mail .logo{width:46px;height:46px;border-radius:50%;background:#F2B544;color:#1F3A5F;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:20px;flex:none}
+.mail .mast b{font-size:22px;display:block;line-height:1.1}
+.mail .mast span{font-size:14px;opacity:.85}
+.mail .intro{padding:24px 28px 8px}
+.mail .intro h2{display:block;font-size:24px;color:#1F3A5F;margin:0 0 8px}
+.mail .intro p{margin-bottom:10px}
+.mail .sign{color:var(--mute)}
+.mail article{padding:20px 28px;border-top:1px solid #EEE9E1}
+.mail article .k{font-size:13px;font-weight:800;color:#C27A12;letter-spacing:.02em}
+.mail article h3{font-size:21px;color:#1F3A5F;line-height:1.3;margin:4px 0 8px}
+.mail article p{margin-bottom:10px}
+.mail article ol,.mail article ul{margin:0 22px 10px 0}
+.mail article li{margin-bottom:4px}
+.mail details summary{list-style:none;cursor:pointer;display:inline-block;color:#1F3A5F;font-weight:800;border-bottom:2px solid #F2B544;padding-bottom:1px}
+.mail details summary::-webkit-details-marker{display:none}
+.mail details[open] summary{display:none}
+.mail details .more{margin-top:4px}
+.mail .cta{display:inline-block;background:#F2B544;color:#1F3A5F;font-weight:800;text-decoration:none;border-radius:999px;padding:9px 20px;margin-top:4px}
+.mail .news{background:#F5F8FC;padding:20px 28px;border-top:1px solid #EEE9E1}
+.mail .news h3{font-size:19px;color:#1F3A5F;margin-bottom:6px}
+.mail .news li{list-style:none;margin:12px 0}
+.mail .news li b{display:block}
+.mail .lk{text-decoration:underline;cursor:pointer}.mail .news .lk{color:#1F3A5F;font-weight:700;font-size:15px}.mail .ft .lk{color:#fff}
+.mail .news a{color:#1F3A5F;font-weight:700;font-size:15px}
+.mail .ft{background:#1F3A5F;color:#C9D4E3;font-size:13px;padding:18px 28px;line-height:1.7}
+.mail .ft a{color:#fff}
 .ok{display:flex;gap:14px;align-items:center;border:2px solid var(--teal2);background:#F3FAF9;border-radius:14px;padding:14px 20px;margin-top:18px}
 .ok .v{width:34px;height:34px;border-radius:50%;background:var(--teal);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
 .held{font-size:15px;color:var(--mute)}
-.callout{border-right:0;border-left:6px solid var(--teal)}.meta{text-align:right}.nl article ul{margin:0 0 8px 22px}
+@media(max-width:820px){.mail{margin:14px 10px}.mail .intro,.mail article,.mail .news,.mail .ft{padding-left:18px;padding-right:18px}}
+.callout{border-right:0;border-left:6px solid var(--teal)}.meta{text-align:right}.mail article ol,.mail article ul{margin:0 0 10px 22px}
 </style></head><body>
 <a class="back" href="../en/#work">← Back to Zarmumia</a>
 <div class="sheet">
 <div class="top">
   <div class="brand"><img src="../assets/gecko_teal.png" alt=""><div><div class="wm">Zarmumia</div><div class="sl">And suddenly, everything works.</div></div></div>
-  <div class="meta">Newsletter from your call notes<br>Sample business: a tax-refund office<br>October 2026</div>
+  <div class="meta">Newsletter from your call notes<br>Sample business: a tax-refund office (fictional)<br>October 2026</div>
 </div>
-<span class="label">Demo – all data is fictional</span>
+<span class="label">Demo – the business and data are fictional</span>
 <div class="hero"><div class="ring"></div>
   <div class="kick">What clients ask becomes content</div>
   <h1>A newsletter written from your calls</h1>
@@ -43,35 +62,62 @@
 </div>
 <p class="held" style="margin-top:10px">A topic is written only if it came up in at least 10 calls, so no article can describe one client's case.</p>
 
-<h2><span class="n">2</span>The newsletter clients received</h2>
-<div class="sub">A draft the AI prepared, and the owner checked, edited and approved</div>
-<div class="nl">
-  <div class="mast"><b>Monthly client update</b><span>The tax-refund office · October</span></div>
-  <article>
-    <div class="q">Came up in 13 calls this month</div>
-    <h3>Worked for two employers? Here's how it affects your refund</h3>
-    <p>With two employers in the same year and no tax coordination, more tax than needed is often withheld. It's one of the most common reasons for a refund.</p>
-    <p>To calculate it, we need <b>Form 106 from every employer</b> – even a short or summer job.</p>
-    <ul><li>Don't have the form? Ask the payroll department.</li><li>Employer no longer exists? Tell us and we'll work out the next step together.</li></ul>
-  </article>
-  <article>
-    <div class="q">Came up in 11 calls this month</div>
-    <h3>We filed. Now what?</h3>
-    <p>After filing, the case is with the tax authority, and handling time varies. The quiet doesn't mean something is stuck.</p>
-    <p>What you can do: make sure we have your current bank details, and reply quickly if we ask for another document. We'll update you on every status change.</p>
-  </article>
-  <article>
-    <div class="q">Came up in 10 calls this month</div>
-    <h3>Donation receipts: money left on the table</h3>
-    <p>Donations to a recognized institution earn a tax credit. Many people keep the receipts and forget to send them.</p>
-    <p>Gather receipts from recent years and send them over. We'll check which qualify and include them.</p>
-  </article>
-  <div class="news">
-    <h3>In the news</h3>
-    <ul>
-      <li><b>Reminder: refunds can be claimed up to six years back</b>A chance to check years you thought were closed. <span>Source: link to the original article</span></li>
-      <li><b>The tax year is ending soon</b>Time to collect receipts and documents before the January rush. <span>Source: link to the original article</span></li>
-    </ul>
+<h2><span class="n">2</span>What landed in clients' inboxes</h2>
+<div class="sub">A draft the AI prepared, and the owner checked, edited and approved. Try "Read more".</div>
+<div class="inbox">
+  <div class="hdr"><div class="subj">Why your refund is waiting on one form (and 2 more things to know)</div>
+  From: <b>Sample Refunds</b> &lt;news@example.co.il&gt; · To: our clients</div>
+  <div class="mail">
+    <div class="mast"><span class="logo">S</span><div><b>Sample Refunds</b><span>Monthly update · October</span></div></div>
+    <div class="intro">
+      <h2>Hi everyone,</h2>
+      <p>Every month we listen to your questions on the phone. This month three of them kept coming up, so we decided to answer them here, for everyone, at once.</p>
+      <p class="sign">The team</p>
+    </div>
+    <article>
+      <div class="k">This month's most common question</div>
+      <h3>Worked for two employers? Here's how it affects your refund</h3>
+      <p>Did you work for more than one employer last year – even for a few months? You may be owed a refund. To check, we need Form 106 from each of them.</p>
+      <details><summary>Read more →</summary><div class="more">
+        <p>With two employers in the same year, each withholds tax as if it were your only one, unless tax coordination was done. The result is often more tax withheld than needed – one of the most common reasons for a refund.</p>
+        <p>Form 106 is the annual salary and tax summary every employer issues. Without it we don't have the full picture, and the case stays open.</p>
+        <p><b>What to do now:</b></p>
+        <ol><li>List every employer you had in the years we're checking – including short or summer jobs.</li><li>Ask payroll for the form. Many employers also have it in the employee portal.</li><li>Send us a clear photo of each form.</li></ol>
+        <p>Employer closed, or you've lost touch? Tell us and we'll work out the next step together.</p>
+        <span class="cta">Send us the form on WhatsApp</span>
+      </div></details>
+    </article>
+    <article>
+      <div class="k">Came up in 11 calls this month</div>
+      <h3>We filed. What happens now?</h3>
+      <p>We filed your claim and it's been quiet since? That's completely normal. Here's the road from here to the money in your account.</p>
+      <details><summary>Read more →</summary><div class="more">
+        <p>After filing, the case is reviewed by the tax authority, which sometimes asks for another document. Handling time varies from case to case, and a quiet period doesn't mean something is stuck.</p>
+        <p><b>Three things you can do to keep it moving:</b></p>
+        <ul><li>Make sure the bank details you gave us are current – that's where the refund goes.</li><li>Got a letter from the tax authority? Snap a photo and send it, even if it looks unimportant.</li><li>If we ask for a document, send it as soon as you can. Every day it waits is a day the case waits.</li></ul>
+        <p>On our side: we'll update you on every status change, so you don't have to call and ask.</p>
+      </div></details>
+    </article>
+    <article>
+      <div class="k">Came up in 10 calls this month</div>
+      <h3>Donation receipts: money left on the table</h3>
+      <p>Donated to a recognized institution? That receipt is worth money. Many people keep it in a drawer and forget to send it.</p>
+      <details><summary>Read more →</summary><div class="more">
+        <p>In Israel, a donation to a public institution recognized under Section 46 of the Income Tax Ordinance earns a tax credit of 35% of the donation, subject to conditions and a minimum annual amount.</p>
+        <p><b>How to check a receipt qualifies:</b></p>
+        <ul><li>It states the institution is recognized under Section 46.</li><li>It's in your name, or your spouse's.</li><li>Digital receipts sent by email count too.</li></ul>
+        <p>Gather receipts from the years we're checking and send them over, even if you're not sure. We'll check which ones qualify.</p>
+        <span class="cta">Send receipts on WhatsApp</span>
+      </div></details>
+    </article>
+    <div class="news">
+      <h3>In the news</h3>
+      <ul>
+        <li><b>Reminder: refunds can be claimed up to six years back</b>A chance to check years you thought were closed. <span class="lk">Full article →</span></li>
+        <li><b>The tax year is ending soon</b>Time to collect receipts and documents before the January rush. <span class="lk">Full article →</span></li>
+      </ul>
+    </div>
+    <div class="ft">Sample Refunds · Tax refund services<br>You're receiving this because you're our client. <span class="lk">Unsubscribe</span><br>General information, not personal advice.</div>
   </div>
 </div>
 <div class="ok"><span class="v">✓</span><div><b>Approved for sending by the owner.</b> Before approval, the system checked for identifying details, for sentences copied from call notes, and that every fact flagged for checking was checked.</div></div>
