@@ -1,0 +1,39 @@
+# Zarmumia (זרמומיה)
+
+> Zarmumia helps small, growing businesses with operations, marketing, automation and AI. We find where leads and time get lost, and build the fix on the tools the business already uses. A human approves anything sensitive. Based in Kfar Saba, Israel; works in Hebrew and English, remotely, worldwide.
+
+Founder: Fanny Ben Ami Rabinovitch, former VP Service & Operations and co-founder of a payments startup. Contact: info@zarmumia.co.il
+
+How we work: first we interview the owner and the team, then measure where leads come from and where they get stuck, then check what the existing CRM can already do, and only then build automations. Every engagement starts from the business's real process, not from a tool.
+
+## Services
+
+- [Service & operations review](https://zarmumia.co.il/en/services/review/): an outside look at the process, CRM and numbers, with a findings report and a prioritized work plan
+- [AI & automation](https://zarmumia.co.il/en/services/ai-automation/): lead follow-up, reminders, call summaries for the CRM, lead screening, document chasing and a morning brief for the owner, on the tools the business already uses
+- [CEO dashboard](https://zarmumia.co.il/en/services/ceo-dashboard/): the whole business on one page that updates itself: inquiries answered, cases by stage, where things get stuck, money on its way
+- [Marketing, websites & landing pages](https://zarmumia.co.il/services/marketing/): marketing connected to operations, landing pages wired to the CRM, and a newsletter written from the questions clients ask on calls
+- [All services](https://zarmumia.co.il/en/services/)
+
+## Products
+
+- [She Calendar](https://zarmumia.co.il/en/she-calendar/): a Google Calendar add-on that remembers recurring self-care and check-ups. Approved on the Google Workspace Marketplace
+- [Developments](https://zarmumia.co.il/en/developments/): tools and products we build
+
+## Work and proof
+
+- [Work samples](https://zarmumia.co.il/en/work/): a service review report, a CRM-connected landing page, a CEO dashboard and a newsletter from call notes, with no identifying details
+- [Open-source tools on GitHub](https://github.com/zarmumia): human-in-the-loop agents for lead generation in communities, Upwork job scouting, Facebook group welcome posts and call summaries
+- [Quick check (Hebrew)](https://zarmumia.co.il/check.html): 9 short questions that show where a business is likely losing leads and time
+
+## About
+
+- [About Zarmumia (English)](https://zarmumia.co.il/en/about/)
+- [אודות (Hebrew)](https://zarmumia.co.il/about/)
+- [Hebrew home page](https://zarmumia.co.il/)
+
+## Elsewhere
+
+- LinkedIn: https://www.linkedin.com/company/https-zarmumia.co.il
+- Facebook: https://www.facebook.com/zarmumia
+- Upwork: https://www.upwork.com/freelancers/~01de48dd2288445f84
+- AI Lounge: https://ai.lounge.ai/@zarmumia
