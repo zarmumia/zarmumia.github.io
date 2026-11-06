@@ -19,10 +19,21 @@ How we work: first we interview the owner and the team, then measure where leads
 - [She Calendar](https://zarmumia.co.il/en/she-calendar/): a Google Calendar add-on that remembers recurring self-care and check-ups. Approved on the Google Workspace Marketplace
 - [Developments](https://zarmumia.co.il/en/developments/): tools and products we build
 
+## Open-source tools
+
+Free tools that run with Claude. In every one of them, a person approves before anything goes out.
+
+- [Comment to Lead](https://github.com/zarmumia/comment-to-lead): finds the Facebook group conversations where clients already ask for help, and drafts a reply in the owner's voice
+- [Upwork Scout](https://github.com/zarmumia/upwork-scout): filters Upwork down to fresh jobs from serious clients, with a draft proposal to approve
+- [Group Welcome Agent](https://github.com/zarmumia/group-welcome-agent): a personal, branded welcome for new members of a Facebook group, in Hebrew, English or Arabic
+- [AI Call Summary](https://github.com/zarmumia/ai-call-summary): every call documented in the CRM without the rep typing a word
+- [Call Insights Newsletter](https://github.com/zarmumia/call-insights-newsletter): turns the questions clients keep asking on calls into a newsletter
+- [CEO Dashboard](https://github.com/zarmumia/ceo-dashboard): the whole business at a glance, where the money flows and where it gets stuck ([live demo](https://zarmumia.github.io/ceo-dashboard/))
+- [Supplier Price Watch](https://github.com/zarmumia/supplier-price-watch): catches quiet price increases in supplier invoices
+
 ## Work and proof
 
 - [Work samples](https://zarmumia.co.il/en/work/): a service review report, a CRM-connected landing page, a CEO dashboard and a newsletter from call notes, with no identifying details
-- [Open-source tools on GitHub](https://github.com/zarmumia): human-in-the-loop agents for lead generation in communities, Upwork job scouting, Facebook group welcome posts and call summaries
 - [Quick check (Hebrew)](https://zarmumia.co.il/check.html): 9 short questions that show where a business is likely losing leads and time
 
 ## About
