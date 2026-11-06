@@ -30,6 +30,7 @@ Free tools that run with Claude. In every one of them, a person approves before 
 - [Call Insights Newsletter](https://github.com/zarmumia/call-insights-newsletter): turns the questions clients keep asking on calls into a newsletter
 - [CEO Dashboard](https://github.com/zarmumia/ceo-dashboard): the whole business at a glance, where the money flows and where it gets stuck ([live demo](https://zarmumia.github.io/ceo-dashboard/))
 - [Supplier Price Watch](https://github.com/zarmumia/supplier-price-watch): catches quiet price increases in supplier invoices
+- [Lead Follow-up](https://github.com/zarmumia/lead-followup-automation): no lead falls through the cracks: daily call lists per rep, a manager digest and client reminders from a CRM export
 
 ## Work and proof
 
