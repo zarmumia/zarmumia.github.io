@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+var zc=null;try{zc=localStorage.getItem('zm_consent');}catch(e){}
+gtag('consent','default',{analytics_storage:zc==='yes'?'granted':'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+gtag('js',new Date());gtag('config','G-Y8C4NEDQ7J');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8C4NEDQ7J"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>צעד 11: סורקים ומפת אתר | מדריך התקנה ל-Lift</title>
+<link rel="canonical" href="https://zarmumia.co.il/lift/guide/wordpress/crawlers/">
+<meta name="description" content="מדריך התקנה ל-Lift בוורדפרס, צעד 11 מתוך 13: סורקים ומפת אתר.">
+<link rel="icon" href="/assets/favicon.png">
+<link rel="preload" href="/fonts/assistant.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/lift/guide/guide.css">
+</head>
+<body>
+<a class="skip" href="#main">דילוג לתוכן</a>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/" aria-label="זרמומיה – לדף הבית"><img src="/assets/gecko_teal.png" alt=""><span>זרמומיה</span></a>
+    <nav class="links" aria-label="ניווט ראשי">
+      <a href="/services/">שירותים</a>
+      <a href="/work/">דוגמאות עבודה</a>
+      <a href="/about/">אודות</a>
+      <a href="/developments/">פיתוחים</a>
+      <a href="/check.html">בדיקה מהירה</a>
+    </nav>
+    <a class="btn sm line" href="/lift/guide/wordpress/">כל הצעדים</a>
+  </div>
+</header>
+<main id="main" class="guide">
+<div class="g">
+<nav class="crumbs" aria-label="מיקום בעמוד"><a href="/">זרמומיה</a> ‹ <a href="/lift/guide/">מדריך התקנה ל-Lift</a> ‹ <a href="/lift/guide/wordpress/">וורדפרס</a> ‹ <span>צעד 11</span></nav>
+<div class="prog" data-step="crawlers"><div class="prog-top"><span>צעד 11 מתוך 13</span><details class="all"><summary>כל הצעדים</summary><ol class="steps"><li class="grp" aria-hidden="true">התקנה</li><li data-s="before"><a href="/lift/guide/wordpress/before/">לפני שמתחילים</a></li><li data-s="login"><a href="/lift/guide/wordpress/login/">נכנסים לניהול האתר</a></li><li data-s="upload"><a href="/lift/guide/wordpress/upload/">מעלים את התוסף</a></li><li data-s="activate"><a href="/lift/guide/wordpress/activate/">מפעילים את Lift</a></li><li class="grp" aria-hidden="true">כמה שאלות על העסק</li><li data-s="business"><a href="/lift/guide/wordpress/business/">העסק שלכם</a></li><li data-s="people"><a href="/lift/guide/wordpress/people/">אנשים ומקום</a></li><li data-s="links"><a href="/lift/guide/wordpress/links/">קישורים</a></li><li data-s="pages"><a href="/lift/guide/wordpress/pages/">דפים חשובים</a></li><li class="grp" aria-hidden="true">הפעלה</li><li data-s="llms"><a href="/lift/guide/wordpress/llms/">llms.txt: קוראים ומפרסמים</a></li><li data-s="schema"><a href="/lift/guide/wordpress/schema/">פרטי עסק לגוגל ול-AI</a></li><li data-s="crawlers" class="here"><a href="/lift/guide/wordpress/crawlers/" aria-current="step">סורקים ומפת אתר</a></li><li data-s="score"><a href="/lift/guide/wordpress/score/">ציון מוכנות: מה מתקנים קודם</a></li><li class="grp" aria-hidden="true">סיום</li><li data-s="done"><a href="/lift/guide/wordpress/done/">סיימתם!</a></li></ol></details></div><div class="bar" role="progressbar" aria-label="התקדמות במדריך" aria-valuemin="1" aria-valuemax="13" aria-valuenow="11"><i style="width:85%"></i></div></div><h1>סורקים ומפת אתר</h1><p class="intro">"סורקים" הם תוכנות שקוראות אתרים, בשביל מנועי חיפוש ו-AI. במסך הזה רואים מי מהם יכול לקרוא את האתר. <b>Lift לא משנה כלום בלי שתלחצו.</b></p>
+<ol class="do">
+  <li>בתפריט: <b>Lift ← סורקים ומפת אתר</b>.</li>
+  <li>לכל סורק כתוב <b>יכול לקרוא</b> או <b>חסום</b>. יש שלוש קבוצות:
+    <ul>
+      <li><b>גוגל ובינג:</b> צריכים להיות פתוחים. בדרך כלל הם כבר פתוחים.</li>
+      <li><b>סורקי חיפוש של AI</b> (של ChatGPT, Claude, Perplexity): קוראים את האתר כשמישהו שואל שאלה. אם חלק מהם חסומים, לוחצים <b>פתיחת סורקי החיפוש</b>. <b>זה הדבר החשוב במסך הזה.</b></li>
+      <li><b>סורקי אימון של AI:</b> אוספים טקסט כדי לאמן מודלים, ולא קשורים לחיפוש. זו החלטה שלכם. הרבה בעלי עסקים משאירים אותם סגורים. לא בטוחים? לא נוגעים.</li>
+    </ul>
+  </li>
+  <li><b>מפת אתר:</b> אם כתוב "לא מופיעה ב-robots.txt" או "לא מופיעה ב-llms.txt", לוחצים על כפתור ההוספה שמתחת.</li>
+</ol>
+<figure class="shot"><div class="ph"><b>צילום מסך 12</b>מסך &quot;סורקים ומפת אתר&quot;</div></figure>
+<div class="video"><div class="ph"><b>סרטון קצר</b>כאן יבוא סרטון של חצי דקה שמראה את הצעד הזה</div></div>
+<div class="tip"><b>אפשר לבטל בכל רגע:</b> הכפתור <b>הסרת השינויים של Lift</b> מחזיר את הכול כמו שהיה.</div><details class="stuck"><summary>נתקעתם?</summary><div class="in"><div class="qa"><h3>הכול כבר "יכול לקרוא"</h3><p>מעולה. אין מה לעשות במסך הזה, ממשיכים.</p></div>
+<div class="qa"><h3>כתוב שיש קובץ robots.txt על השרת</h3><p>במקרה כזה Lift לא יכול לשנות אותו, רק להראות את המצב. אם סורק חשוב חסום, פונים לחברת האחסון או למי שבנה את האתר, ומראים להם את המסך הזה.</p></div>
+<div class="qa"><h3>כתוב "גוגל או בינג חסומים"</h3><p>זה חשוב לתקן, כי זה פוגע בחשיפה בכל מקום. בודקים את הגדרת robots.txt בתוסף ה-SEO, או פונים למי שבנה את האתר.</p></div>
+<div class="qa"><h3>כתוב "האתר מבקש ממנועי חיפוש לא להציג אותו"</h3><p>זו הגדרה של וורדפרס: <b>הגדרות ← קריאה</b> (Settings ← Reading). לפני שמשנים, כדאי לבדוק עם מי שבנה את האתר. לפעמים היא נשארת דלוקה בטעות אחרי הבנייה.</p></div><div class="help"><b>עדיין לא מסתדר?</b> בהתקנה העצמית אין תמיכה אישית, ולכן המדריך הזה מנסה לענות על הכול. אם בכל זאת נתקעתם: ב-<b>Lift עם ליווי</b> פאני מתקינה יחד איתכם (1,200 ש"ח, ומי שכבר קנו משלמים רק את ההפרש). <a href="https://wa.me/972547892320?text=%D7%94%D7%99%D7%99%20%D7%A4%D7%90%D7%A0%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20Lift%20%D7%A2%D7%9D%20%D7%9C%D7%99%D7%95%D7%95%D7%99" target="_blank" rel="noopener">לפרטים על ליווי</a></div></div></details><div class="next"><a class="back" href="/lift/guide/wordpress/schema/">→ לצעד הקודם</a><a class="btn" href="/lift/guide/wordpress/score/" data-done="crawlers">סיימתי, הלאה ←</a></div>
+</div>
+</main>
+<footer>
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/gecko_white.png" alt=""><span>זרמומיה</span></a>
+    <div>ופתאום הכול עובד. · כפר סבא · <a href="/services/">שירותים</a> · <a href="/about/">אודות</a> · <a href="mailto:info@zarmumia.co.il">info@zarmumia.co.il</a> · <a href="/privacy.html">מדיניות פרטיות</a> · <a href="/accessibility.html">הצהרת נגישות</a></div>
+    <div>© 2026 זרמומיה</div>
+  </div>
+</footer>
+<div id="zm-cookie" role="dialog" aria-live="polite" hidden>
+<p>האתר משתמש בעוגיות של Google Analytics כדי להבין כמה מבקרים יש ומאיפה הם מגיעים. בלי מידע אישי. <a href="/privacy.html" style="color:#F2A65A">מדיניות פרטיות</a></p><div><button type="button" data-c="yes">אישור</button><button type="button" data-c="no">לא, תודה</button></div>
+</div>
+<script>
+(function(){var b=document.getElementById('zm-cookie');if(!b)return;
+var c=null;try{c=localStorage.getItem('zm_consent');}catch(e){}
+if(!c)b.hidden=false;
+b.addEventListener('click',function(e){var v=e.target.getAttribute('data-c');if(!v)return;
+try{localStorage.setItem('zm_consent',v);}catch(e){}
+if(v==='yes')gtag('consent','update',{analytics_storage:'granted'});
+b.hidden=true;});})();
+</script>
+<script src="/lift/guide/guide.js"></script>
+</body>
+</html>
