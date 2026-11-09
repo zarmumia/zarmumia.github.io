@@ -92,7 +92,8 @@ footer a{color:#fff}
 .shot{margin:22px 0}
 .frame{position:relative;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 10px 26px -16px rgba(8,66,63,.35)}
 .frame img{width:100%;height:auto;border-radius:11px}
-.mark{position:absolute;border:3px solid var(--amber);border-radius:10px;box-shadow:0 0 0 4px rgba(217,130,43,.22)}
+.mark{position:absolute;border:2.5px solid var(--amber);border-radius:8px}
+.mark b{display:none!important}
 .mark b{position:absolute;top:-31px;right:-8px;width:28px;height:28px;border-radius:50%;background:var(--amber);color:#fff;font-size:15px;font-weight:800;display:grid;place-items:center}
 .mark.l b{top:50%;right:auto;left:-36px;margin-top:-14px}
 .mark.b b{top:auto;bottom:-34px;right:50%;margin-right:-14px}
