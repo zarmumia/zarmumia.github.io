@@ -65,6 +65,7 @@
         var zoom = box.clientWidth < 640;
         pan.style.transformOrigin = f.x + '% ' + f.y + '%';
         pan.style.transform = zoom ? 'scale(2.2)' : '';
+        pan.classList.toggle('z', zoom);
       }
       timer = setTimeout(function () {
         cur.classList.remove('click'); void cur.offsetWidth; cur.classList.add('click');

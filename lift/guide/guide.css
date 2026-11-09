@@ -113,6 +113,7 @@ footer a{color:#fff}
 .anim img.fade{opacity:.15}
 .anim .cursor{position:absolute;left:50%;top:60%;width:26px;height:26px;margin:-3px 0 0 -4px;transition:left 1s ease-in-out,top 1s ease-in-out;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 2l15 11-6.5 1.2L16 21l-3 1.4-3.4-6.8L4 20z' fill='%231C2726' stroke='%23fff' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.anim .pan.z .cursor{transform:scale(.5);transform-origin:4px 3px}
 .anim .cursor::before{content:"";position:absolute;left:-14px;top:-14px;width:32px;height:32px;border-radius:50%;background:rgba(217,130,43,.55);transform:scale(0);opacity:0}
 .anim .cursor.click::before{animation:clk .6s ease-out}
 @keyframes clk{0%{transform:scale(.2);opacity:1}100%{transform:scale(1.6);opacity:0}}
