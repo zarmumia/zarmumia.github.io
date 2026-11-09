@@ -198,3 +198,42 @@ a.plat:hover{border-color:var(--amber)}
 #zm-cookie button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:8px 18px;cursor:pointer}
 #zm-cookie [data-c=yes]{background:#F2A65A;color:#1C2726}
 #zm-cookie [data-c=no]{background:transparent;color:#FBF7F1;border:1px solid rgba(251,247,241,.5)}
+
+/* Lift product page (/lift/) */
+.lift-hero{padding:10px 0 6px}
+.lift-hero .kicker{font-size:15px;font-weight:800;color:var(--amber);letter-spacing:.03em;margin:0 0 4px}
+.lift-hero h1{color:var(--teal-d)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0 10px}
+.small{font-size:15px;color:var(--mute)}
+.does{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:16px 0}
+.does div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px}
+.does b{display:block;font-size:19px;color:var(--teal-d)}
+.does span{display:block;font-size:16px;color:var(--mute);line-height:1.55;margin-top:4px}
+.pkgs{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:18px 0 10px;align-items:stretch}
+.pkg{background:#fff;border:2px solid var(--line);border-radius:18px;padding:20px 18px;display:flex;flex-direction:column;gap:10px}
+.pkg.star{border-color:var(--teal)}
+.pkg .tag{align-self:flex-start;margin:0;font-size:13px;font-weight:800;color:#fff;background:var(--amber);border-radius:99px;padding:2px 10px}
+.pkg h3{font-size:22px;color:var(--teal-d);margin:0}
+.pkg .price{font-size:34px;font-weight:800;line-height:1;margin:0;font-variant-numeric:tabular-nums}
+.pkg .price small{font-size:16px;font-weight:600;color:var(--mute)}
+.pkg ul{margin:0 18px 0 0;font-size:16px;line-height:1.5;display:grid;gap:4px;flex:1}
+.pkg .btn{width:100%}
+.promise{margin:10px 22px 0 0;display:grid;gap:6px}
+.promise b{color:var(--teal-d)}
+.free{background:#fff;border:2px solid var(--teal);border-radius:18px;padding:20px 22px}
+.free-form{display:grid;gap:6px;max-width:440px;margin:12px 0}
+.free-form label{font-weight:700;font-size:16px}
+.free-form input[type=text],.free-form input[type=email]{font:inherit;font-size:18px;padding:10px 14px;border:2px solid var(--line);border-radius:12px;background:var(--paper)}
+.free-form input:focus{outline:3px solid var(--amber);outline-offset:1px}
+.free-form .check{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:16px;line-height:1.5;margin:8px 0}
+.free-form .check input{margin-top:5px;flex:none;width:18px;height:18px}
+.free-form .btn{justify-self:start;margin-top:4px}
+.qa{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:10px 0}
+@media(max-width:600px){.cta .btn{flex:1 1 100%}.free-form .btn{width:100%}}
+.pkg .for{margin:0;font-size:13px;font-weight:800;color:var(--teal);background:var(--teal-t);border-radius:99px;padding:2px 10px;align-self:flex-start}
+.fresh{background:var(--teal-d);color:var(--paper);border-radius:20px;padding:22px 24px;margin:30px 0 10px}
+.fresh h2{color:#fff;margin-top:0}
+.fresh p{color:var(--teal-t)}
+.fresh ul{margin:6px 22px 0 0;display:grid;gap:6px}
+.fresh b{color:var(--amber-l)}
+.lift-hero .onit{display:block;color:var(--amber);margin-top:6px}

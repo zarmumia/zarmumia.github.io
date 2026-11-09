@@ -271,3 +271,12 @@ $kit_path = '/lift/wix/kit-x7q4m2/';
 write( dirname( $root ) . '/wix/kit-x7q4m2/index.html', page( $tpl, $kit_path, 'ערכת Lift לוויקס | זרמומיה',
 	'ממלאים את פרטי העסק ומקבלים קוד מוכן להדבקה בוויקס.',
 	$c_home . '<span>ערכת Lift לוויקס</span>', file_get_contents( __DIR__ . '/pages/wix-kit.html' ) ) );
+
+// 5. The Lift product page and the "coming soon" page behind the buy and free-download buttons
+//    (until payment through Paperless/PayMe and the sendmsg form are connected). noindex like the rest, for now.
+write( dirname( $root ) . '/index.html', page( $tpl, '/lift/', 'Lift: למה העסק שלי לא מופיע ב-ChatGPT? | זרמומיה',
+	'Lift מכין אתר וורדפרס שכבר עובד לקריאה של ChatGPT, Claude, Perplexity וגוגל, בלי לשנות עיצוב או טקסט. בעברית, לעסקים קטנים.',
+	$c_home . '<span>Lift</span>', file_get_contents( __DIR__ . '/pages/lift.html' ) ) );
+write( dirname( $root ) . '/soon/index.html', page( $tpl, '/lift/soon/', 'עוד רגע זה כאן | Lift | זרמומיה',
+	'הקנייה וההורדה של Lift נפתחות בימים הקרובים.',
+	$c_home . '<a href="/lift/">Lift</a> ‹ <span>בקרוב</span>', file_get_contents( __DIR__ . '/pages/lift-soon.html' ) ) );
