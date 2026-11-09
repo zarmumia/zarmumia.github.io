@@ -90,10 +90,10 @@ footer a{color:#fff}
 
 /* screenshot with marks */
 .shot{margin:22px 0}
-.frame{position:relative;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 10px 26px -16px rgba(8,66,63,.35)}
-.frame img{width:100%;height:auto}
+.frame{position:relative;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 10px 26px -16px rgba(8,66,63,.35)}
+.frame img{width:100%;height:auto;border-radius:11px}
 .mark{position:absolute;border:3px solid var(--amber);border-radius:10px;box-shadow:0 0 0 4px rgba(217,130,43,.22)}
-.mark b{position:absolute;top:-14px;right:-14px;width:28px;height:28px;border-radius:50%;background:var(--amber);color:#fff;font-size:15px;font-weight:800;display:grid;place-items:center}
+.mark b{position:absolute;top:-31px;right:-8px;width:28px;height:28px;border-radius:50%;background:var(--amber);color:#fff;font-size:15px;font-weight:800;display:grid;place-items:center}
 .shot figcaption{font-size:15px;color:var(--mute);margin-top:8px}
 .zoom{display:inline-block;margin-top:6px;font-size:15px;color:var(--teal);font-weight:600}
 .ph{border:2px dashed var(--line);border-radius:12px;padding:38px 20px;text-align:center;color:var(--mute);background:var(--cream);font-size:16px}

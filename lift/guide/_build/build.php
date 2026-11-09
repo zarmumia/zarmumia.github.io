@@ -37,22 +37,27 @@ $steps = array(
 	array( 'done',     'סיימתם!',                        'end' ),
 );
 
-// Screenshots: alt text, and marks as [left %, top %, width %, height %] measured on the image.
+// Screenshots (img/shot-N.png or .jpg): alt text, and marks as
+// [left %, top %, width %, height %, label] measured on the image. The label is the number of the
+// matching instruction on the page ('' for no number).
 $shots = array(
-	1  => array( 'מסך הכניסה לניהול האתר', array() ),
-	2  => array( 'תוספים ← הוספת תוסף, עם הכפתור "העלאת תוסף" למעלה', array() ),
-	3  => array( 'אזור בחירת הקובץ, אחרי הלחיצה על "העלאת תוסף"', array() ),
-	4  => array( 'סוף ההתקנה, עם הכפתור "הפעלת התוסף"', array() ),
-	5  => array( 'רשימת התוספים: Lift מופעל, ובתפריט בצד מופיע Lift', array() ),
-	6  => array( 'האשף, מסך "העסק שלכם"', array() ),
-	7  => array( 'האשף, מסך "אנשים ומקום"', array() ),
-	8  => array( 'האשף, מסך "קישורים"', array() ),
-	9  => array( 'האשף, מסך "דפים חשובים"', array() ),
-	10 => array( 'מסך llms.txt, עם הכפתור "פרסום"', array() ),
-	11 => array( 'מסך "פרטי עסק לגוגל ול-AI", עם הכפתור "הפעלה"', array() ),
-	12 => array( 'מסך "סורקים ומפת אתר"', array() ),
-	13 => array( 'מסך "ציון מוכנות" אחרי הבדיקה', array() ),
-	14 => array( 'מסך "סקירה", עם הרשימה "איך מתחילים"', array() ),
+	1  => array( 'מסך הכניסה לניהול האתר', array( array( 26, 36.5, 48, 8.6, 2 ), array( 26, 52.8, 48, 8.6, 2 ), array( 26, 64.4, 12.6, 8.6, 2 ) ) ),
+	2  => array( 'תוספים ← הוספת תוסף, עם הכפתור "העלאת תוסף" למעלה', array( array( 82.6, 39.6, 16.2, 14.8, 1 ), array( 58.9, 6.6, 9.8, 5.6, 2 ) ) ),
+	3  => array( 'אזור בחירת הקובץ, אחרי הלחיצה על "העלאת תוסף"', array( array( 49.5, 31.4, 10.2, 5.8, 3 ), array( 22.8, 30.6, 11.2, 7.4, 3 ) ) ),
+	4  => array( 'סוף ההתקנה, עם הכפתור "הפעל תוסף"', array( array( 72.6, 27.6, 10.4, 7.8, 1 ) ) ),
+	5  => array( 'רשימת התוספים: Lift מופעל, ובתפריט בצד מופיע Lift', array( array( 64, 41.6, 14, 5.8, 2 ), array( 82.6, 69.8, 16.2, 5.2, 2 ) ) ),
+	15 => array( 'מסך הפתיחה של Lift, עם הכפתור "מתחילים!"', array( array( 65.2, 34.2, 13, 7.6, 1 ) ) ),
+	6  => array( 'האשף, מסך "העסק שלכם"', array( array( 43.4, 41, 34.8, 6.4, 2 ), array( 8.2, 57, 70, 12, 3 ), array( 71, 75, 7.6, 7, 4 ) ) ),
+	7  => array( 'האשף, מסך "אנשים ומקום": שם, תפקיד, עיר ואזור', array( array( 43.4, 41, 34.8, 6.4, 1 ), array( 43.4, 69.2, 34.8, 6.6, 2 ), array( 43.4, 82, 34.8, 6.4, 2 ) ) ),
+	16 => array( 'המשך המסך "אנשים ומקום": שפות, טלפון ואימייל', array( array( 70.6, 31.4, 8, 18.2, 3 ), array( 43.4, 56.5, 34.8, 6.6, 4 ), array( 71, 80.6, 7.6, 7.2, 5 ) ) ),
+	8  => array( 'האשף, מסך "קישורים"', array( array( 43.4, 46.1, 34.8, 6.6, 1 ), array( 43.4, 87.1, 34.8, 6.6, 2 ) ) ),
+	9  => array( 'האשף, מסך "דפים חשובים"', array( array( 64.4, 39.4, 14.2, 5.2, 1 ), array( 68.4, 49.4, 10, 6.6, 3 ) ) ),
+	10 => array( 'מסך llms.txt, עם הכפתור "פרסום"', array( array( 8.2, 28.8, 70, 58.2, 2 ), array( 71, 87.8, 7.6, 6.8, 3 ) ) ),
+	11 => array( 'מסך "פרטי עסק לגוגל ול-AI", עם הכפתור "הפעלה"', array( array( 8.2, 33, 70, 43.6, 2 ), array( 70.6, 84.2, 8, 7, 3 ) ) ),
+	12 => array( 'מסך "סורקים ומפת אתר": כל הסורקים יכולים לקרוא', array( array( 55.2, 29.4, 23.6, 32.8, 2 ) ) ),
+	17 => array( 'המשך המסך "סורקים ומפת אתר": מפת האתר', array( array( 59.6, 42.2, 18.6, 7, 3 ) ) ),
+	13 => array( 'מסך "ציון מוכנות" אחרי הבדיקה', array( array( 7.4, 33.6, 70.8, 15.6, 2 ), array( 53.4, 57, 24.8, 10.4, 4 ) ) ),
+	14 => array( 'מסך "סקירה", עם הרשימה "איך מתחילים"', array( array( 50.4, 29.4, 28, 19.6, '' ) ) ),
 );
 
 $help = '<div class="help"><b>עדיין לא מסתדר?</b> בהתקנה העצמית אין תמיכה אישית, ולכן המדריך הזה מנסה לענות על הכול. '
@@ -67,14 +72,16 @@ function expand( $html, $root, $shots ) {
 		$alt = isset( $shots[ $n ] ) ? $shots[ $n ][0] : '';
 		$rel = 'img/shot-' . $n . '.png';
 		if ( ! file_exists( $root . '/' . $rel ) ) {
+			$rel = 'img/shot-' . $n . '.jpg';
+		}
+		if ( ! file_exists( $root . '/' . $rel ) ) {
 			return '<figure class="shot"><div class="ph"><b>צילום מסך ' . $n . '</b>' . e( $alt ) . '</div></figure>';
 		}
 		list( $w, $h ) = getimagesize( $root . '/' . $rel );
 		$marks = '';
-		$i     = 0;
 		foreach ( $shots[ $n ][1] as $mk ) {
-			$i++;
-			$marks .= sprintf( '<span class="mark" style="left:%s%%;top:%s%%;width:%s%%;height:%s%%"><b>%d</b></span>', $mk[0], $mk[1], $mk[2], $mk[3], $i );
+			$label  = isset( $mk[4] ) && '' !== $mk[4] ? '<b>' . $mk[4] . '</b>' : '';
+			$marks .= sprintf( '<span class="mark" style="left:%s%%;top:%s%%;width:%s%%;height:%s%%" aria-hidden="true">%s</span>', $mk[0], $mk[1], $mk[2], $mk[3], $label );
 		}
 		$src = '/lift/guide/' . $rel;
 		return '<figure class="shot"><div class="frame"><img src="' . $src . '" alt="' . e( $alt ) . '" width="' . $w . '" height="' . $h . '" loading="lazy">' . $marks . '</div>'
