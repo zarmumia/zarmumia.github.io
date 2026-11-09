@@ -60,13 +60,61 @@ $shots = array(
 	14 => array( 'מסך "סקירה", עם הרשימה "איך מתחילים"', array( array( 50.4, 29.4, 28, 19.6, '' ) ) ),
 );
 
-$help = '<div class="help"><b>עדיין לא מסתדר?</b> בהתקנה העצמית אין תמיכה אישית, ולכן המדריך הזה מנסה לענות על הכול. '
+// Short animations instead of recorded videos: screenshots, a moving cursor, a click and a caption.
+// Each frame: [shot number, cursor left %, cursor top %, caption].
+$anims = array(
+	'upload' => array(
+		array( 2, 90.5, 52, 'בתפריט: תוספים ← Add Plugin' ),
+		array( 2, 63.8, 9.4, 'למעלה: העלאת תוסף' ),
+		array( 3, 54.6, 34.3, 'Choose File, ובוחרים את zarmumia-lift.zip' ),
+		array( 3, 28.4, 34.3, 'Install Now' ),
+		array( 4, 77.8, 31.5, 'הותקן! בצעד הבא: הפעל תוסף' ),
+	),
+	'crawlers' => array(
+		array( 12, 92, 84.5, 'בתפריט: Lift ← סורקים ומפת אתר' ),
+		array( 12, 64.8, 42.3, 'סורקי חיפוש של AI: צריך לראות "יכול לקרוא"' ),
+		array( 12, 71, 65.4, 'סורקי אימון: ההחלטה שלכם. לא בטוחים? לא נוגעים' ),
+		array( 17, 69, 45.6, 'מפת אתר: אם צריך, לוחצים על כפתור ההוספה' ),
+	),
+	'score' => array(
+		array( 13, 94, 72.2, 'בתפריט: Lift ← ציון מוכנות' ),
+		array( 13, 72.5, 41.8, 'הציון, מ-0 עד 100' ),
+		array( 13, 66.2, 59, 'כל בעיה: מה זה אומר, ואיך מתקנים' ),
+		array( 13, 73, 28.9, 'אחרי שמתקנים: בדיקה מחדש' ),
+	),
+);
+
+$help ='<div class="help"><b>עדיין לא מסתדר?</b> בהתקנה העצמית אין תמיכה אישית, ולכן המדריך הזה מנסה לענות על הכול. '
 	. 'אם בכל זאת נתקעתם: ב-<b>Lift עם ליווי</b> פאני מתקינה יחד איתכם (1,200 ש"ח, ומי שכבר קנו משלמים רק את ההפרש). '
 	. '<a href="https://wa.me/972547892320?text=' . rawurlencode( 'היי פאני, אשמח לשמוע על Lift עם ליווי' ) . '" target="_blank" rel="noopener">לפרטים על ליווי</a></div>';
 
 function e( $s ) { return htmlspecialchars( $s, ENT_QUOTES, 'UTF-8' ); }
 
+function shot_src( $root, $n ) {
+	foreach ( array( 'png', 'jpg' ) as $ext ) {
+		if ( file_exists( $root . '/img/shot-' . $n . '.' . $ext ) ) {
+			return '/lift/guide/img/shot-' . $n . '.' . $ext;
+		}
+	}
+	return '';
+}
+
 function expand( $html, $root, $shots ) {
+	global $anims;
+	$html = preg_replace_callback( '/\[\[anim:([a-z0-9-]+)\]\]/', function ( $m ) use ( $root, $anims ) {
+		if ( empty( $anims[ $m[1] ] ) ) {
+			return '';
+		}
+		$frames = array();
+		foreach ( $anims[ $m[1] ] as $f ) {
+			$frames[] = array( 'src' => shot_src( $root, $f[0] ), 'x' => $f[1], 'y' => $f[2], 'cap' => $f[3] );
+		}
+		$first = $frames[0];
+		return '<figure class="anim" data-frames="' . e( json_encode( $frames, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ) . '">'
+			. '<div class="stage"><div class="pan"><img src="' . $first['src'] . '" alt="הדגמה מונפשת של הצעד"><span class="cursor" aria-hidden="true"></span></div></div>'
+			. '<figcaption><span class="cap" aria-live="polite">' . e( $first['cap'] ) . '</span>'
+			. '<button type="button" class="replay">▶ הפעלה</button></figcaption></figure>';
+	}, $html );
 	$html = preg_replace_callback( '/\[\[shot:(\d+)\]\]/', function ( $m ) use ( $root, $shots ) {
 		$n   = (int) $m[1];
 		$alt = isset( $shots[ $n ] ) ? $shots[ $n ][0] : '';
