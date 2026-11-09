@@ -58,6 +58,14 @@ $shots = array(
 	17 => array( 'המשך המסך "סורקים ומפת אתר": מפת האתר', array( array( 59.6, 42.2, 18.6, 7, 3, 'l' ) ) ),
 	13 => array( 'מסך "ציון מוכנות" אחרי הבדיקה', array( array( 7.4, 33.6, 70.8, 15.6, 2, 'l' ), array( 25.8, 56.6, 52.6, 11, 4, 'l' ) ) ),
 	14 => array( 'מסך "סקירה", עם הרשימה "איך מתחילים"', array( array( 50.4, 29.4, 28, 19.6, '' ) ) ),
+	// Wix.
+	101 => array( 'ויקס: SEO & GEO, עם Go to SEO Settings', array( array( 0.6, 72.4, 19, 15.9, '' ), array( 50.2, 51, 14.6, 6.6, '' ) ) ),
+	102 => array( 'ויקס: הגדרות SEO של דף הבית, לשונית Advanced', array( array( 79, 21.4, 10.5, 7, '' ), array( 70.5, 35.3, 27.7, 20.6, '' ) ) ),
+	103 => array( 'ויקס: Structured data markup, עם Local business ו-Exclude from page', array( array( 78.9, 82, 14.1, 5.6, '' ) ) ),
+	104 => array( 'ויקס: Add new markup, עם הקוד של Lift', array( array( 29.6, 25.1, 40.9, 5.9, '' ), array( 29.6, 39.1, 40.9, 50.1, '' ) ) ),
+	105 => array( 'ויקס: לשונית Basics, עם Meta description', array( array( 68.7, 21.6, 10.4, 6.8, '' ), array( 70.5, 50, 27.7, 15.9, '' ), array( 91.4, 89.6, 6.8, 6, '' ) ) ),
+	106 => array( 'ויקס: הקוד של Lift ברשימה, עם Test on Google', array( array( 70.5, 75.6, 26.8, 7.9, '' ), array( 80.5, 62.6, 11.7, 5.2, '' ) ) ),
+	107 => array( 'הערכה של Lift: הקוד מוכן להעתקה', array( array( 10.3, 30, 79.6, 31, '' ), array( 81.2, 63.4, 8.6, 5.4, '' ) ) ),
 );
 
 // Short animations instead of recorded videos: screenshots, a moving cursor, a click and a caption.
@@ -189,42 +197,76 @@ write( $root . '/index.html', page( $tpl, '/lift/guide/', 'מדריך התקנה
 	'מתקינים את Lift לבד, צעד אחר צעד, בעברית ובלי ידע טכני. בוחרים פלטפורמה ומתחילים.',
 	$c_home . '<span>מדריך התקנה ל-Lift</span>', $main ) );
 
-// 2. WordPress overview.
-$main = file_get_contents( __DIR__ . '/pages/wordpress.html' );
-$main = str_replace( '[[steps]]', steps_list( $steps, $groups, $base ), $main );
-$main = str_replace( '[[first]]', $base . $steps[0][0] . '/', $main );
-$main = str_replace( '[[count]]', (string) count( $steps ), $main );
-write( $root . '/wordpress/index.html', page( $tpl, $base, 'מדריך התקנה: Lift לוורדפרס | זרמומיה',
-	'מתקינים את Lift בוורדפרס לבד, ב-' . count( $steps ) . ' צעדים קצרים, בערך 15 דקות.',
-	$c_home . $c_guide . ' ‹ <span>וורדפרס</span>', $main ) );
+/**
+ * Overview page and one page per step for a platform (/lift/guide/<key>/<slug>/).
+ */
+function build_platform( $key, $label, $steps, $groups, $stepdir, $overview, $minutes ) {
+	global $tpl, $root, $shots, $help, $c_home, $c_guide;
+	$base  = '/lift/guide/' . $key . '/';
+	$c_pl  = '<a href="' . $base . '">' . $label . '</a>';
+	$total = count( $steps );
 
-// 3. Steps.
-$total = count( $steps );
-foreach ( $steps as $i => $s ) {
-	list( $slug, $title ) = $s;
-	$n    = $i + 1;
-	$src  = file_get_contents( __DIR__ . '/steps/' . $slug . '.html' );
-	$part = explode( '<!--stuck-->', $src );
-	$body = expand( trim( $part[0] ), $root, $shots );
-	$stk  = isset( $part[1] ) ? trim( $part[1] ) : '';
+	$main = file_get_contents( __DIR__ . '/pages/' . $overview );
+	$main = str_replace( '[[steps]]', steps_list( $steps, $groups, $base ), $main );
+	$main = str_replace( '[[first]]', $base . $steps[0][0] . '/', $main );
+	$main = str_replace( '[[count]]', (string) $total, $main );
+	write( $root . '/' . $key . '/index.html', page( $tpl, $base, 'מדריך התקנה: Lift ל' . $label . ' | זרמומיה',
+		'מתקינים את Lift ב' . $label . ' לבד, ב-' . $total . ' צעדים קצרים, בערך ' . $minutes . ' דקות.',
+		$c_home . $c_guide . ' ‹ <span>' . $label . '</span>', $main ) );
 
-	$prog = '<div class="prog" data-step="' . $slug . '"><div class="prog-top"><span>צעד ' . $n . ' מתוך ' . $total . '</span>'
-		. '<details class="all"><summary>כל הצעדים</summary>' . steps_list( $steps, $groups, $base, $slug ) . '</details></div>'
-		. '<div class="bar" role="progressbar" aria-label="התקדמות במדריך" aria-valuemin="1" aria-valuemax="' . $total . '" aria-valuenow="' . $n . '"><i style="width:' . round( 100 * $n / $total ) . '%"></i></div></div>';
+	foreach ( $steps as $i => $s ) {
+		list( $slug, $title ) = $s;
+		$n    = $i + 1;
+		$src  = file_get_contents( __DIR__ . '/' . $stepdir . '/' . $slug . '.html' );
+		$part = explode( '<!--stuck-->', $src );
+		$body = expand( trim( $part[0] ), $root, $shots );
+		$stk  = isset( $part[1] ) ? trim( $part[1] ) : '';
 
-	$stuck = '<details class="stuck"><summary>נתקעתם?</summary><div class="in">' . $stk . $help . '</div></details>';
+		$prog = '<div class="prog" data-step="' . $slug . '"><div class="prog-top"><span>צעד ' . $n . ' מתוך ' . $total . '</span>'
+			. '<details class="all"><summary>כל הצעדים</summary>' . steps_list( $steps, $groups, $base, $slug ) . '</details></div>'
+			. '<div class="bar" role="progressbar" aria-label="התקדמות במדריך" aria-valuemin="1" aria-valuemax="' . $total . '" aria-valuenow="' . $n . '"><i style="width:' . round( 100 * $n / $total ) . '%"></i></div></div>';
 
-	$back = $i > 0
-		? '<a class="back" href="' . $base . $steps[ $i - 1 ][0] . '/">→ לצעד הקודם</a>'
-		: '<a class="back" href="' . $base . '">→ לרשימת הצעדים</a>';
-	$next = $i < $total - 1
-		? '<a class="btn" href="' . $base . $steps[ $i + 1 ][0] . '/" data-done="' . $slug . '">סיימתי, הלאה ←</a>'
-		: '<a class="btn teal" href="' . $base . '" data-done="' . $slug . '">סיימתי ✓</a>';
+		$stuck = '<details class="stuck"><summary>נתקעתם?</summary><div class="in">' . $stk . $help . '</div></details>';
 
-	$main = $prog . '<h1>' . e( $title ) . '</h1>' . $body . $stuck . '<div class="next">' . $back . $next . '</div>';
+		$back = $i > 0
+			? '<a class="back" href="' . $base . $steps[ $i - 1 ][0] . '/">→ לצעד הקודם</a>'
+			: '<a class="back" href="' . $base . '">→ לרשימת הצעדים</a>';
+		$next = $i < $total - 1
+			? '<a class="btn" href="' . $base . $steps[ $i + 1 ][0] . '/" data-done="' . $slug . '">סיימתי, הלאה ←</a>'
+			: '<a class="btn teal" href="' . $base . '" data-done="' . $slug . '">סיימתי ✓</a>';
 
-	write( $root . '/wordpress/' . $slug . '/index.html', page( $tpl, $base . $slug . '/',
-		'צעד ' . $n . ': ' . $title . ' | מדריך התקנה ל-Lift',
-		'מדריך התקנה ל-Lift בוורדפרס, צעד ' . $n . ' מתוך ' . $total . ': ' . $title . '.',
-		$c_home . $c_guide . ' ‹ ' . $c_wp . ' ‹ <span>צעד ' . $n . '</span>', $main ) );
+		$main = $prog . '<h1>' . e( $title ) . '</h1>' . $body . $stuck . '<div class="next">' . $back . $next . '</div>';
+
+		write( $root . '/' . $key . '/' . $slug . '/index.html', page( $tpl, $base . $slug . '/',
+			'צעד ' . $n . ': ' . $title . ' | מדריך התקנה ל-Lift',
+			'מדריך התקנה ל-Lift ב' . $label . ', צעד ' . $n . ' מתוך ' . $total . ': ' . $title . '.',
+			$c_home . $c_guide . ' ‹ ' . $c_pl . ' ‹ <span>צעד ' . $n . '</span>', $main ) );
+	}
 }
+
+// 2. WordPress.
+build_platform( 'wordpress', 'וורדפרס', $steps, $groups, 'steps', 'wordpress.html', 15 );
+
+// 3. Wix: a kit (code to paste), not a plugin.
+$wix_groups = array(
+	'prep'  => 'הכנה',
+	'paste' => 'מדביקים בוויקס',
+	'end'   => 'בדיקה וסיום',
+);
+$wix_steps = array(
+	array( 'before',      'לפני שמתחילים',                      'prep' ),
+	array( 'kit',         'ממלאים את הערכה',                    'prep' ),
+	array( 'seo',         'פותחים את הגדרות ה-SEO של דף הבית',  'paste' ),
+	array( 'business',    'מדביקים את פרטי העסק',               'paste' ),
+	array( 'faq',         'שאלות ותשובות',                      'paste' ),
+	array( 'description', 'תיאור לגוגל',                        'paste' ),
+	array( 'check',       'בודקים שזה עבד',                     'end' ),
+	array( 'done',        'סיימתם!',                            'end' ),
+);
+build_platform( 'wix', 'ויקס', $wix_steps, $wix_groups, 'steps-wix', 'wix.html', 15 );
+
+// 4. The Wix kit itself. Unlisted: sent by email after payment, not linked from the guide or the menu.
+$kit_path = '/lift/wix/kit-x7q4m2/';
+write( dirname( $root ) . '/wix/kit-x7q4m2/index.html', page( $tpl, $kit_path, 'ערכת Lift לוויקס | זרמומיה',
+	'ממלאים את פרטי העסק ומקבלים קוד מוכן להדבקה בוויקס.',
+	$c_home . '<span>ערכת Lift לוויקס</span>', file_get_contents( __DIR__ . '/pages/wix-kit.html' ) ) );

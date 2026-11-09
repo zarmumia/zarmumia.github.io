@@ -125,6 +125,30 @@ footer a{color:#fff}
 .anim .replay{flex:none;font:inherit;font-size:15px;font-weight:700;border:2px solid rgba(255,255,255,.5);background:transparent;color:#fff;border-radius:99px;padding:5px 14px;cursor:pointer}
 .anim .replay:hover{background:rgba(255,255,255,.12)}
 
+/* Wix kit form */
+.kit label{display:block;font-weight:700;font-size:16px;margin:0 0 14px;color:var(--teal-d)}
+.kit input:not([type=checkbox]),.kit textarea{display:block;width:100%;margin-top:5px;font:inherit;font-size:17px;font-weight:400;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:9px 12px}
+.kit input:focus,.kit textarea:focus{border-color:var(--teal);outline:none;box-shadow:0 0 0 3px var(--teal-t)}
+.kit small,.small{display:block;font-weight:400;font-size:14px;color:var(--mute);margin-top:4px}
+.kit .two{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.kit fieldset{border:0;margin:0 0 14px}
+.kit legend{font-weight:700;font-size:16px;color:var(--teal-d);margin-bottom:6px}
+.kit .chk{display:inline-flex;align-items:center;gap:6px;font-weight:400;margin:0 0 0 16px;color:var(--ink)}
+.kit .qa-row{background:var(--cream);border-radius:12px;padding:12px 14px 2px;margin-bottom:10px}
+@media(max-width:600px){.kit .two{grid-template-columns:1fr}}
+.out{margin-top:30px;padding-top:6px;border-top:2px solid var(--teal-t)}
+.code{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin:0 0 16px}
+.code-top{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;margin-bottom:8px}
+.code-top b{color:var(--teal-d)}
+.code-top span{font-size:14px;color:var(--mute)}
+.code textarea{width:100%;font-family:Consolas,monospace;font-size:13px;line-height:1.5;border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--paper);color:var(--ink);resize:vertical}
+.code-bot{display:flex;align-items:center;gap:12px;margin-top:8px}
+.code-bot small{font-size:13px;color:var(--mute)}
+.linkbtn{font:inherit;font-size:14px;background:none;border:0;color:var(--teal);text-decoration:underline;cursor:pointer;padding:0}
+.checklist{list-style:none;margin:10px 0 18px}
+.checklist li{position:relative;padding-right:30px;margin-bottom:8px;font-size:17px}
+.checklist li::before{content:"☐";position:absolute;right:0;top:0;color:var(--teal);font-size:20px;line-height:1.3}
+
 /* stuck */
 .stuck{margin:30px 0 0;border:2px solid var(--teal-t);border-radius:16px;background:#fff}
 .stuck>summary{cursor:pointer;padding:14px 20px;font-weight:800;font-size:19px;color:var(--teal-d);list-style:none;display:flex;justify-content:space-between;align-items:center}

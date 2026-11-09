@@ -1,6 +1,6 @@
 /* Lift guide: remembers, only in this browser, which steps were done and where the visitor stopped. */
 (function () {
-  var KEY = 'lift_guide_wp';
+  var KEY = location.pathname.indexOf('/guide/wix/') > -1 ? 'lift_guide_wix' : 'lift_guide_wp';
   function load() {
     try { return JSON.parse(localStorage.getItem(KEY)) || { done: [], last: '' }; }
     catch (e) { return { done: [], last: '' }; }
