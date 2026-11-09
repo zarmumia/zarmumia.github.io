@@ -237,3 +237,4 @@ a.plat:hover{border-color:var(--amber)}
 .fresh ul{margin:6px 22px 0 0;display:grid;gap:6px}
 .fresh b{color:var(--amber-l)}
 .lift-hero .onit{display:block;color:var(--amber);margin-top:6px}
+.pkg .how{margin:0;font-size:15px;font-weight:700;color:var(--teal-d);background:var(--amber-t);border-radius:10px;padding:6px 10px}
