@@ -176,6 +176,12 @@ function page( $tpl, $path, $title, $desc, $crumbs, $main ) {
 		$tpl = str_replace( '<a class="btn sm line" href="/lift/guide/">המדריך</a>',
 			'<a class="btn sm" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ11R725W2CBQ4aLhRfyup7IzMiVJSC1gbAsFsz1nDbvG8glv3UhfWArrI-Qhs647aM6ZEHCorSX" target="_blank" rel="noopener">שיחה קצרה</a>', $tpl );
 	}
+	// The short ad page has one goal (the free check): no menu, no header button, no breadcrumbs.
+	if ( '/lift/check/' === $path ) {
+		$tpl = preg_replace( '#\s*<nav class="links".*?</nav>#s', '', $tpl );
+		$tpl = str_replace( '<a class="btn sm line" href="/lift/guide/">המדריך</a>', '', $tpl );
+		$tpl = str_replace( '<nav class="crumbs" aria-label="מיקום בעמוד">{{CRUMBS}}</nav>', '', $tpl );
+	}
 	return strtr( $tpl, array(
 		'{{TITLE}}'  => e( $title ),
 		'{{PATH}}'   => $path,
@@ -285,6 +291,10 @@ write( dirname( $root ) . '/index.html', page( $tpl, '/lift/', 'Lift: למה ה�
 write( dirname( $root ) . '/soon/index.html', page( $tpl, '/lift/soon/', 'עוד רגע זה כאן | Lift | זרמומיה',
 	'הקנייה וההורדה של Lift נפתחות בימים הקרובים.',
 	$c_home . '<a href="/lift/">Lift</a> ‹ <span>בקרוב</span>', file_get_contents( __DIR__ . '/pages/lift-soon.html' ) ) );
+// 5b. Short page for the ads: only the free check, with the form on the first screen.
+write( dirname( $root ) . '/check/index.html', page( $tpl, '/lift/check/', 'בדיקה חינמית: למה העסק שלי לא מופיע ב-ChatGPT? | Lift | זרמומיה',
+	'שלחו את כתובת האתר, וקבלו במייל ציון מוכנות ל-AI ואת שלושת הדברים שהכי חשוב לתקן. חינם! ובלי התחייבות להמשך.',
+	'', file_get_contents( __DIR__ . '/pages/lift-check.html' ) ) );
 // 6. Thank-you page after the free-check form (sendmsg redirects here after saving the lead).
 write( dirname( $root ) . '/thanks/index.html', page( $tpl, '/lift/thanks/', 'קיבלנו, תודה | Lift | זרמומיה',
 	'קיבלנו את כתובת האתר. פאני תשלח דוח קצר תוך יום-יומיים עבודה.',

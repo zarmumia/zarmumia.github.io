@@ -1,0 +1,77 @@
+<section class="lift-hero chk-hero" id="chk">
+  <p class="kicker">בדיקה חינמית · Lift by Zarmumia</p>
+  <h1>למה העסק שלי לא מופיע <span class="nowrap">ב-ChatGPT?</span></h1>
+  <p class="intro">שלחו את כתובת האתר, וקבלו במייל ציון <span class="nowrap">מוכנות ל-AI</span> ואת שלושת הדברים שהכי חשוב לתקן. <b>חינם! ובלי התחייבות להמשך.</b></p>
+  <!-- Same sendmsg form as /lift/ (346383, group 349428, redirects to /lift/thanks/).
+       Two steps when JavaScript runs: the website first, then name and email. Without JavaScript all fields show. -->
+  <form class="free-form chk-form" action="https://panel.sendmsg.co.il/AddUserFromSite.aspx" method="post" accept-charset="UTF-8">
+    <input type="hidden" name="MLID" value="349428">
+    <input type="hidden" name="form" value="346383__c576e05f-d5a5-4e3e-86ed-23d6cc453dfb">
+    <label for="chk-site">כתובת האתר שלכם</label>
+    <input id="chk-site" name="2" type="text" inputmode="url" placeholder="www.example.co.il" maxlength="250" required dir="ltr">
+    <button class="btn s1" type="button">לבדיקה החינמית ←</button>
+    <div class="s2">
+      <label for="chk-name">שם</label>
+      <input id="chk-name" name="1" type="text" autocomplete="name" maxlength="250" required>
+      <label for="chk-email">לאיזה מייל לשלוח את הדוח?</label>
+      <input id="chk-email" name="email" type="email" autocomplete="email" required dir="ltr">
+      <label class="check"><input type="checkbox" name="confirm" value="1"> אשמח לקבל מיילים מ-Lift: פעם בחודש מה חדש ב-AI ומה זה אומר לאתר. אפשר להסיר בכל מייל.</label>
+      <button class="btn" type="submit">שלחו לי את הבדיקה</button>
+    </div>
+  </form>
+  <ul class="chk-sure">
+    <li>לא נוגעים באתר, רק קוראים אותו, כמו שגוגל קורא</li>
+    <li>הדוח מגיע תוך יום-יומיים עבודה (לא בשבת ובחג)</li>
+  </ul>
+</section>
+
+<h2>מה מקבלים במייל</h2>
+<div class="chk-get">
+  <figure class="sample-report">
+    <a href="/lift/assets/sample-report-1.webp" target="_blank" rel="noopener" aria-label="הדוח לדוגמה בגודל מלא">
+      <img class="p2" src="/lift/assets/sample-report-2.webp" alt="" width="640" height="902" loading="lazy">
+      <img class="p1" src="/lift/assets/sample-report-1.webp" alt="דוח לדוגמה: ציון מוכנות 59 מתוך 100, מה כבר עובד, ושלושת הדברים החשובים שחסרים" width="640" height="902" loading="lazy">
+    </a>
+    <figcaption>ככה נראה הדוח (דוגמה, לעסק מומצא)</figcaption>
+  </figure>
+  <ul class="chk-list">
+    <li><b>ציון מוכנות ל-AI</b> מ-0 עד 100</li>
+    <li><b>שלושת הדברים החשובים שחסרים,</b> בעברית פשוטה, עם מה שמצאנו אצלכם</li>
+    <li><b>PDF עם כל 18 הבדיקות:</b> מה כבר עובד ומה עוד לא</li>
+  </ul>
+</div>
+
+<blockquote class="quote">
+  <p>"מהמם, תודה. ראיתי את כל הדברים. סוף סוף העמוד מקבל קצת חיים אחרי שנים."</p>
+  <footer>דני יוגלסון, בעלים ומנכ"ל <a href="https://ogen-cal.co.il/" target="_blank" rel="noopener">עוגן כלכלי</a></footer>
+  <p class="score">ציון המוכנות של האתר היום: <b>85 מתוך 100</b>, בבדיקה של Lift</p>
+</blockquote>
+
+<div class="chk-who">
+  <img src="/assets/fanny.png" alt="פאני בן עמי רבינוביץ׳" width="72" height="72" loading="lazy">
+  <p><b>מי בודקת?</b> פאני בן עמי רבינוביץ׳, מייסדת זרמומיה. שאלה לפני? <a href="https://wa.me/972547892320" target="_blank" rel="noopener">וואטסאפ לפאני</a></p>
+</div>
+
+<div class="chk-end">
+  <a class="btn" href="#chk">לבדיקה החינמית</a>
+  <p class="small"><a href="/lift/">רוצים לקרוא הכול על Lift? לדף המלא ←</a> · <a href="/privacy.html">מדיניות פרטיות</a></p>
+</div>
+
+<a class="sticky-call" href="#chk">בדיקה חינמית לאתר</a>
+<script>
+document.body.classList.add('has-sticky');
+(function(){
+  // Two-step form: the website first (the easy field), then name and email.
+  var f=document.querySelector('.chk-form'),s=document.getElementById('chk-site'),go=f.querySelector('.s1');
+  f.classList.add('steps');
+  function next(){ if(!s.value.trim()){ s.reportValidity(); return; } f.classList.add('open'); document.getElementById('chk-name').focus(); }
+  go.addEventListener('click',next);
+  s.addEventListener('keydown',function(e){ if(e.key==='Enter'&&!f.classList.contains('open')){ e.preventDefault(); next(); } });
+  // The bottom button and the sticky button bring the reader back to the form, ready to type.
+  document.querySelectorAll('a[href="#chk"]').forEach(function(a){ a.addEventListener('click',function(){ setTimeout(function(){ (f.classList.contains('open')?document.getElementById('chk-name'):s).focus({preventScroll:true}); },400); }); });
+  // Hide the sticky button while the form is on screen.
+  var b=document.querySelector('.sticky-call');
+  if(!b||!('IntersectionObserver' in window))return;
+  new IntersectionObserver(function(e){ b.classList.toggle('away',e[0].isIntersecting); },{threshold:0.05}).observe(f);
+})();
+</script>
