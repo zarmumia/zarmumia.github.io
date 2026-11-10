@@ -171,6 +171,11 @@ function steps_list( $steps, $groups, $base, $current = '' ) {
 }
 
 function page( $tpl, $path, $title, $desc, $crumbs, $main ) {
+	// On the sales pages the header button books a call instead of opening the guide.
+	if ( in_array( $path, array( '/lift/', '/lift/free/', '/lift/thanks/' ), true ) ) {
+		$tpl = str_replace( '<a class="btn sm line" href="/lift/guide/">המדריך</a>',
+			'<a class="btn sm" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ11R725W2CBQ4aLhRfyup7IzMiVJSC1gbAsFsz1nDbvG8glv3UhfWArrI-Qhs647aM6ZEHCorSX" target="_blank" rel="noopener">שיחה קצרה</a>', $tpl );
+	}
 	return strtr( $tpl, array(
 		'{{TITLE}}'  => e( $title ),
 		'{{PATH}}'   => $path,
