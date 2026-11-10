@@ -332,3 +332,8 @@ a.plat:hover{border-color:var(--amber)}
 #zm-cookie [data-c=yes]{background:#F9E3CB;color:#1C2726}
 #zm-cookie [data-c=no]{background:transparent;color:#5F6B69;border:0;padding:2px 6px}
 @media (max-width:640px){#zm-cookie{font-size:11px;padding:2px 3px 2px 9px;padding-inline-start:9px;padding-inline-end:3px}body.ck-open .sticky-call{bottom:40px}}
+
+/* Phones with a forced dark mode (e.g. Samsung Internet) turned the page dark and the buttons maroon. Ask for light only. */
+:root{color-scheme:only light}
+.chk-end .small{margin-top:16px;line-height:1.8}
+.chk-end{margin-bottom:28px}
