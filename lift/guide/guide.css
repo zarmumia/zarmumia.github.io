@@ -223,7 +223,7 @@ a.plat:hover{border-color:var(--amber)}
 .free{background:#fff;border:2px solid var(--teal);border-radius:18px;padding:20px 22px}
 .free-form{display:grid;gap:6px;max-width:440px;margin:12px 0}
 .free-form label{font-weight:700;font-size:16px}
-.free-form input[type=text],.free-form input[type=email]{font:inherit;font-size:18px;padding:10px 14px;border:2px solid var(--line);border-radius:12px;background:var(--paper)}
+.free-form input[type=text],.free-form input[type=email],.free-form input[type=url]{font:inherit;font-size:18px;padding:10px 14px;border:2px solid var(--line);border-radius:12px;background:var(--paper)}
 .free-form input:focus{outline:3px solid var(--amber);outline-offset:1px}
 .free-form .check{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:16px;line-height:1.5;margin:8px 0}
 .free-form .check input{margin-top:5px;flex:none;width:18px;height:18px}
@@ -238,3 +238,7 @@ a.plat:hover{border-color:var(--amber)}
 .fresh b{color:var(--amber-l)}
 .lift-hero .onit{display:block;color:var(--amber);margin-top:6px}
 .pkg .how{margin:0;font-size:15px;font-weight:700;color:var(--teal-d);background:var(--amber-t);border-radius:10px;padding:6px 10px}
+
+.pkg.soon{opacity:.62}
+.pkg .soon-note{margin:0;text-align:center;font-weight:800;color:var(--mute);border:2px dashed var(--line);border-radius:12px;padding:8px}
+.pkg p.small{margin:0}
