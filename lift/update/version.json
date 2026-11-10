@@ -1,18 +1,19 @@
 {
-    "version": "0.9.6-beta",
+    "version": "0.9.7-beta",
     "requires": "6.5",
     "requires_php": "7.4",
     "tested": "7.1.4",
-    "released": "2026-11-09",
+    "released": "2026-11-10",
     "changelog": [
         "עדכון בלחיצה: מעכשיו Lift מודיע כשיש גרסה חדשה ומתעדכן בלחיצה אחת",
         "תיקונים לדף: תיאור לגוגל, תיאורים לתמונות, כותרת ראשית ושאלות ותשובות",
         "לוגו העסק: בוחרים בתוך Lift",
         "אבטחה: כל עדכון חתום דיגיטלית, ו-Lift מתקין רק עדכון עם חתימה תקינה",
-        "תיקונים קטנים: בדיקת הטלפון מדויקת יותר, \"לא עכשיו\" ב-llms.txt, בדיקת כל הדפים לא נתקעת על דף אחד"
+        "תיקונים קטנים: בדיקת הטלפון מדויקת יותר, \"לא עכשיו\" ב-llms.txt, בדיקת כל הדפים לא נתקעת על דף אחד",
+        "עדכונים אוטומטיים מופעלים מראש (אפשר לכבות ברשימת התוספים)"
     ],
     "signatures": {
-        "free": "W9YqbqKJh6tFKL0WbesdSwoiU8MSjhBkna3eS2VzHEKcjAEWyqmow81gwXw2BmROpcSMXscO2DJK1Hqa+HCyDg==",
-        "site": "D4/iHl5Cxp/QhAETvf4UuT36WLeFreL/C3YQU+etRKrjr2hues5DMWFGmIv1msBvB0OFRB+NTYSDvnr/xd17AA=="
+        "free": "Jcp4HXSjTldlKNYvlfttSTwp1+OJVT3GEshpprtrsCuJncqjEBklQd1WJCiilY0ca1SuDd5gL76sQJor1APTBw==",
+        "site": "sEqJqWPN2zU0xQdnOwnCmFtO56hviJTKWXJUecKBAhXVIfstgOj7qWjriA2L1PF6KJ+HEDCF5y7hStCJ1kixCg=="
     }
 }
