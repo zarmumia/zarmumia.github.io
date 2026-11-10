@@ -177,5 +177,12 @@
 
 <div class="tip"><b>שאלה אחרת?</b> <a href="https://wa.me/972547892320?text=%D7%94%D7%99%D7%99%20%D7%A4%D7%90%D7%A0%D7%99%2C%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20Lift" target="_blank" rel="noopener">כתבו לפאני בוואטסאפ</a>. עונים בימים א'–ה'. בשבת ובחג אין מענה.</div>
 
-<a class="sticky-call" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ11R725W2CBQ4aLhRfyup7IzMiVJSC1gbAsFsz1nDbvG8glv3UhfWArrI-Qhs647aM6ZEHCorSX" target="_blank" rel="noopener">שיחה קצרה עם פאני</a>
-<script>document.body.classList.add('has-sticky');</script>
+<a class="sticky-call" href="#free">בדיקה חינמית לאתר</a>
+<script>
+document.body.classList.add('has-sticky');
+// Hide the sticky button while the top button or the free-check form is on screen: no duplicate, never covers the fields.
+(function(){var b=document.querySelector('.sticky-call'),f=document.getElementById('free');var g=f&&f.parentElement.querySelector('.free-grid'),h=document.querySelector('.btn[href="#free"]');
+if(!b||!g||!('IntersectionObserver' in window))return;var on=new Set();
+var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)on.add(e.target);else on.delete(e.target);});b.classList.toggle('away',on.size>0);},{threshold:0.05});
+o.observe(g);if(h)o.observe(h);})();
+</script>
