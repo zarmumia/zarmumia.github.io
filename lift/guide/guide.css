@@ -325,3 +325,10 @@ a.plat:hover{border-color:var(--amber)}
   body.has-sticky #zm-cookie{bottom:8px}
   body.ck-open .sticky-call{bottom:46px}
 }
+/* Cookie notice, round 2 (Fanny): even smaller, light instead of dark green. */
+#zm-cookie{background:#fff;color:#5F6B69;border:1px solid #E4D9C9;box-shadow:0 2px 8px rgba(0,0,0,.08);font-size:11px;padding:2px 3px 2px 9px;padding-inline-start:9px;padding-inline-end:3px;gap:6px;opacity:1}
+#zm-cookie a{color:#5F6B69!important;text-decoration:underline}
+#zm-cookie button{font-size:11px;padding:2px 9px;font-weight:700}
+#zm-cookie [data-c=yes]{background:#F9E3CB;color:#1C2726}
+#zm-cookie [data-c=no]{background:transparent;color:#5F6B69;border:0;padding:2px 6px}
+@media (max-width:640px){#zm-cookie{font-size:11px;padding:2px 3px 2px 9px;padding-inline-start:9px;padding-inline-end:3px}body.ck-open .sticky-call{bottom:40px}}
