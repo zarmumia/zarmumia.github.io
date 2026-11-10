@@ -143,16 +143,18 @@ gtag('js',new Date());gtag('config','G-Y8C4NEDQ7J');
 <h2 id="free">בדיקה חינמית לאתר</h2>
 <div class="free">
   <p>שולחים את כתובת האתר, ופאני בודקת אותו ושולחת לכם במייל דוח קצר: ציון מוכנות ל-AI, ושלושת הדברים החשובים שחסרים. תוך יום-יומיים עבודה (לא בשבת ובחג).</p>
-  <!-- Until sendmsg is connected: the fields have no "name", so nothing typed is sent anywhere. -->
-  <form class="free-form" action="/lift/soon/" method="get">
-    <input type="hidden" name="p" value="check">
+  <!-- sendmsg form 346383 ("Lift – בקשת בדיקה"): adds the lead to group 349428 and redirects to /lift/thanks/.
+       Field names come from sendmsg: 1 = name, 2 = website, confirm = mailing consent (unchecked by default). -->
+  <form class="free-form" action="https://panel.sendmsg.co.il/AddUserFromSite.aspx" method="post" accept-charset="UTF-8">
+    <input type="hidden" name="MLID" value="349428">
+    <input type="hidden" name="form" value="346383__c576e05f-d5a5-4e3e-86ed-23d6cc453dfb">
     <label for="lift-site">כתובת האתר</label>
-    <input id="lift-site" type="url" inputmode="url" placeholder="https://" required dir="ltr">
+    <input id="lift-site" name="2" type="text" inputmode="url" placeholder="www.example.co.il" maxlength="250" required dir="ltr">
     <label for="lift-name">שם</label>
-    <input id="lift-name" type="text" autocomplete="name" required>
+    <input id="lift-name" name="1" type="text" autocomplete="name" maxlength="250" required>
     <label for="lift-email">מייל</label>
-    <input id="lift-email" type="email" autocomplete="email" required dir="ltr">
-    <label class="check"><input type="checkbox" id="lift-news"> אשמח לקבל מיילים מ-Lift: פעם בחודש מה חדש ב-AI ומה זה אומר לאתר, וגם מה חדש ב-Lift. אפשר להסיר בכל מייל.</label>
+    <input id="lift-email" name="email" type="email" autocomplete="email" required dir="ltr">
+    <label class="check"><input type="checkbox" id="lift-news" name="confirm" value="1"> אשמח לקבל מיילים מ-Lift: פעם בחודש מה חדש ב-AI ומה זה אומר לאתר, וגם מה חדש ב-Lift. אפשר להסיר בכל מייל.</label>
     <button class="btn" type="submit">שלחו לי בדיקה</button>
   </form>
   <p class="small"><a href="/privacy.html">מדיניות פרטיות</a></p>

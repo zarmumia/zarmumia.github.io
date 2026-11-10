@@ -280,3 +280,7 @@ write( dirname( $root ) . '/index.html', page( $tpl, '/lift/', 'Lift: למה ה�
 write( dirname( $root ) . '/soon/index.html', page( $tpl, '/lift/soon/', 'עוד רגע זה כאן | Lift | זרמומיה',
 	'הקנייה וההורדה של Lift נפתחות בימים הקרובים.',
 	$c_home . '<a href="/lift/">Lift</a> ‹ <span>בקרוב</span>', file_get_contents( __DIR__ . '/pages/lift-soon.html' ) ) );
+// 6. Thank-you page after the free-check form (sendmsg redirects here after saving the lead).
+write( dirname( $root ) . '/thanks/index.html', page( $tpl, '/lift/thanks/', 'קיבלנו, תודה | Lift | זרמומיה',
+	'קיבלנו את כתובת האתר. פאני תשלח דוח קצר תוך יום-יומיים עבודה.',
+	$c_home . '<a href="/lift/">Lift</a> ‹ <span>תודה</span>', file_get_contents( __DIR__ . '/pages/lift-thanks.html' ) ) );
