@@ -3,7 +3,7 @@
 <head>
 <script>
 // sendmsg appends the lead's name/email/site to the thank-you URL: strip it before anything (incl. analytics) reads the address.
-if(location.pathname.indexOf('/lift/thanks')===0&&location.search){try{history.replaceState(null,'',location.pathname);}catch(e){}}
+if((location.pathname.indexOf('/lift/thanks')===0||location.pathname.indexOf('/lift/free')===0)&&location.search){try{history.replaceState(null,'',location.pathname);}catch(e){}}
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 var zc=null;try{zc=localStorage.getItem('zm_consent');}catch(e){}
 gtag('consent','default',{analytics_storage:zc==='yes'?'granted':'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
@@ -43,7 +43,7 @@ gtag('js',new Date());gtag('config','G-Y8C4NEDQ7J');
 <h2>מה קורה מעכשיו</h2>
 <ol class="do">
   <li><b>מוסיפים דף חדש לאתר?</b> Lift שואל אם להוסיף אותו ל-llms.txt. בלי האישור שלכם הוא לא משנה כלום.</li>
-  <li><b>עדכונים:</b> עולם ה-AI משתנה כל הזמן, ו-Lift מתעדכן איתו. העדכונים האוטומטיים מופעלים מראש, וכל שיפור מגיע לאתר לבד. אפשר לראות את זה במסך <b>Lift ← סקירה</b>. מי שמעדיפה לעדכן בעצמה: תוספים ← <b>כבה עדכונים אוטומטיים</b> ליד Lift, ואז מופיעה הודעה כשיש עדכון, ולוחצים.</li>
+  <li><b>עדכונים (בגרסאות בתשלום):</b> עולם ה-AI משתנה כל הזמן, ו-Lift מתעדכן איתו. העדכונים האוטומטיים מופעלים מראש, וכל שיפור מגיע לאתר לבד. אפשר לראות את זה במסך <b>Lift ← סקירה</b>. בגרסה החינמית אין עדכונים. מי שמעדיפים לעדכן בעצמם: תוספים ← <b>כבה עדכונים אוטומטיים</b> ליד Lift, ואז מופיעה הודעה כשיש עדכון, ולוחצים.</li>
   <li><b>כדאי לבדוק:</b> שאלו את ChatGPT מה הוא יודע על העסק, ושאלו שוב בעוד חודש. אצל מנועי AI שינויים לוקחים זמן.</li>
   <li><b>רוצים להסיר את Lift?</b> תוספים ← Lift by Zarmumia ← <b>השבתה</b> ← <b>מחיקה</b>. האתר חוזר בדיוק למצב שהיה, בלי שאריות.</li>
 </ol>

@@ -284,3 +284,9 @@ write( dirname( $root ) . '/soon/index.html', page( $tpl, '/lift/soon/', 'עוד
 write( dirname( $root ) . '/thanks/index.html', page( $tpl, '/lift/thanks/', 'קיבלנו, תודה | Lift | זרמומיה',
 	'קיבלנו את כתובת האתר. פאני תשלח דוח קצר תוך יום-יומיים עבודה.',
 	$c_home . '<a href="/lift/">Lift</a> ‹ <span>תודה</span>', file_get_contents( __DIR__ . '/pages/lift-thanks.html' ) ) );
+
+// 7. Free download page: sendmsg redirects here after the "free download" form saves the lead.
+//    The zip lives in /lift/dl/free/ (the free edition has no update URL, so the file name is fixed per release).
+write( dirname( $root ) . '/free/index.html', page( $tpl, '/lift/free/', 'Lift בחינם: הורדה | זרמומיה',
+	'הורדת הגרסה החינמית של Lift לוורדפרס: llms.txt וציון מוכנות ל-AI, עם מדריך התקנה בעברית.',
+	$c_home . '<a href="/lift/">Lift</a> ‹ <span>הורדה בחינם</span>', file_get_contents( __DIR__ . '/pages/lift-free.html' ) ) );

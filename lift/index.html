@@ -3,7 +3,7 @@
 <head>
 <script>
 // sendmsg appends the lead's name/email/site to the thank-you URL: strip it before anything (incl. analytics) reads the address.
-if(location.pathname.indexOf('/lift/thanks')===0&&location.search){try{history.replaceState(null,'',location.pathname);}catch(e){}}
+if((location.pathname.indexOf('/lift/thanks')===0||location.pathname.indexOf('/lift/free')===0)&&location.search){try{history.replaceState(null,'',location.pathname);}catch(e){}}
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 var zc=null;try{zc=localStorage.getItem('zm_consent');}catch(e){}
 gtag('consent','default',{analytics_storage:zc==='yes'?'granted':'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
@@ -71,15 +71,16 @@ gtag('js',new Date());gtag('config','G-Y8C4NEDQ7J');
   <ul>
     <li><b>פעם בחודש אנחנו בודקים מה השתנה</b> ומה זה אומר לאתר של עסק קטן.</li>
     <li><b>כשצריך, Lift מתעדכן.</b> בוורדפרס מופיע "יש עדכון ל-Lift", ולוחצים פעם אחת. בוויקס, הערכה והמדריך מתעדכנים.</li>
-    <li><b>מייל קצר בעברית:</b> מה חדש, ומה כדאי לעשות עכשיו. רק למי שבחרה לקבל.</li>
+    <li><b>מייל קצר בעברית:</b> מה חדש, ומה כדאי לעשות עכשיו. רק למי שבחרו לקבל.</li>
     <li><b>השנה הראשונה כלולה.</b> אחר כך ממשיכים להתעדכן ב-300 ש"ח לשנה.</li>
   </ul>
 </section>
 
 <h2 id="pkgs">החבילות</h2>
-<p>תשלום אחד, כולל שנה של עדכונים. אחר כך חידוש עדכונים ב-300 ש"ח לשנה. מי שלא מחדשת: הכול ממשיך לעבוד. המחירים סופיים, בלי מע"מ.</p>
+<p>תשלום אחד, כולל שנה של עדכונים. אחר כך חידוש עדכונים ב-300 ש"ח לשנה. מי שלא מחדשים: הכול ממשיך לעבוד. המחירים סופיים, בלי מע"מ.</p>
 <div class="pkgs">
-  <article class="pkg soon">
+  <article class="pkg">
+    <p class="tag">בהרצה</p>
     <p class="for">וורדפרס · ויקס</p>
     <h3>בחינם</h3>
     <p class="price">0 <small>ש"ח</small></p>
@@ -87,9 +88,9 @@ gtag('js',new Date());gtag('config','G-Y8C4NEDQ7J');
     <ul>
       <li>llms.txt</li>
       <li>בוורדפרס: ציון מוכנות ל-AI לדף הבית</li>
-      <li>בוויקס: רשימת בדיקה</li>
+      <li>בוויקס: בדיקה חינמית ודוח קצר</li>
     </ul>
-    <p class="soon-note">בקרוב</p>
+    <a class="btn line" href="#download">להורדה בחינם</a>
   </article>
   <article class="pkg soon">
     <p class="for">ויקס</p>
@@ -142,6 +143,24 @@ gtag('js',new Date());gtag('config','G-Y8C4NEDQ7J');
   <li><b>שום מידע לא יוצא מהאתר שלכם.</b></li>
 </ul>
 
+<h2 id="download">הורדה חינמית לוורדפרס</h2>
+<div class="free">
+  <p>משאירים שם ומייל, ומגיעים ישר להורדה של Lift בחינם: llms.txt, וציון מוכנות ל-AI לדף הבית. עם מדריך התקנה בעברית.</p>
+  <!-- sendmsg form 346384 ("Lift – הורדה חינמית"): adds the lead to group 349452 and redirects to /lift/free/.
+       Field names come from sendmsg: 1 = name, confirm = mailing consent (unchecked by default). -->
+  <form class="free-form" action="https://panel.sendmsg.co.il/AddUserFromSite.aspx" method="post" accept-charset="UTF-8">
+    <input type="hidden" name="MLID" value="349452">
+    <input type="hidden" name="form" value="346384__7170c337-dc72-4ba2-9422-41f3366c169e">
+    <label for="dl-name">שם</label>
+    <input id="dl-name" name="1" type="text" autocomplete="name" maxlength="250" required>
+    <label for="dl-email">מייל</label>
+    <input id="dl-email" name="email" type="email" autocomplete="email" required dir="ltr">
+    <label class="check"><input type="checkbox" id="dl-news" name="confirm" value="1"> אשמח לקבל מיילים מ-Lift: פעם בחודש מה חדש ב-AI ומה זה אומר לאתר, וגם מה חדש ב-Lift. אפשר להסיר בכל מייל.</label>
+    <button class="btn" type="submit">להורדה</button>
+  </form>
+  <p class="small">בוויקס אין תוסף להתקין: <a href="#free">בקשו בדיקה חינמית</a>. · <a href="/privacy.html">מדיניות פרטיות</a></p>
+</div>
+
 <h2 id="free">בדיקה חינמית לאתר</h2>
 <div class="free">
   <p>שולחים את כתובת האתר, ופאני בודקת אותו ושולחת לכם במייל דוח קצר: ציון מוכנות ל-AI, ושלושת הדברים החשובים שחסרים. תוך יום-יומיים עבודה (לא בשבת ובחג).</p>
@@ -173,7 +192,7 @@ gtag('js',new Date());gtag('config','G-Y8C4NEDQ7J');
 </div>
 <div class="qa">
   <h3>צריך ידע טכני?</h3>
-  <p>לא. המדריך מסביר כל צעד, עם צילומי מסך. ההתקנה לוקחת בערך 15 דקות. מי שמעדיפה שמישהו יעשה את זה בשבילה, לוקחת ליווי.</p>
+  <p>לא. המדריך מסביר כל צעד, עם צילומי מסך. ההתקנה לוקחת בערך 15 דקות. מי שמעדיפים שמישהו יעשה את זה בשבילם, לוקחים ליווי.</p>
 </div>
 <div class="qa">
   <h3>זה משנה את האתר?</h3>
@@ -185,7 +204,7 @@ gtag('js',new Date());gtag('config','G-Y8C4NEDQ7J');
 </div>
 <div class="qa">
   <h3>למה לא לתת את זה לסוכנות?</h3>
-  <p>אפשר, וזה בדרך כלל עולה הרבה יותר, לפעמים כל חודש מחדש. Lift הוא תשלום אחד, ההתקנה לוקחת בערך 15 דקות, והכול נשאר אצלכם ובשליטה שלכם, בלי לגעת בעיצוב. ומי שמעדיפה שמישהו יעשה את זה בשבילה, יכולה לקחת את Lift עם ליווי.</p>
+  <p>אפשר, וזה בדרך כלל עולה הרבה יותר, לפעמים כל חודש מחדש. Lift הוא תשלום אחד, ההתקנה לוקחת בערך 15 דקות, והכול נשאר אצלכם ובשליטה שלכם, בלי לגעת בעיצוב. ומי שמעדיפים שמישהו יעשה את זה בשבילם, יכולים לקחת את Lift עם ליווי.</p>
 </div>
 <div class="qa">
   <h3>ויקס נותנת את זה בחבילות. למה אני צריכה אתכם?</h3>
