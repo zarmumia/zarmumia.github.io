@@ -242,3 +242,6 @@ a.plat:hover{border-color:var(--amber)}
 .pkg.soon{opacity:.62}
 .pkg .soon-note{margin:0;text-align:center;font-weight:800;color:var(--mute);border:2px dashed var(--line);border-radius:12px;padding:8px}
 .pkg p.small{margin:0}
+.quote{margin:28px 0;padding:18px 22px;background:#fff;border-inline-start:5px solid var(--amber);border-radius:14px}
+.quote p{margin:0 0 6px;font-size:20px;font-weight:700;color:var(--ink)}
+.quote footer{margin:0;padding:0;border:0;font-size:15px;color:var(--mute);background:none}
