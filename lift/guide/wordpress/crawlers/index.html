@@ -18,7 +18,7 @@ gtag('js',new Date());gtag('config','G-Y8C4NEDQ7J');
 <meta name="description" content="מדריך התקנה ל-Lift בוורדפרס, צעד 11 מתוך 13: סורקים ומפת אתר.">
 <link rel="icon" href="/assets/favicon.png">
 <link rel="preload" href="/fonts/assistant.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/lift/guide/guide.css?v=20261110b">
+<link rel="stylesheet" href="/lift/guide/guide.css?v=20261110c">
 </head>
 <body>
 <a class="skip" href="#main">דילוג לתוכן</a>
@@ -67,16 +67,16 @@ gtag('js',new Date());gtag('config','G-Y8C4NEDQ7J');
   </div>
 </footer>
 <div id="zm-cookie" role="dialog" aria-live="polite" hidden>
-<p>האתר משתמש בעוגיות של Google Analytics כדי להבין כמה מבקרים יש ומאיפה הם מגיעים. בלי מידע אישי. <a href="/privacy.html" style="color:#F2A65A">מדיניות פרטיות</a></p><div><button type="button" data-c="yes">אישור</button><button type="button" data-c="no">לא, תודה</button></div>
+<p><span class="ck-long">האתר משתמש בעוגיות של Google Analytics כדי להבין כמה מבקרים יש ומאיפה הם מגיעים. בלי מידע אישי.</span><span class="ck-short">עוגיות לסטטיסטיקה בלבד, בלי מידע אישי.</span> <a href="/privacy.html" style="color:#F2A65A">מדיניות פרטיות</a></p><div><button type="button" data-c="yes">אישור</button><button type="button" data-c="no">לא, תודה</button></div>
 </div>
 <script>
 (function(){var b=document.getElementById('zm-cookie');if(!b)return;
 var c=null;try{c=localStorage.getItem('zm_consent');}catch(e){}
-if(!c)b.hidden=false;
+if(!c){b.hidden=false;document.body.classList.add('ck-open');}
 b.addEventListener('click',function(e){var v=e.target.getAttribute('data-c');if(!v)return;
 try{localStorage.setItem('zm_consent',v);}catch(e){}
 if(v==='yes')gtag('consent','update',{analytics_storage:'granted'});
-b.hidden=true;});})();
+b.hidden=true;document.body.classList.remove('ck-open');});})();
 </script>
 <script src="/lift/guide/guide.js"></script>
 <!-- Cloudflare Web Analytics (no cookies) --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "af25e1ce60da4e47a6f8aef2f327b9a2"}'></script><!-- End Cloudflare Web Analytics -->

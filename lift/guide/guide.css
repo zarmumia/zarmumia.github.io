@@ -273,7 +273,15 @@ a.plat:hover{border-color:var(--amber)}
 @media (max-width:640px){
   .sticky-call{display:block;position:fixed;inset-inline:12px;bottom:12px;z-index:50;text-align:center;background:var(--teal);color:#fff;font-weight:800;text-decoration:none;border-radius:14px;padding:13px 16px;font-size:18px;box-shadow:0 6px 18px rgba(0,0,0,.2)}
   body.has-sticky{padding-bottom:76px}
-  body.has-sticky #zm-cookie{bottom:80px}
+  /* Phone: cookie notice becomes a slim strip at the very bottom, so it never hides the form. */
+  #zm-cookie{inset-inline:0;bottom:0;max-width:none;border-radius:12px 12px 0 0;padding:8px 12px;font-size:14px;line-height:1.35;gap:8px;flex-wrap:nowrap}
+  #zm-cookie p{flex:1 1 auto}
+  #zm-cookie div{gap:6px;flex-shrink:0}
+  #zm-cookie button{padding:6px 12px}
+  body.has-sticky #zm-cookie{bottom:0}
+  body.ck-open .sticky-call{bottom:62px}
 }
+.ck-short{display:none}
+@media (max-width:640px){.ck-long{display:none}.ck-short{display:inline}}
 [id]{scroll-margin-top:80px}
 .quote footer a{color:var(--teal);font-weight:700}
