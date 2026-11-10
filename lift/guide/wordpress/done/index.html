@@ -2,6 +2,8 @@
 <html lang="he" dir="rtl">
 <head>
 <script>
+// sendmsg appends the lead's name/email/site to the thank-you URL: strip it before anything (incl. analytics) reads the address.
+if(location.pathname.indexOf('/lift/thanks')===0&&location.search){try{history.replaceState(null,'',location.pathname);}catch(e){}}
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 var zc=null;try{zc=localStorage.getItem('zm_consent');}catch(e){}
 gtag('consent','default',{analytics_storage:zc==='yes'?'granted':'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
