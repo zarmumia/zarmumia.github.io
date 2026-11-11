@@ -297,7 +297,7 @@ write( dirname( $root ) . '/check/index.html', page( $tpl, '/lift/check/', 'בד
 	'', file_get_contents( __DIR__ . '/pages/lift-check.html' ) ) );
 // 6. Thank-you page after the free-check form (sendmsg redirects here after saving the lead).
 write( dirname( $root ) . '/thanks/index.html', page( $tpl, '/lift/thanks/', 'קיבלנו, תודה | Lift | זרמומיה',
-	'קיבלנו את כתובת האתר. פאני תשלח דוח קצר תוך יום-יומיים עבודה.',
+	'קיבלנו את כתובת האתר. הדוח יגיע במייל תוך כמה דקות.',
 	$c_home . '<a href="/lift/">Lift</a> ‹ <span>תודה</span>', file_get_contents( __DIR__ . '/pages/lift-thanks.html' ) ) );
 
 // 7. Free download page: sendmsg redirects here after the "free download" form saves the lead.
