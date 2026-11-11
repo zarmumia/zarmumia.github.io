@@ -344,3 +344,4 @@ a.plat:hover{border-color:var(--amber)}
 .chk-me b{color:var(--ink,#1C2726)}
 .chk-why{margin:10px 0 0;font-size:15px;color:var(--mute);line-height:1.6}
 .chk-why b{color:var(--teal)}
+.chk-sure b{color:var(--ink)}
