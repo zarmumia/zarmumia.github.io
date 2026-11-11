@@ -337,3 +337,10 @@ a.plat:hover{border-color:var(--amber)}
 :root{color-scheme:only light}
 .chk-end .small{margin-top:16px;line-height:1.8}
 .chk-end{margin-bottom:28px}
+/* Trust row under the free-check form: a real face, and why it is free (11.11.2026). */
+.chk-me{display:flex;gap:10px;align-items:center;margin:14px 0 0;font-size:15px;color:var(--mute)}
+.chk-me img{border-radius:50%;flex:none;width:44px;height:44px}
+.chk-me p{margin:0}
+.chk-me b{color:var(--ink,#1C2726)}
+.chk-why{margin:10px 0 0;font-size:15px;color:var(--mute);line-height:1.6}
+.chk-why b{color:var(--teal)}
