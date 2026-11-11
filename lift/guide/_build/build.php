@@ -292,7 +292,7 @@ write( dirname( $root ) . '/soon/index.html', page( $tpl, '/lift/soon/', 'עוד
 	'הקנייה וההורדה של Lift נפתחות בימים הקרובים.',
 	$c_home . '<a href="/lift/">Lift</a> ‹ <span>בקרוב</span>', file_get_contents( __DIR__ . '/pages/lift-soon.html' ) ) );
 // 5b. Short page for the ads: only the free check, with the form on the first screen.
-write( dirname( $root ) . '/check/index.html', page( $tpl, '/lift/check/', 'בדיקה חינמית: למה העסק שלי לא מופיע ב-ChatGPT? | Lift | זרמומיה',
+write( dirname( $root ) . '/check/index.html', page( $tpl, '/lift/check/', 'בדיקה חינמית: למה ה-AI לא מכיר את העסק שלי? | Lift | זרמומיה',
 	'שלחו את כתובת האתר, וקבלו במייל ציון מוכנות ל-AI ואת שלושת הדברים שהכי חשוב לתקן. חינם! ובלי התחייבות להמשך.',
 	'', file_get_contents( __DIR__ . '/pages/lift-check.html' ) ) );
 // 6. Thank-you page after the free-check form (sendmsg redirects here after saving the lead).
