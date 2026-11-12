@@ -12,7 +12,8 @@ gtag('js',new Date());gtag('config','G-Y8C4NEDQ7J');
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>She Calendar — your self-care, remembered for you</title>
-<meta name="description" content="She Calendar is a Google Calendar add-on that remembers your recurring self-care for you: nails, hair color, dental cleaning, check-ups and more.">
+<meta name="description" content="She Calendar remembers your recurring self-care for you: nails, hair color, dental cleaning, checkups and more. An Android app and a Google Calendar™ add-on.">
+<link rel="alternate" hreflang="en" href="https://zarmumia.co.il/en/she-calendar/"><link rel="alternate" hreflang="he" href="https://zarmumia.co.il/she-calendar/">
 <link rel="icon" href="icon-128.png">
 <style>
   :root{--rose:#B83B6B;--rose-dark:#7E2448;--rose-soft:#E8A0B8;--bg:#FBF6F8;--ink:#2b2226;--muted:#6f5f66;--teal:#0E6B66;--amber:#D9822B}
@@ -49,7 +50,18 @@ gtag('js',new Date());gtag('config','G-Y8C4NEDQ7J');
   footer img{width:34px;height:34px}
   footer b{color:var(--teal)}
   footer .slogan{color:var(--amber)}
-  @media (max-width:720px){.hero{grid-template-columns:1fr}.steps{grid-template-columns:1fr}h1{font-size:34px}}
+  .get{display:grid;gap:14px;margin-top:6px}
+  .opt{background:#fff;border:1px solid #ead9e0;border-radius:16px;padding:14px 16px}
+  .opt .t{display:block;font-weight:bold;color:var(--rose-dark);margin-bottom:8px}
+  .opt .cta{font-size:15px}
+  .pill{display:inline-block;background:#F1E3E8;color:var(--rose-dark);padding:10px 20px;border-radius:999px;font-weight:bold;font-size:15px}
+  .opt small{display:block;margin-top:8px;color:var(--muted);font-size:14px}
+  .feat{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .feat div{background:#fff;border-radius:16px;padding:16px}
+  .feat b{display:block;color:var(--rose-dark)}
+  .note{font-size:14px;color:var(--muted);margin-top:14px}
+  .links p{margin:6px 0}
+  @media (max-width:720px){.hero{grid-template-columns:1fr}.steps,.feat{grid-template-columns:1fr}h1{font-size:34px}}
 </style>
 </head>
 <body>
@@ -61,13 +73,23 @@ gtag('js',new Date());gtag('config','G-Y8C4NEDQ7J');
 
   <div class="hero">
     <div>
-      <h1>You take care of everyone.<br>Let something take care of you.</h1>
-      <p class="lead">She Calendar is a Google Calendar add-on that remembers your recurring self-care for you: nails, hair color, dental cleaning, a yearly check-up, a night out with friends.</p>
-      <a class="cta" href="https://workspace.google.com/marketplace/app/she_calendar/578959471413" target="_blank" rel="noopener">Install free from Google Workspace Marketplace</a>
-      <span class="soon">Set it up once on a computer &mdash; your reminders arrive on your phone. A phone version is on the way. Now in beta.</span>
+      <h1>You take care of everyone.<br>Who takes care of you?</h1>
+      <p class="lead">She Calendar remembers the things you do for yourself, again and again: nails, hair color, a facial, a dental cleaning, a yearly checkup. Tell it once, and it keeps track for you, in the calendar you already use.</p>
+      <div class="get">
+        <div class="opt">
+          <span class="t">📱 Android app</span>
+          <span class="pill">Coming soon to Google Play</span>
+          <small>We're in closed testing. Want to be one of the first testers? <a href="mailto:info@zarmumia.co.il?subject=She%20Calendar%20Android">Write to us</a></small>
+        </div>
+        <div class="opt">
+          <span class="t">💻 Google Calendar™ add-on, on a computer</span>
+          <a class="cta" href="https://workspace.google.com/marketplace/app/she_calendar/578959471413" target="_blank" rel="noopener">Install free from Google Workspace Marketplace</a>
+          <small>Install it on a computer (the add-on doesn't appear on phones), and your reminders reach your phone through your calendar.</small>
+        </div>
+      </div>
       <a class="cta2" href="https://docs.google.com/forms/d/e/1FAIpQLSfNkkLlEEDH2y0SXcyOgpWW9OJnUFZY-UOwZoM2CtZZQPIveg/viewform" target="_blank" rel="noopener">Tried it? Tell us in a short form</a>
     </div>
-    <div class="card" aria-label="Example of the She Calendar panel">
+    <div class="card" aria-label="Example of a She Calendar list">
       <div class="h">She Calendar <span>♡</span></div>
       <div class="item"><small>Every 3 weeks</small><b>💅 Nails</b><small>In 5 days</small></div>
       <div class="item"><small>Every 5 weeks</small><b>🎨 Hair color</b><small>In 2 weeks</small></div>
@@ -86,16 +108,34 @@ gtag('js',new Date());gtag('config','G-Y8C4NEDQ7J');
   </section>
 
   <section>
-    <h2>Made with respect for your privacy</h2>
-    <ul class="clean">
-      <li>Works only inside its own calendar, "She Calendar". It never sees your other events.</li>
-      <li>Your list stays in your own Google account. No outside servers, no ads, nothing sold.</li>
-      <li>In English, and in Hebrew for Hebrew-language accounts.</li>
-    </ul>
-    <p style="margin-top:18px"><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
+    <h2>What's inside the Android app</h2>
+    <div class="feat">
+      <div><b>"Done" in one tap</b>The next date is counted from the day you actually went.</div>
+      <div><b>Reminders with buttons</b>Done, Snooze a week, or Call, right from the notification.</div>
+      <div><b>Your treatments in one place</b>When you last went, when's next, who does it, a note. "Find nearby" opens Google Maps with the search ready.</div>
+      <div><b>Recommended checkups</b>For your age and country, from official health sources (Ministry of Health, USPSTF, NHS), each with a link.</div>
+      <div><b>"Your year"</b>A heart fills up every time you do something for yourself. And small celebrations on the days that are yours, like your birthday.</div>
+      <div><b>Period reminders, only if you want</b>Off by default, with an event name you choose.</div>
+    </div>
+    <p class="note">Recommended checkups are general information, not medical advice. Please consult your doctor. For adults, 18 and over.</p>
   </section>
 
-  <footer><img src="/assets/gecko_teal.png" alt="Zarmumia"><div><b>Zarmumia</b> · <span class="slogan">And suddenly, everything works.</span><br>Kfar Saba, Israel · <a href="mailto:info@zarmumia.co.il">info@zarmumia.co.il</a> · <a href="https://zarmumia.co.il/en/">zarmumia.co.il</a></div></footer>
+  <section>
+    <h2>Made with respect for your privacy</h2>
+    <ul class="clean">
+      <li><b>In the Android app:</b> everything stays on your phone. No account with us, no server, no tracking. Reminders are saved as private events in your own calendar.</li>
+      <li><b>In the calendar add-on:</b> it works only inside its own calendar, "She Calendar", and never sees your other events. Your list stays in your own Google account.</li>
+      <li>No ads, nothing sold. We never ask for a diagnosis, only what you do and when.</li>
+      <li>In English and Hebrew.</li>
+    </ul>
+    <div class="links" style="margin-top:18px">
+      <p>Android app: <a href="privacy-android.html">Privacy Policy</a></p>
+      <p>Calendar add-on: <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
+      <p style="font-size:13px;color:var(--muted)">Google Calendar™ and Google Play are trademarks of Google LLC.</p>
+    </div>
+  </section>
+
+  <footer><img src="/assets/gecko_teal.png" alt="Zarmumia"><div><b>Zarmumia</b> · <span class="slogan">And suddenly, everything works.</span><br>Kfar Saba, Israel · <a href="mailto:info@zarmumia.co.il">info@zarmumia.co.il</a> · <a href="https://zarmumia.co.il/en/">zarmumia.co.il</a> · <a href="/accessibility.html">Accessibility (Hebrew)</a> · <a href="/she-calendar/" lang="he">עברית</a></div></footer>
 </div>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "af25e1ce60da4e47a6f8aef2f327b9a2"}'></script><!-- End Cloudflare Web Analytics --></body>
 </html>
