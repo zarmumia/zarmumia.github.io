@@ -240,7 +240,7 @@ function framedTotal(n){const t=Math.floor(n/3),r=n%3;return t*TRIPLE+(r===2?PAI
 function totals(){
   const nF=cart.filter(x=>x.kind==='framed').reduce((a,b)=>a+b.q,0);
   const nP=cart.filter(x=>x.kind==='poster').reduce((a,b)=>a+b.q,0);
-  const sets=cart.filter(x=>x.kind==='set'), setSum=sets.reduce((a,b)=>a+SET_PRICE[b.size]*b.q,0);
+  const sets=cart.filter(x=>x.kind==='set'||x.kind==='trip'), setSum=sets.reduce((a,b)=>a+(b.kind==='trip'?TRIPLE:SET_PRICE[b.size])*b.q,0);
   const full=nF*PRICE_FRAMED+nP*POSTER+setSum, fr=framedTotal(nF);
   const ship=(nF>0||sets.length)?SHIP:0, sub=fr+nP*POSTER+setSum;
   return {nF,nP,full,save:nF*PRICE_FRAMED-fr,sub,ship,total:sub+ship};
@@ -254,11 +254,11 @@ function shop(){
   <section class="wrap hero">
     <div>
       <h1>פיוטים ושירים של הבית, ממוסגרים לקיר</h1>
-      <p>שורות מהפיוטים שליוו את הבתים של מרוקו, תימן, פרס ועיראק, בעיצוב נקי ובכתב עברי מסורתי. כל הדפס מגיע ממוסגר עם פספרטו, מוכן לתלייה.</p>
+      <p>שורות מהפיוטים והשירים שליוו את הבתים שלנו, בעיצוב נקי ובאות עברית מסורתית. כל הדפס מגיע ממוסגר עם פספרטו, מוכן לתלייה.</p>
       <a class="cta" href="#prints">לכל ההדפסים</a>
-      <div class="facts"><span>הדפסה 20×30 ס״מ</span><span>מסגרת עץ עם פספרטו</span><span>שליח עד הבית</span></div>
+      <div class="facts"><span>מסגרת 20×30 ס״מ</span><span>הדפס 15×21 בפספרטו</span><span>שליח עד הבית</span></div>
     </div>
-    <img src="img/wall.jpg" alt="שני הדפסים ממוסגרים של אעופה אשכונה תלויים על קיר">
+    <a href="#trip"><img src="img/trip.jpg" alt="טריפטיך ממוסגר: אעופה אשכונה, צללית ילד ושמח בני" style="aspect-ratio:auto"></a>
   </section>
   <div class="deal"><div class="wrap">
     <span>הדפס ממוסגר <b>${nis(PRICE_FRAMED)}</b></span>
@@ -316,8 +316,8 @@ function product(p){
         <button type="button" class="cta add" id="add">הוספה לעגלה</button>
       </div>
       <dl class="spec">
-        <div><dt>הדפסה</dt><dd>20×30 ס״מ, נייר צילום איכותי</dd></div>
-        <div><dt>מסגרת</dt><dd>עץ, עם פספרטו לבן וזכוכית</dd></div>
+        <div><dt>הדפסה</dt><dd>15×21 ס״מ</dd></div>
+        <div><dt>מסגרת</dt><dd>עץ 20×30 ס״מ, עם פספרטו לבן</dd></div>
         <div><dt>משלוח</dt><dd>שליח עד הבית, ${nis(SHIP)} להזמנה</dd></div>
         <div><dt>במארז</dt><dd>זוג ${nis(PAIR)} · שלישייה ${nis(TRIPLE)}, ההנחה מחושבת בעגלה</dd></div>
       </dl>
@@ -350,7 +350,8 @@ function cartView(){
   <section class="wrap cart">
     <div>
       <h1>העגלה</h1>
-      ${cart.length?cart.map((x,i)=>{if(x.kind==='set'){const m=mixOf(x.c1,x.c2);return`
+      ${cart.length?cart.map((x,i)=>{if(x.kind==='trip')return`
+        <div class="line"><img src="img/trip.jpg" alt=""><div><div class="n">טריפטיך אעופה · הילד · שמח בני</div><div class="m">שלוש מסגרות עץ טבעי עם פספרטו · כמות ${x.q}</div></div><div class="r"><span>${nis(TRIPLE*x.q)}</span><button class="rm" type="button" data-i="${i}">הסרה</button></div></div>`;if(x.kind==='set'){const m=mixOf(x.c1,x.c2);return`
         <div class="line">
           <img src="img/set.jpg" alt="">
           <div><div class="n">צבע + צבע</div>
@@ -458,6 +459,31 @@ function setView(){
   sync();
 }
 
+function tripView(){
+  let q=1;
+  V.innerHTML=`
+  <section class="wrap pp">
+    <div><div class="main"><img src="img/trip.jpg" alt="טריפטיך ממוסגר על הקיר" style="aspect-ratio:auto"></div><a class="back" href="#shop">חזרה לחנות</a></div>
+    <div>
+      <h1>אָעוּפָה · הַיֶּלֶד · שְׂמַח בְּנִי</h1>
+      <div class="by">טריפטיך · שלושה הדפסים ממוסגרים עם פספרטו</div>
+      <p>ילד באמצע מרים את הראש. מצד אחד "אעופה אשכונה וארחיקה נדד" של ר׳ יצחק אבוחצירא, ומהצד השני "שמח בני בחלקך, העולם לפניך" של ר׳ יצחק סונה. שלושתם על אותו רקע קרם, מיושרים לקיר אחד.</p>
+      <div class="row">
+        <div class="qty"><button type="button" id="minus" aria-label="פחות">−</button><output id="q">1</output><button type="button" id="plus" aria-label="עוד">+</button></div>
+        <button type="button" class="cta add" id="add">הוספה לעגלה · ${nis(TRIPLE)}</button>
+      </div>
+      <dl class="spec">
+        <div><dt>בסט</dt><dd>שלוש מסגרות עץ טבעי 20×30 עם פספרטו, הדפס 15×21 בכל אחת</dd></div>
+        <div><dt>משלוח</dt><dd>שליח עד הבית, ${nis(SHIP)} להזמנה</dd></div>
+      </dl>
+    </div>
+  </section>`;
+  const sync=()=>{document.getElementById('q').textContent=q};
+  document.getElementById('minus').onclick=()=>{q=Math.max(1,q-1);sync()};
+  document.getElementById('plus').onclick=()=>{q=Math.min(9,q+1);sync()};
+  document.getElementById('add').onclick=()=>{const ex=cart.find(x=>x.key==='trip');if(ex)ex.q+=q;else cart.push({key:'trip',kind:'trip',q});save();toast('נוסף לעגלה')};
+}
+
 function about(){
   V.innerHTML=`
   <section class="wrap sec about">
@@ -467,7 +493,7 @@ function about(){
       <p>המרקט המסורתי מביא לקיר את המילים ששמענו בבית: שורות מפיוטים, משירי סבתא ומהשפות שהגיעו איתנו. כל טקסט נבדק מול מקור, עם ניקוד מלא וקרדיט למחבר.</p>
       <p>ההדפסים מודפסים וממוסגרים בישראל, ונשלחים עם שליח עד הבית.</p>
       <div class="faq">
-        <details><summary>מה גודל ההדפס?</summary><p>ההדפס 20×30 ס״מ, עם פספרטו לבן בתוך המסגרת.</p></details>
+        <details><summary>מה גודל ההדפס?</summary><p>ההדפס 15×21 ס״מ, בתוך מסגרת עץ 20×30 עם פספרטו לבן.</p></details>
         <details><summary>איך עובד הפוסטר להדפסה?</summary><p>אחרי התשלום מקבלים קובץ באיכות גבוהה בגדלים A4 ו־A3, ומדפיסים בכל מקום.</p></details>
         <details><summary>אפשר להזמין כמתנה?</summary><p>כן. כתבו בהערות למשלוח לאן לשלוח ואם להוסיף ברכה.</p></details>
       </div>
@@ -478,7 +504,7 @@ function about(){
 function route(){
   const h=location.hash.slice(1);
   const p=P.find(x=>x.id===h);
-  if(p)product(p);else if(h==='set')setView();else if(h==='cart')cartView();else if(h==='about')about();else{shop();if(h==='prints')document.getElementById('prints').scrollIntoView()}
+  if(p)product(p);else if(h==='trip')tripView();else if(h==='set')setView();else if(h==='cart')cartView();else if(h==='about')about();else{shop();if(h==='prints')document.getElementById('prints').scrollIntoView()}
   if(!(h==='prints'))window.scrollTo(0,0);
 }
 document.getElementById('cartbtn').onclick=()=>{location.hash='cart'};
