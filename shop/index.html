@@ -122,6 +122,7 @@ nav a:hover{color:var(--ink)}
 .line .n{font-family:var(--display);font-size:22px;line-height:1.2}
 .line .m{font-size:14px;color:var(--ink-soft)}
 .line .r{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-variant-numeric:tabular-nums}
+.payframe{display:block;width:calc(100% + 76px);max-width:none;height:780px;border:0;border-radius:0;background:#fff;margin:14px -38px -12px}
 .paymodal{position:fixed;inset:0;z-index:50;background:rgba(20,16,12,.55);display:flex;align-items:center;justify-content:center}.pm{background:#fff;width:min(560px,100%);height:90vh;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}.pmh{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;font-size:14px;color:#2b2621;border-bottom:1px solid #e5ded2}.pmh button{background:none;border:0;font-size:18px;cursor:pointer;color:#2b2621}.pm iframe{flex:1;width:100%;border:0}@media(max-width:600px){.paymodal{align-items:flex-end}.pm{border-radius:12px 12px 0 0}}
 .qs{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px}.qs button{background:none;border:0;color:var(--ink);font-size:18px;width:34px;height:32px;cursor:pointer}.qs b{min-width:20px;text-align:center;font-weight:600}
 .rm{background:none;border:0;color:var(--ink-soft);font-size:13px;text-decoration:underline;padding:0}
@@ -672,11 +673,10 @@ function payModal(no,url,note){
 function showPay(f,m,no,url,note){
   f.querySelectorAll('.f,.two,button[type=submit]').forEach(e=>e.hidden=true);
   const cp=()=>{try{navigator.clipboard.writeText(no).catch(()=>{})}catch(e){}};
-  m.innerHTML=`<b>ההזמנה ${no} נשמרה.</b> נשאר רק לשלם.${note?` בשדה "הערה למוכר" כתבי <b>${no}</b> <button type="button" class="rm" id="cpno">העתקה</button>`:''}
-    <br><button type="button" class="cta" id="payopen" style="margin-top:10px">לתשלום מאובטח</button>
-    <a class="rm" id="paygo" href="${url}" target="_blank" rel="noopener" style="display:block;margin-top:8px">לא נפתח? לעמוד התשלום בחלון חדש</a>`;
-  const open=()=>{if(note)cp();payModal(no,url,note)};
-  document.getElementById('payopen').onclick=open; if(note){document.getElementById('cpno').onclick=cp;document.getElementById('paygo').onclick=cp;} open();
+  m.innerHTML=`<b>ההזמנה ${no} נשמרה.</b> נשאר רק לשלם, כאן למטה.${note?` בשדה "הערה למוכר" כתבי <b>${no}</b> <button type="button" class="rm" id="cpno">העתקה</button>`:''}
+    <iframe class="payframe" src="${url}" title="תשלום מאובטח" allow="payment"></iframe>`;
+  if(note)document.getElementById('cpno').onclick=cp;
+  m.scrollIntoView({behavior:'smooth',block:'start'});
 }
 function sendOrder(f,m){
   const t=totals(), v=id=>{const e=f.querySelector('#'+id);return e?e.value.trim():''};
