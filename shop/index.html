@@ -288,8 +288,9 @@ function totals(){
   const nF=cart.filter(x=>x.kind==='framed').reduce((a,b)=>a+b.q,0);
   const nP=cart.filter(x=>x.kind==='poster').reduce((a,b)=>a+b.q,0);
   const sets=cart.filter(x=>x.kind==='set'||x.kind==='trip'), setSum=sets.reduce((a,b)=>a+(b.kind==='trip'?TRIPLE:SET_PRICE[b.size])*b.q,0);
-  const full=nF*PRICE_FRAMED+nP*POSTER+setSum, fr=framedTotal(nF);
-  const ship=(nF===1&&!sets.length)?SHIP:0, sub=fr+nP*POSTER+setSum; // משלוח חינם מ־2 תמונות או בסט
+  const nX=cart.filter(x=>x.kind==='test').reduce((a,b)=>a+b.q,0)*5; // מוצר בדיקה נסתר, #test
+  const full=nF*PRICE_FRAMED+nP*POSTER+setSum+nX, fr=framedTotal(nF);
+  const ship=(nF===1&&!sets.length)?SHIP:0, sub=fr+nP*POSTER+setSum+nX; // משלוח חינם מ־2 תמונות או בסט
   const save=nF*PRICE_FRAMED-fr, saved=save+((!ship&&(nF>1||sets.length))?SHIP:0);
   return {nF,nP,full,save,saved,sub,ship,total:sub+ship};
 }
@@ -411,7 +412,7 @@ function cartView(){
   <section class="wrap cart">
     <div>
       <h1>העגלה</h1>
-      ${cart.length?cart.map((x,i)=>{if(x.kind==='trip')return`
+      ${cart.length?cart.map((x,i)=>{if(x.kind==='test')return`<div class="line"><img src="img/p8-natural.jpg" alt=""><div><div class="n">מוצר בדיקה</div><div class="m">לבדיקת תשלום בלבד</div></div><div class="r"><span>${nis(5)}</span><button class="rm" type="button" data-i="${i}">הסרה</button></div></div>`;if(x.kind==='trip')return`
         <div class="line"><img src="img/trip.webp" alt=""><div><div class="n">טריפטיך אעופה אשכונה · הילד · שמח בני</div><div class="m">שלוש מסגרות עץ טבעי עם פספרטו</div></div><div class="r"><span>${nis(TRIPLE*x.q)}</span><span class="qs"><button type="button" class="qd" data-i="${i}" data-d="-1" aria-label="פחות">−</button><b>${x.q}</b><button type="button" class="qd" data-i="${i}" data-d="1" aria-label="עוד">+</button></span><button class="rm" type="button" data-i="${i}">הסרה</button></div></div>`;if(x.kind==='set'){const m=mixOf(x.c1,x.c2);return`
         <div class="line">
           <img src="img/set.jpg" alt="">
@@ -653,9 +654,10 @@ function legal(k){
 // הזמנות: נשלחות למייל דרך FormSubmit, ואז מעבר לעמוד סליקה לפי הסכום
 const ORDER_TO='https://formsubmit.co/ajax/fanny.ra@gmail.com';
 const PB='https://www.paperless.tax/invoice?sID=3wR0dOAkWQg6lDf1w-95K';
-const PAYLINKS={189:PB+'RWRxP7Vjt7RnkPKu5L0cISoEtLkn2DkvA',289:PB+'TCfD9kwUJMnMvjmjm-kq2JlfGCX76bmnQ',399:PB+'XE7R6WUx9eMMJN0TEHzitHEvVV-7L7_lw',
+const PAYLINKS={5:'', /* קישור עמוד בדיקה 5 ש"ח */ 189:PB+'RWRxP7Vjt7RnkPKu5L0cISoEtLkn2DkvA',289:PB+'TCfD9kwUJMnMvjmjm-kq2JlfGCX76bmnQ',399:PB+'XE7R6WUx9eMMJN0TEHzitHEvVV-7L7_lw',
   39:PB+'Yf8Za3RxxsZDALDmg3v94Y8Yc-GyLR5Cw',449:PB+'bA-4DPV9gVv5TVZCEcyffTIzpwcWdCSgQ',549:PB+'QJqP57OolLMn7yZHHJpm5mCRwB_kI_DfQ'}; // עמודי מכירה בפייפרלס לפי סכום
 function itemLine(x){
+  if(x.kind==='test')return 'מוצר בדיקה ₪5';
   if(x.kind==='trip')return `טריפטיך אעופה · הילד · שמח בני · כמות ${x.q}`;
   if(x.kind==='set')return `צבע + צבע: ${WORDS[x.w1].w} (${PRIM[x.c1].n}) · קיבוץ גלויות · ${WORDS[x.w2].w} (${PRIM[x.c2].n}) · ${SIZES[x.size].n} · כמות ${x.q}`;
   const p=P.find(y=>y.id===x.id);
@@ -673,7 +675,8 @@ function sendOrder(f,m){
     .then(()=>{
       const q=k=>cart.filter(x=>x.kind===k).reduce((s,x)=>s+x.q,0), nF=q('framed'),nP=q('poster'),nS=q('set'),nT=q('trip');
       // קישור רק כשההזמנה תואמת בדיוק את המוצר שבעמוד התשלום, אחרת קישור ידני
-      const ok=(nF>=1&&nF<=3&&!nP&&!nS&&!nT)||(nT===1&&!nF&&!nP&&!nS)||(nP===1&&!nF&&!nS&&!nT)||(nS===1&&!nF&&!nP&&!nT);
+      const nX=q('test');
+      const ok=(nX===1&&cart.length===1)||(!nX&&nF>=1&&nF<=3&&!nP&&!nS&&!nT)||(nT===1&&!nF&&!nP&&!nS)||(nP===1&&!nF&&!nS&&!nT)||(nS===1&&!nF&&!nP&&!nT);
       const link=ok?PAYLINKS[t.total]:null;
       try{localStorage.setItem('mm-last',no)}catch(e){}
       if(!link){cart.length=0;save();}
@@ -703,7 +706,7 @@ function thanks(){
 function route(){
   const h=location.hash.slice(1);
   const p=P.find(x=>x.id===h);
-  if(p)product(p);else if(h==='trip')tripView();else if(h==='set')setView();else if(h==='cart')cartView();else if(h==='about')about();else if(LEGAL[h])legal(h);else if(h==='thanks')thanks();else{shop();if(h==='prints')document.getElementById('prints').scrollIntoView()}
+  if(p)product(p);else if(h==='trip')tripView();else if(h==='set')setView();else if(h==='cart')cartView();else if(h==='about')about();else if(LEGAL[h])legal(h);else if(h==='thanks')thanks();else if(h==='test'){cart.length=0;cart.push({key:'test',kind:'test',q:1});save();location.hash='cart';return}else{shop();if(h==='prints')document.getElementById('prints').scrollIntoView()}
   if(!(h==='prints'))window.scrollTo(0,0);
 }
 document.getElementById('cartbtn').onclick=()=>{location.hash='cart'};
