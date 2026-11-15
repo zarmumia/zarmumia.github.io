@@ -683,7 +683,7 @@ function sendOrder(f,m){
   const d=new Date(), no=`${String(d.getFullYear()).slice(2)}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}-${Math.floor(100+Math.random()*900)}`;
   const btn=f.querySelector('button[type=submit]'); btn.disabled=true; m.textContent='שולחים את ההזמנה...';
   const addr=[v('st'),v('ct')].filter(Boolean).join(', ');
-  const body={_subject:`הזמנה ${no} · ${nis(t.total)} · ממתינה לתשלום`,'סטטוס':'נפתחה הזמנה, התשלום עוד לא אושר. לשלוח רק אחרי שמופיעה קבלה בפייפרלס על מספר ההזמנה הזה.',_template:'table',_captcha:'false',
+  const body={_subject:`ליד · הזמנה ${no} · ${nis(t.total)} · עוד לא שולם`,'סטטוס':'לקוחה פתחה הזמנה. כשהתשלום יעבור יגיע מייל "שולם". אם לא ישולם תוך 30 דקות יגיע מייל "לא שולם".',_template:'table',_captcha:'false',
     'מספר הזמנה':no,'שם':v('fn'),'טלפון':v('ph'),'מייל':v('em'),'כתובת':addr||'—',
     'הערות':v('nt')||'—','פריטים':cart.map(itemLine).join(' | '),'משלוח':t.ship?nis(t.ship):'חינם','לתשלום':nis(t.total)};
   try{localStorage.setItem('mm-last',no)}catch(e){}
