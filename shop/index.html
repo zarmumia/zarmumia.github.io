@@ -122,7 +122,7 @@ nav a:hover{color:var(--ink)}
 .line .n{font-family:var(--display);font-size:22px;line-height:1.2}
 .line .m{font-size:14px;color:var(--ink-soft)}
 .line .r{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-variant-numeric:tabular-nums}
-.payframe{display:block;width:100%;height:1050px;border:1px solid var(--line);border-radius:10px;background:#fff;margin:12px 0 8px}
+.paymodal{position:fixed;inset:0;z-index:50;background:rgba(20,16,12,.55);display:flex;align-items:center;justify-content:center}.pm{background:#fff;width:min(560px,100%);height:90vh;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}.pmh{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;font-size:14px;color:#2b2621;border-bottom:1px solid #e5ded2}.pmh button{background:none;border:0;font-size:18px;cursor:pointer;color:#2b2621}.pm iframe{flex:1;width:100%;border:0}@media(max-width:600px){.paymodal{align-items:flex-end}.pm{border-radius:12px 12px 0 0}}
 .qs{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px}.qs button{background:none;border:0;color:var(--ink);font-size:18px;width:34px;height:32px;cursor:pointer}.qs b{min-width:20px;text-align:center;font-weight:600}
 .rm{background:none;border:0;color:var(--ink-soft);font-size:13px;text-decoration:underline;padding:0}
 .sum{background:var(--card);border:1px solid var(--line);padding:24px;display:grid;gap:10px;position:sticky;top:calc(80px + env(safe-area-inset-top,0px))}
@@ -675,16 +675,20 @@ function sendOrder(f,m){
       // קישור רק כשההזמנה תואמת בדיוק את המוצר שבעמוד התשלום, אחרת קישור ידני
       const ok=(nF>=1&&nF<=3&&!nP&&!nS&&!nT)||(nT===1&&!nF&&!nP&&!nS)||(nP===1&&!nF&&!nS&&!nT)||(nS===1&&!nF&&!nP&&!nT);
       const link=ok?PAYLINKS[t.total]:null;
-      cart.length=0; save();
       try{localStorage.setItem('mm-last',no)}catch(e){}
+      if(!link){cart.length=0;save();}
       if(link){
         f.querySelectorAll('.f,.two,button[type=submit]').forEach(e=>e.hidden=true);
         m.innerHTML=`<b>ההזמנה ${no} נשמרה.</b> נשאר רק לשלם. בשדה "הערה למוכר" כתבי <b>${no}</b> <button type="button" class="rm" id="cpno">העתקה</button>
-          <iframe class="payframe" src="${link}" title="תשלום מאובטח"></iframe>
-          <a class="rm" id="paygo" href="${link}" target="_blank" rel="noopener">לא נטען? לפתיחת עמוד התשלום בחלון חדש</a>`;
-        document.getElementById('cpno').onclick=()=>{try{navigator.clipboard.writeText(no)}catch(e){}};
-        document.getElementById('paygo').onclick=()=>{try{navigator.clipboard.writeText(no)}catch(e){}};
-        m.scrollIntoView({behavior:'smooth',block:'start'});}
+          <br><button type="button" class="cta" id="payopen" style="margin-top:10px">לתשלום מאובטח</button>
+          <a class="rm" id="paygo" href="${link}" target="_blank" rel="noopener" style="display:block;margin-top:8px">לא נפתח? לעמוד התשלום בחלון חדש</a>`;
+        const open=()=>{try{navigator.clipboard.writeText(no).catch(()=>{})}catch(e){}
+          const d=document.createElement('div');d.className='paymodal';d.setAttribute('role','dialog');d.setAttribute('aria-label','תשלום מאובטח');
+          d.innerHTML=`<div class="pm"><div class="pmh"><span>הזמנה ${no} · כתבי את המספר ב"הערה למוכר"</span><button type="button" aria-label="סגירה">✕</button></div><iframe src="${link}" title="תשלום מאובטח"></iframe></div>`;
+          d.querySelector('button').onclick=()=>d.remove(); document.body.appendChild(d);};
+        document.getElementById('payopen').onclick=open; open();
+        document.getElementById('cpno').onclick=()=>{try{navigator.clipboard.writeText(no).catch(()=>{})}catch(e){}};
+        document.getElementById('paygo').onclick=()=>{try{navigator.clipboard.writeText(no).catch(()=>{})}catch(e){}};}
       else m.textContent=`תודה! ההזמנה ${no} התקבלה. קישור לתשלום מאובטח יישלח אלייך תוך כמה שעות.`;
     })
     .catch(()=>{btn.disabled=false;m.textContent='משהו לא עבד בשליחה. נסי שוב בעוד רגע.'});
@@ -692,6 +696,7 @@ function sendOrder(f,m){
 
 function thanks(){
   if(window.top!==window){try{window.top.location.hash='thanks';return}catch(e){}}
+  cart.length=0;save();document.querySelectorAll('.paymodal').forEach(d=>d.remove());
   let no='';try{no=localStorage.getItem('mm-last')||''}catch(e){}
   V.innerHTML=`<section class="wrap sec legal"><h2>תודה!</h2><p>התשלום התקבל${no?` עבור הזמנה ${no}`:''}. קבלה נשלחה אלייך למייל.</p><p>ההדפסים מודפסים וממוסגרים במיוחד בשבילך, ויגיעו עד 5 ימי עסקים.</p><p><a href="#shop">חזרה לחנות</a></p></section>`;
 }
