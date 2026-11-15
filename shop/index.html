@@ -68,13 +68,14 @@ nav a:hover{color:var(--ink)}
 .sec-h h2{font-size:clamp(30px,4vw,44px)}
 .sec-h p{margin:0;color:var(--ink-soft)}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 28px}
+@media (min-width:861px){#prints .item[href='#p8']{order:1}#prints .item[href='#p2'],#prints .item[href='#p4'],#prints .item[href='#p9']{order:2}}
 .item{text-decoration:none;display:flex;flex-direction:column;gap:12px}
 .item .ph{overflow:hidden}
 .item img{width:100%;aspect-ratio:832/1171;object-fit:cover;display:block;transition:transform .5s ease}
 .item:hover img{transform:scale(1.03)}
 .item h3{font-size:28px;line-height:1.2}
 .item .sub{color:var(--ink-soft);font-size:15px;margin-top:-6px}
-.item .pr{font-size:16px;font-variant-numeric:tabular-nums;display:flex;justify-content:space-between;align-items:baseline;gap:8px}.item .go{font-size:14px;color:var(--ink-soft);border-bottom:1px solid currentColor;white-space:nowrap}.item:hover .go{color:var(--accent)}
+.item .pr{margin-top:auto;font-size:16px;font-variant-numeric:tabular-nums;display:flex;justify-content:space-between;align-items:baseline;gap:8px}.item .go{font-size:14px;color:var(--ink-soft);border-bottom:1px solid currentColor;white-space:nowrap}.item:hover .go{color:var(--accent)}
 .letter{font-family:var(--display);color:var(--sand);margin-inline-end:8px}
 
 /* עמוד מוצר */
