@@ -231,8 +231,6 @@ const P=[
    text:'"אם ננעלו דלתי נדיבים, דלתי מרום לא ננעלו". שירו של ר׳ שלום שבזי, גדול משוררי תימן: גם כשדלתות נסגרות, יש דלת שתמיד פתוחה. מתנה לבית חדש, לעסק חדש או למי שצריך חיזוק.'},
   {id:'p9',l:'ט',name:'כִּי אֶשְׁמְרָה שַׁבָּת',plain:'כי אשמרה שבת',sub:'לשולחן השבת',by:'ר׳ אברהם אבן עזרא',
    text:'"כי אשמרה שבת קל ישמרני, אות היא לעולמי עד בינו וביני". הזמר של ר׳ אברהם אבן עזרא ששרים בסעודת השבת כבר מאות שנים. לפינת האוכל, ליד שולחן השבת.'},
-  {id:'p10',l:'י',name:'קָהּ רִבּוֹן עָלַם',plain:'יה ריבון',sub:'לשולחן השבת',by:'ר׳ ישראל נג׳ארה',
-   text:'"קה ריבון עלם ועלמיא, אנת הוא מלכא מלך מלכיא". הזמר בארמית של ר׳ ישראל נג׳ארה, שנשמע בכל שולחן שבת מזרחי. בזוג עם כי אשמרה שבת.'},
   {id:'p11',l:'יא',name:'דְּרוֹר יִקְרָא',plain:'דרור יקרא',sub:'לחדר ילדים · שתי ציפורים על ענף',by:'דונש בן לברט',
    text:'"דרור יקרא לבן עם בת, וינצרכם כמו בבת". הזמר של דונש בן לברט משבת בבוקר, עם איור קווי עדין של שתי ציפורים. לחדר ילדים, למתנת לידה או לברית ולבריתה.',s:'kids'},
   {id:'p12',l:'יב',name:'יְשִׂמְךָ אֱלֹקִים',plain:'ישמך · לבן',sub:'ברכת הבנים לליל שבת',by:'בראשית מח, כ',
@@ -425,6 +423,7 @@ function cartView(){
   const f=document.getElementById('co');
   if(f)f.addEventListener('submit',e=>{
     e.preventDefault();
+    if(isShabbat()){const m=document.getElementById('msg');m.hidden=false;m.textContent='החנות סגורה בשבת. אפשר לשמור את העגלה ולהזמין במוצאי שבת.';return}
     const bad=[...f.querySelectorAll('[required]')].filter(i=>!i.value.trim()||!i.checkValidity());
     const m=document.getElementById('msg');m.hidden=false;
     if(bad.length){m.textContent='חסרים פרטים: '+bad.map(i=>f.querySelector(`label[for="${i.id}"]`).textContent).join(', ');bad[0].focus();return}
@@ -432,6 +431,11 @@ function cartView(){
   });
 }
 
+// שבת: לא מוכרים משישי 14:00 עד מוצאי שבת 21:00, שעון ישראל
+function isShabbat(){
+  const p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Jerusalem',weekday:'short',hour:'numeric',hour12:false}).formatToParts(new Date()).map(x=>[x.type,x.value]));
+  const h=+p.hour%24; return (p.weekday==='Fri'&&h>=14)||(p.weekday==='Sat'&&h<21);
+}
 function setView(){
   let st={w1:0,c1:'b',w2:1,c2:'y',size:'a',q:1};
   const opts=WORDS.map((x,i)=>`<option value="${i}">${x.w} · ${x.lang}</option>`).join('');
@@ -546,6 +550,7 @@ document.getElementById('cartbtn').onclick=()=>{location.hash='cart'};
 addEventListener('hashchange',route);
 addEventListener('resize',()=>{if(location.hash==='#set'){const s=document.getElementById('stage');s&&s.dispatchEvent(new Event('rs'))}});
 updCount();route();
+if(isShabbat()){const d=document.createElement('div');d.className='demo';d.textContent='שבת שלום · החנות סגורה להזמנות עד מוצאי שבת';document.querySelector('.demo').after(d)}
 </script>
 
 </body>
