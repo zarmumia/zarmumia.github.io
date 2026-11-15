@@ -687,13 +687,15 @@ function sendOrder(f,m){
     'מספר הזמנה':no,'שם':v('fn'),'טלפון':v('ph'),'מייל':v('em'),'כתובת':addr||'—',
     'הערות':v('nt')||'—','פריטים':cart.map(itemLine).join(' | '),'משלוח':t.ship?nis(t.ship):'חינם','לתשלום':nis(t.total)};
   try{localStorage.setItem('mm-last',no)}catch(e){}
-  const mail=fetch(ORDER_TO,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)}).then(r=>r.ok).catch(()=>false);
+  const tfetch=(u,o,ms)=>{const c=new AbortController();const t=setTimeout(()=>c.abort(),ms);return fetch(u,Object.assign({signal:c.signal},o)).finally(()=>clearTimeout(t))};
+  const mail=tfetch(ORDER_TO,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)},9000).then(r=>r.ok).catch(()=>false);
   // 1) תשלום לסכום המדויק דרך ה-Worker (פייפרלס API)
-  const viaWorker=!WORKER?Promise.resolve(null):fetch(WORKER+'/checkout',{method:'POST',headers:{'Content-Type':'application/json'},
+  const viaWorker=!WORKER?Promise.resolve(null):tfetch(WORKER+'/checkout',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({no,cart:cart.map(x=>({kind:x.kind,q:x.q,size:x.size||null})),buyer:{name:v('fn'),email:v('em'),phone:v('ph'),address:addr},
-        remark:`הזמנה ${no}: ${cart.map(itemLine).join(' | ')}${v('nt')?' | הערות: '+v('nt'):''}`.slice(0,480),total:t.total})})
+        remark:`הזמנה ${no}: ${cart.map(itemLine).join(' | ')}${v('nt')?' | הערות: '+v('nt'):''}`.slice(0,480),total:t.total})},12000)
     .then(r=>r.ok?r.json():null).then(j=>{if(!(j&&j.url&&j.amount===t.total))return null;const u=new URL(j.url);if(v('ph'))u.searchParams.set('phone',v('ph').replace(/[^\d+]/g,''));return u.toString()}).catch(()=>null);
-  Promise.all([mail,viaWorker]).then(([sent,url])=>{
+  // התשלום לא מחכה למייל: אם יש קישור, פותחים מיד
+  viaWorker.then(url=>url?{url}:mail.then(sent=>({sent}))).then(({url,sent})=>{
     if(url)return showPay(f,m,no,url,false);
     // 2) גיבוי: עמודי מכירה קבועים לפי סכום
     const q=k=>cart.filter(x=>x.kind===k).reduce((s,x)=>s+x.q,0), nF=q('framed'),nP=q('poster'),nS=q('set'),nT=q('trip'),nX=q('test');
