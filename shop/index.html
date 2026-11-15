@@ -56,8 +56,11 @@ nav a:hover{color:var(--ink)}
 
 /* מבצע */
 .deal{background:var(--wall);border-block:1px solid var(--line)}
-.deal .wrap{display:flex;flex-wrap:wrap;gap:12px 40px;justify-content:center;padding-block:18px;font-size:16px}
-.deal b{font-family:var(--display);font-size:22px;font-weight:500;margin-inline-start:6px}
+.deal .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding-block:18px 10px;font-size:15px;max-width:640px;margin-inline:auto}
+.deal .all{text-align:center;font-size:13px;opacity:.75;padding-bottom:16px}
+.deal .d{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
+.deal b{font-family:var(--display);font-size:24px;font-weight:500}
+.deal .ds{font-size:13px;opacity:.75}
 
 /* גלריה */
 .sec{padding-block:64px}
@@ -177,6 +180,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .brand{font-size:22px}
 }
 @media (prefers-reduced-motion:reduce){.item img{transition:none}}
+.pairhint{margin:12px 0 0;font-size:15px;opacity:.8}.pairhint a{color:inherit;font-weight:700}
 </style>
 </head>
 <body>
@@ -195,7 +199,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <footer><div class="wrap">
   <span>המרקט המסורתי · מילים שגדלנו עליהן · מבית זרמומיה</span>
-  <span>משלוח עם שליח עד הבית · תשלום מאובטח בפיימי</span>
+  <span>משלוח חינם מ־2 תמונות · תשלום מאובטח בפיימי</span>
 </div></footer>
 
 <script>
@@ -203,24 +207,23 @@ const PRICE_FRAMED=150, PAIR=279, TRIPLE=399, POSTER=39, SHIP=39; // מחיר פ
 const COLORS=[
   {id:'natural',name:'עץ טבעי',hex:'#C9A878'},
   {id:'white',name:'לבן',hex:'#F4F1EA'},
-  {id:'honey',name:'דבש',hex:'#A8723A'},
-  {id:'black',name:'שחור',hex:'#1E1C1A'}
+  {id:'honey',name:'חום כהה',hex:'#7A5434'}
 ];
 const P=[
-  {id:'p1',l:'א',name:'אָעוּפָה אֶשְׁכֹּנָה',plain:'אעופה אשכונה',sub:'עם להקת הציפורים',by:'מתוך פיוט של ר׳ יצחק אבוחצירא',
+  {id:'p1',l:'א',name:'אָעוּפָה אֶשְׁכּוֹנָה',plain:'אעופה אשכונה',sub:'עם להקת הציפורים',by:'מתוך פיוט של ר׳ יצחק אביחצירא',
    text:'שורה מתוך הפיוט, עם להקת ציפורים שעולה אל הכותרת. הדפס בגווני נייר חמים שמתאים לסלון, למסדרון ולחדר עבודה.'},
-  {id:'p2',l:'ב',name:'אָעוּפָה אֶשְׁכֹּנָה',plain:'אעופה אשכונה · מינימליסטי',sub:'גרסה מינימליסטית',by:'מתוך פיוט של ר׳ יצחק אבוחצירא',
+  {id:'p2',l:'ב',name:'אָעוּפָה אֶשְׁכּוֹנָה',plain:'אעופה אשכונה · מינימליסטי',sub:'גרסה מינימליסטית',by:'מתוך פיוט של ר׳ יצחק אביחצירא',
    text:'אותה שורה בלי איור. טיפוגרפיה בכתר, הרבה אוויר סביב. משתלב יפה בזוג עם הגרסה עם הציפורים.'},
   {id:'p3',l:'ג',name:'שְׂמַח בְּנִי בְּחֶלְקְךָ',plain:'שמח בני בחלקך',sub:'ר׳ יצחק סונה',by:'מילים: ר׳ יצחק סונה',
    text:'חמש שורות על שמחה בחלק ועל העולם שפתוח לפניך. מתנה טובה לבר מצווה, לחדר של ילד או לבית חדש.'},
-  {id:'p4',l:'ד',name:'חֲשׂוֹף זְרוֹעֲךָ',plain:'חשוף זרועך',sub:'לקבץ פזורים · מפת ישראל',by:'מתוך פיוט של ר׳ יצחק אבוחצירא',
+  {id:'p4',l:'ד',name:'חֲשׂוֹף זְרוֹעֲךָ',plain:'חשוף זרועך',sub:'לקבץ פזורים · מפת ישראל',by:'מתוך פיוט של ר׳ יצחק אביחצירא',
    text:'שורות על קיבוץ הפזורים, על רקע מפה עדינה של הארץ. מתאים לבית שהגיע אליו מכל מקום.'},
   {id:'p5',l:'ה',name:'הָעוֹלָם לְפָנֶיךָ',plain:'העולם לפניך',sub:'צללית ילד מביט למעלה',by:'מילים: ר׳ יצחק סונה',
    text:'ילד מרים את הראש אל המילים מתוך "שמח בני". מתנה לבר מצווה, לחדר ילדים או לכל מי שמתחיל דרך.',s:'joy'},
   {id:'p6',l:'ו',name:'בּוֹאִי כַלָּה',plain:'בואי כלה',sub:'לכלה · מתוך לכה דודי',by:'ר׳ שלמה הלוי אלקבץ',
    text:'"בואי כלה, בואי כלה", ומתחת "בואי בשלום עטרת בעלה". הפיוט ששרים כל ליל שבת, לכלה ביום שלה. בזוג עם ישמח חתני.',s:'joy',def:'white'},
   {id:'p7',l:'ז',name:'יִשְׂמַח חֲתָנִי',plain:'ישמח חתני',sub:'לחתן ולבר מצווה',by:'פיוט עממי',
-   text:'"ישמח חתני בקהל אמוני, ישא ברכה מאת ה׳". שרים אותו לחתן מתחת לחופה ולנער בבר המצווה. בזוג עם בואי כלה.',s:'joy',def:'black'}
+   text:'"ישמח חתני בקהל אמוני, ישא ברכה מאת ה׳". שרים אותו לחתן מתחת לחופה ולנער בבר המצווה. בזוג עם בואי כלה.',s:'joy',def:'honey'}
 ];
 const img=(id,c)=>`img/${id}-${c}.jpg`;
 // צבע + צבע
@@ -242,7 +245,7 @@ function totals(){
   const nP=cart.filter(x=>x.kind==='poster').reduce((a,b)=>a+b.q,0);
   const sets=cart.filter(x=>x.kind==='set'||x.kind==='trip'), setSum=sets.reduce((a,b)=>a+(b.kind==='trip'?TRIPLE:SET_PRICE[b.size])*b.q,0);
   const full=nF*PRICE_FRAMED+nP*POSTER+setSum, fr=framedTotal(nF);
-  const ship=(nF>0||sets.length)?SHIP:0, sub=fr+nP*POSTER+setSum;
+  const ship=(nF===1&&!sets.length)?SHIP:0, sub=fr+nP*POSTER+setSum; // משלוח חינם מ־2 תמונות או בסט
   return {nF,nP,full,save:nF*PRICE_FRAMED-fr,sub,ship,total:sub+ship};
 }
 function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;d.setAttribute('role','status');document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
@@ -255,16 +258,16 @@ function shop(){
     <div>
       <h1>פיוטים ושירים של הבית, ממוסגרים לקיר</h1>
       <p>שורות מהפיוטים והשירים שליוו את הבתים שלנו, בעיצוב נקי ובאות עברית מסורתית. כל הדפס מגיע ממוסגר עם פספרטו, מוכן לתלייה.</p>
-      <a class="cta" href="#prints">לכל ההדפסים</a>
-      <div class="facts"><span>מסגרת 20×30 ס״מ</span><span>הדפס 15×21 בפספרטו</span><span>שליח עד הבית</span></div>
+      <a class="cta" href="#prints">בוחרים 2 או 3 הדפסים</a>
+      <div class="facts"><span>זכוכית ופספרטו</span><span>מסגרת 20×30 ס״מ</span><span>משלוח חינם מ־2 תמונות</span></div>
     </div>
     <a href="#trip"><img src="img/trip.jpg" alt="טריפטיך ממוסגר: אעופה אשכונה, צללית ילד ושמח בני" style="aspect-ratio:auto"></a>
   </section>
   <div class="deal"><div class="wrap">
-    <span>הדפס ממוסגר <b>${nis(PRICE_FRAMED)}</b></span>
-    <span>זוג <b>${nis(PAIR)}</b></span>
-    <span>שלישייה <b>${nis(TRIPLE)}</b></span>
-  </div></div>
+    <div class="d"><span class="dn">הדפס 1</span><b>${nis(PRICE_FRAMED)}</b><span class="ds">ועוד משלוח</span></div>
+    <div class="d"><span class="dn">2 הדפסים</span><b>${nis(PAIR)}</b><span class="ds">משלוח חינם</span></div>
+    <div class="d"><span class="dn">3 הדפסים</span><b>${nis(TRIPLE)}</b><span class="ds">משלוח חינם</span></div>
+  </div><div class="all">משלבים כל הדפס שרוצים, בכל צבע מסגרת</div></div>
   <a class="wrap feature" href="#set">
     <img src="img/set.jpg" alt="שלושה בלוקי עץ: מענטש בצהוב, קיבוץ גלויות בירוק ונעביבשק בכחול">
     <div><div class="k">חדש · סט לזוג</div><h2>צבע + צבע</h2>
@@ -277,7 +280,7 @@ function shop(){
   </section>
   <section class="wrap sec" id="joy" style="padding-top:0">
     <div class="sec-h"><h2>סדרת השמחות</h2><p>חתונה · בר מצווה · זוג ${nis(PAIR)}</p></div>
-    <img src="img/wedding.jpg" alt="בואי כלה במסגרת לבנה וישמח חתני במסגרת שחורה" style="width:100%;display:block;margin-bottom:28px">
+    <img src="img/wedding.jpg" alt="בואי כלה במסגרת לבנה וישמח חתני במסגרת חומה כהה" style="width:100%;display:block;margin-bottom:28px">
     <div class="grid">${P.filter(p=>p.s==='joy').map(card).join('')}</div>
   </section>`;
 }
@@ -286,7 +289,7 @@ const card=p=>`
         <div class="ph"><img loading="lazy" src="${img(p.id,p.def||'natural')}" alt="${p.plain} ממוסגר"></div>
         <h3><span class="letter">${p.l}</span>${p.name}</h3>
         <div class="sub">${p.sub}</div>
-        <div class="pr">ממוסגר ${nis(PRICE_FRAMED)} · פוסטר להדפסה ${nis(POSTER)}</div>
+        <div class="pr">${nis(PRICE_FRAMED)} · כל 2 הדפסים ${nis(PAIR)}</div>
       </a>`;
 
 function product(p){
@@ -315,11 +318,12 @@ function product(p){
         <div class="qty"><button type="button" id="minus" aria-label="פחות">−</button><output id="q">1</output><button type="button" id="plus" aria-label="עוד">+</button></div>
         <button type="button" class="cta add" id="add">הוספה לעגלה</button>
       </div>
+      <p class="pairhint" id="pairhint">כל 2 הדפסים מהחנות, לבחירתך, ב־${nis(PAIR)} עם משלוח חינם. כל 3 ב־${nis(TRIPLE)}. אפשר לשלב הדפסים וצבעי מסגרת שונים.</p>
       <dl class="spec">
+        <div><dt>2 או 3 הדפסים</dt><dd>כל 2 לבחירתך ${nis(PAIR)} · כל 3 ${nis(TRIPLE)}, משלוח חינם</dd></div>
         <div><dt>הדפסה</dt><dd>15×21 ס״מ</dd></div>
-        <div><dt>מסגרת</dt><dd>עץ 20×30 ס״מ, עם פספרטו לבן</dd></div>
-        <div><dt>משלוח</dt><dd>שליח עד הבית, ${nis(SHIP)} להזמנה</dd></div>
-        <div><dt>במארז</dt><dd>זוג ${nis(PAIR)} · שלישייה ${nis(TRIPLE)}, ההנחה מחושבת בעגלה</dd></div>
+        <div><dt>מסגרת</dt><dd>עץ 20×30 ס״מ, עם זכוכית ופספרטו לבן</dd></div>
+        <div><dt>משלוח</dt><dd>שליח עד הבית. חינם מ־2 תמונות, ולתמונה בודדת ${nis(SHIP)}</dd></div>
       </dl>
     </div>
   </section>`;
@@ -339,7 +343,10 @@ function product(p){
     const key=p.id+'|'+kind+'|'+(kind==='framed'?color:'');
     const ex=cart.find(x=>x.key===key);
     if(ex)ex.q+=q;else cart.push({key,id:p.id,kind,color:kind==='framed'?color:null,q});
-    save();toast('נוסף לעגלה');
+    save();
+    const n=totals().nF;
+    toast(n===1?'נוסף לעגלה · עוד הדפס אחד לבחירתך, ושניהם ב־'+nis(PAIR)+' עם משלוח חינם':n===2?'נוסף לעגלה · 2 הדפסים ב־'+nis(PAIR)+', משלוח חינם':'נוסף לעגלה');
+    if(n===1){document.getElementById('pairhint').innerHTML='בחרו עוד הדפס אחד, כל הדפס שתרצו, ושניהם יעלו '+nis(PAIR)+' עם משלוח חינם. <a href="#prints">לבחירת השני</a>';}
   };
   sync();
 }
@@ -351,7 +358,7 @@ function cartView(){
     <div>
       <h1>העגלה</h1>
       ${cart.length?cart.map((x,i)=>{if(x.kind==='trip')return`
-        <div class="line"><img src="img/trip.jpg" alt=""><div><div class="n">טריפטיך אעופה · הילד · שמח בני</div><div class="m">שלוש מסגרות עץ טבעי עם פספרטו · כמות ${x.q}</div></div><div class="r"><span>${nis(TRIPLE*x.q)}</span><button class="rm" type="button" data-i="${i}">הסרה</button></div></div>`;if(x.kind==='set'){const m=mixOf(x.c1,x.c2);return`
+        <div class="line"><img src="img/trip.jpg" alt=""><div><div class="n">טריפטיך אעופה אשכונה · הילד · שמח בני</div><div class="m">שלוש מסגרות עץ טבעי עם פספרטו · כמות ${x.q}</div></div><div class="r"><span>${nis(TRIPLE*x.q)}</span><button class="rm" type="button" data-i="${i}">הסרה</button></div></div>`;if(x.kind==='set'){const m=mixOf(x.c1,x.c2);return`
         <div class="line">
           <img src="img/set.jpg" alt="">
           <div><div class="n">צבע + צבע</div>
@@ -367,10 +374,10 @@ function cartView(){
     </div>
     <aside class="sum" aria-label="סיכום הזמנה">
       <div class="l"><span>מחיר מלא</span><span>${nis(t.full)}</span></div>
-      ${t.save>0?`<div class="l save"><span>הנחת מארז</span><span><bdi dir="ltr">−${nis(t.save)}</bdi></span></div>`:''}
-      <div class="l"><span>משלוח</span><span>${t.ship?nis(t.ship):'—'}</span></div>
+      ${t.save>0?`<div class="l save"><span>הנחה על כמה הדפסים</span><span><bdi dir="ltr">−${nis(t.save)}</bdi></span></div>`:''}
+      <div class="l"><span>משלוח</span><span>${t.ship?nis(t.ship):((t.nF>1||cart.some(x=>x.kind==='set'||x.kind==='trip'))?'חינם':'—')}</span></div>
       <div class="l tot"><span>לתשלום</span><span>${nis(t.total)}</span></div>
-      ${t.nF===1||t.nF===4?`<small>עוד הדפס ממוסגר אחד והזוג עולה ${nis(PAIR)}.</small>`:''}
+      ${t.nF===1&&!t.ship?'':''}${t.nF===1&&t.ship?`<small>עוד הדפס אחד לבחירתך: שניהם ב־${nis(PAIR)} והמשלוח חינם.</small>`:''}${t.nF===4?`<small>עוד הדפס אחד, ושני האחרונים יחושבו ב־${nis(PAIR)}.</small>`:''}
       ${cart.length?`
       <form class="co" id="co" novalidate>
         <div class="f"><label for="fn">שם מלא</label><input id="fn" required autocomplete="name"></div>
@@ -428,7 +435,7 @@ function setView(){
       </div>
       <dl class="spec">
         <div><dt>בסט</dt><dd>שלושה פריטים, מוכנים להעמדה או לתלייה</dd></div>
-        <div><dt>משלוח</dt><dd>שליח עד הבית, ${nis(SHIP)} להזמנה</dd></div>
+        <div><dt>משלוח</dt><dd>שליח עד הבית. חינם מ־2 תמונות, ולתמונה בודדת ${nis(SHIP)}</dd></div>
       </dl>
     </div>
   </section>`;
@@ -467,14 +474,14 @@ function tripView(){
     <div>
       <h1>אָעוּפָה · הַיֶּלֶד · שְׂמַח בְּנִי</h1>
       <div class="by">טריפטיך · שלושה הדפסים ממוסגרים עם פספרטו</div>
-      <p>ילד באמצע מרים את הראש. מצד אחד "אעופה אשכונה וארחיקה נדד" של ר׳ יצחק אבוחצירא, ומהצד השני "שמח בני בחלקך, העולם לפניך" של ר׳ יצחק סונה. שלושתם על אותו רקע קרם, מיושרים לקיר אחד.</p>
+      <p>ילד באמצע מרים את הראש. מצד אחד הבית הראשון של "אעופה אשכונה", עד "ואולי אמצא דוד", של ר׳ יצחק אביחצירא, ומהצד השני "שמח בני בחלקך, העולם לפניך" של ר׳ יצחק סונה. שלושתם על אותו רקע קרם, מיושרים לקיר אחד.</p>
       <div class="row">
         <div class="qty"><button type="button" id="minus" aria-label="פחות">−</button><output id="q">1</output><button type="button" id="plus" aria-label="עוד">+</button></div>
         <button type="button" class="cta add" id="add">הוספה לעגלה · ${nis(TRIPLE)}</button>
       </div>
       <dl class="spec">
         <div><dt>בסט</dt><dd>שלוש מסגרות עץ טבעי 20×30 עם פספרטו, הדפס 15×21 בכל אחת</dd></div>
-        <div><dt>משלוח</dt><dd>שליח עד הבית, ${nis(SHIP)} להזמנה</dd></div>
+        <div><dt>משלוח</dt><dd>שליח עד הבית. חינם מ־2 תמונות, ולתמונה בודדת ${nis(SHIP)}</dd></div>
       </dl>
     </div>
   </section>`;
