@@ -70,7 +70,7 @@ nav a:hover{color:var(--ink)}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 28px}
 .item{text-decoration:none;display:flex;flex-direction:column;gap:12px}
 .item .ph{background:var(--wall);overflow:hidden}
-.item img{width:100%;aspect-ratio:1;object-fit:cover;display:block;transition:transform .5s ease}
+.item img{width:100%;aspect-ratio:898/1238;object-fit:cover;display:block;transition:transform .5s ease}
 .item:hover img{transform:scale(1.03)}
 .item h3{font-size:28px;line-height:1.2}
 .item .sub{color:var(--ink-soft);font-size:15px;margin-top:-6px}
@@ -81,7 +81,9 @@ nav a:hover{color:var(--ink)}
 .pp{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;padding-block:40px 64px;align-items:start}
 .pp>div{min-width:0}
 .pp .main{background:var(--wall)}
-.pp .main img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.pp .main img{width:100%;aspect-ratio:898/1238;object-fit:cover;display:block}
+.pp .main a{display:block;cursor:zoom-in}
+@media (max-width:700px){.hero{grid-template-columns:minmax(0,1fr)}.hero>a{display:block;min-width:0;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.hero>a img{width:170%;max-width:none}}
 .thumbs{display:flex;gap:10px;margin-top:10px}
 .thumbs button{padding:0;border:1px solid transparent;background:none;width:76px}
 .thumbs button[aria-pressed="true"]{border-color:var(--ink)}
@@ -297,7 +299,7 @@ function product(p){
   V.innerHTML=`
   <section class="wrap pp">
     <div>
-      <div class="main"><img id="mainimg" src="${img(p.id,color)}" alt=""></div>
+      <div class="main"><a id="zoomlink" href="${img(p.id,color)}" target="_blank" rel="noopener" aria-label="תמונה בגודל מלא"><img id="mainimg" src="${img(p.id,color)}" alt=""></a></div>
       <div class="thumbs">${COLORS.map(c=>`<button type="button" data-c="${c.id}" aria-label="מסגרת ${c.name}"><img src="${img(p.id,c.id)}" alt=""></button>`).join('')}</div>
       <a class="back" href="#shop">חזרה לכל ההדפסים</a>
     </div>
@@ -331,7 +333,7 @@ function product(p){
     V.querySelectorAll('.choice').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===kind));
     V.querySelectorAll('[data-c]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.c===color));
     document.getElementById('colorset').hidden=kind!=='framed';
-    const m=document.getElementById('mainimg');m.src=img(p.id,color);
+    const m=document.getElementById('mainimg');m.src=img(p.id,color);document.getElementById('zoomlink').href=img(p.id,color);
     m.alt=`${p.plain} במסגרת ${COLORS.find(c=>c.id===color).name}`;
     document.getElementById('q').textContent=q;
   };
