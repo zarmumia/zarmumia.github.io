@@ -122,6 +122,7 @@ nav a:hover{color:var(--ink)}
 .line .n{font-family:var(--display);font-size:22px;line-height:1.2}
 .line .m{font-size:14px;color:var(--ink-soft)}
 .line .r{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-variant-numeric:tabular-nums}
+.gift{display:flex;gap:8px;align-items:center;margin:6px 0 10px;font-weight:600;cursor:pointer}.gift input{width:18px;height:18px}#gbox small{display:block;opacity:.75;margin:6px 0 12px}
 .payframe{display:block;width:calc(100% + 76px);max-width:none;height:780px;border:0;border-radius:0;background:#fff;margin:14px -38px -12px}
 .paymodal{position:fixed;inset:0;z-index:50;background:rgba(20,16,12,.55);display:flex;align-items:center;justify-content:center}.pm{background:#fff;width:min(560px,100%);height:90vh;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}.pmh{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;font-size:14px;color:#2b2621;border-bottom:1px solid #e5ded2}.pmh button{background:none;border:0;font-size:18px;cursor:pointer;color:#2b2621}.pm iframe{flex:1;width:100%;border:0}@media(max-width:600px){.paymodal{align-items:flex-end}.pm{border-radius:12px 12px 0 0}}
 .qs{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px}.qs button{background:none;border:0;color:var(--ink);font-size:18px;width:34px;height:32px;cursor:pointer}.qs b{min-width:20px;text-align:center;font-weight:600}
@@ -446,7 +447,16 @@ function cartView(){
           <div class="f"><label for="st">רחוב ומספר</label><input id="st" required autocomplete="street-address"></div>
           <div class="f"><label for="ct">עיר</label><input id="ct" required autocomplete="address-level2"></div>
         </div>`:''}
-        <div class="f"><label for="nt">ברכה או הערות למשלוח (לא חובה)</label><textarea id="nt" rows="2"></textarea></div>
+        ${(t.nF||cart.some(x=>x.kind==='set'||x.kind==='trip'))?`<label class="gift"><input type="checkbox" id="gf"> זו מתנה, לשלוח ישר למקבל/ת</label>
+        <div id="gbox" hidden>
+          <div class="two">
+            <div class="f"><label for="gn">שם המקבל/ת</label><input id="gn" autocomplete="off"></div>
+            <div class="f"><label for="gp">טלפון המקבל/ת (לשליח)</label><input id="gp" type="tel" autocomplete="off"></div>
+          </div>
+          <div class="f"><label for="gb">ברכה לכרטיס שבחבילה</label><textarea id="gb" rows="3" maxlength="300" placeholder="מזל טוב! באהבה, משפחת כהן"></textarea></div>
+          <small>הכתובת למעלה היא הכתובת של המקבל/ת. בחבילת מתנה אין מחיר.</small>
+        </div>`:''}
+        <div class="f"><label for="nt">הערות למשלוח (לא חובה)</label><textarea id="nt" rows="2"></textarea></div>
         <button class="cta" type="submit">מעבר לתשלום מאובטח</button>
         <div id="msg" class="note" hidden></div>
       </form>`:''}
@@ -455,6 +465,8 @@ function cartView(){
   V.querySelectorAll('.rm').forEach(b=>b.onclick=()=>{cart.splice(+b.dataset.i,1);save();cartView()});
   V.querySelectorAll('.qd').forEach(b=>b.onclick=()=>{const x=cart[+b.dataset.i];x.q+=+b.dataset.d;if(x.q<1)cart.splice(+b.dataset.i,1);save();cartView()});
   const f=document.getElementById('co');
+  const gf=document.getElementById('gf');
+  if(gf)gf.onchange=()=>{const on=gf.checked;document.getElementById('gbox').hidden=!on;['gn','gp'].forEach(id=>document.getElementById(id).required=on)};
   if(f)f.addEventListener('submit',e=>{
     e.preventDefault();
     if(isShabbat()){const m=document.getElementById('msg');m.hidden=false;m.textContent='החנות סגורה בשבת ובחג. אפשר לשמור את העגלה ולהזמין במוצאי שבת או החג.';return}
@@ -683,16 +695,18 @@ function sendOrder(f,m){
   const d=new Date(), no=`${String(d.getFullYear()).slice(2)}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}-${Math.floor(100+Math.random()*900)}`;
   const btn=f.querySelector('button[type=submit]'); btn.disabled=true; m.textContent='שולחים את ההזמנה...';
   const addr=[v('st'),v('ct')].filter(Boolean).join(', ');
+  const isGift=!!(f.querySelector('#gf')&&f.querySelector('#gf').checked);
   const body={_subject:`ליד · הזמנה ${no} · ${nis(t.total)} · עוד לא שולם`,'סטטוס':'לקוחה פתחה הזמנה. כשהתשלום יעבור יגיע מייל "שולם". אם לא ישולם תוך 30 דקות יגיע מייל "לא שולם".',_template:'table',_captcha:'false',
     'מספר הזמנה':no,'שם':v('fn'),'טלפון':v('ph'),'מייל':v('em'),'כתובת':addr||'—',
+    'מתנה':isGift?`כן · למקבל/ת: ${v('gn')} · ${v('gp')}`:'לא','ברכה לכרטיס':isGift?(v('gb')||'—'):'—',
     'הערות':v('nt')||'—','פריטים':cart.map(itemLine).join(' | '),'משלוח':t.ship?nis(t.ship):'חינם','לתשלום':nis(t.total)};
   try{localStorage.setItem('mm-last',no)}catch(e){}
   const tfetch=(u,o,ms)=>{const c=new AbortController();const t=setTimeout(()=>c.abort(),ms);return fetch(u,Object.assign({signal:c.signal},o)).finally(()=>clearTimeout(t))};
   const mail=tfetch(ORDER_TO,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)},9000).then(r=>r.ok?r.json():{}).then(j=>!!j.ok).catch(()=>false);
   // 1) תשלום לסכום המדויק דרך ה-Worker (פייפרלס API)
   const viaWorker=!WORKER?Promise.resolve(null):tfetch(WORKER+'/checkout',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({no,cart:cart.map(x=>({kind:x.kind,q:x.q,size:x.size||null})),buyer:{name:v('fn'),email:v('em'),phone:v('ph'),address:addr},
-        remark:`הזמנה ${no}: ${cart.map(itemLine).join(' | ')}${v('nt')?' | הערות: '+v('nt'):''}`.slice(0,480),total:t.total})},12000)
+      body:JSON.stringify({no,cart:cart.map(x=>({kind:x.kind,q:x.q,size:x.size||null})),buyer:{name:v('fn'),email:v('em'),phone:v('ph'),address:addr},gift:isGift?{name:v('gn'),phone:v('gp'),blessing:v('gb')}:null,
+        remark:`הזמנה ${no}: ${cart.map(itemLine).join(' | ')}${isGift?' | מתנה ל'+v('gn'):''}${v('nt')?' | הערות: '+v('nt'):''}`.slice(0,480),total:t.total})},12000)
     .then(r=>r.ok?r.json():null).then(j=>{if(!(j&&j.url&&j.amount===t.total))return null;const u=new URL(j.url);if(v('ph'))u.searchParams.set('phone',v('ph').replace(/[^\d+]/g,''));return u.toString()}).catch(()=>null);
   // התשלום לא מחכה למייל: אם יש קישור, פותחים מיד
   viaWorker.then(url=>url?{url}:mail.then(sent=>({sent}))).then(({url,sent})=>{
