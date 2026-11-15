@@ -692,7 +692,7 @@ function sendOrder(f,m){
   const viaWorker=!WORKER?Promise.resolve(null):fetch(WORKER+'/checkout',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({no,cart:cart.map(x=>({kind:x.kind,q:x.q,size:x.size||null})),buyer:{name:v('fn'),email:v('em'),phone:v('ph'),address:addr},
         remark:`הזמנה ${no}: ${cart.map(itemLine).join(' | ')}${v('nt')?' | הערות: '+v('nt'):''}`.slice(0,480),total:t.total})})
-    .then(r=>r.ok?r.json():null).then(j=>j&&j.url&&j.amount===t.total?j.url:null).catch(()=>null);
+    .then(r=>r.ok?r.json():null).then(j=>{if(!(j&&j.url&&j.amount===t.total))return null;const u=new URL(j.url);if(v('ph'))u.searchParams.set('phone',v('ph').replace(/[^\d+]/g,''));return u.toString()}).catch(()=>null);
   Promise.all([mail,viaWorker]).then(([sent,url])=>{
     if(url)return showPay(f,m,no,url,false);
     // 2) גיבוי: עמודי מכירה קבועים לפי סכום
