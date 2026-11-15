@@ -668,7 +668,10 @@ function sendOrder(f,m){
   fetch(ORDER_TO,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)})
     .then(r=>{if(!r.ok)throw 0;return r.json()})
     .then(()=>{
-      const link=PAYLINKS[t.total];
+      const q=k=>cart.filter(x=>x.kind===k).reduce((s,x)=>s+x.q,0), nF=q('framed'),nP=q('poster'),nS=q('set'),nT=q('trip');
+      // קישור רק כשההזמנה תואמת בדיוק את המוצר שבעמוד התשלום, אחרת קישור ידני
+      const ok=(nF>=1&&nF<=3&&!nP&&!nS&&!nT)||(nT===1&&!nF&&!nP&&!nS)||(nP===1&&!nF&&!nS&&!nT)||(nS===1&&!nF&&!nP&&!nT);
+      const link=ok?PAYLINKS[t.total]:null;
       cart.length=0; save();
       try{localStorage.setItem('mm-last',no)}catch(e){}
       if(link){m.innerHTML=`<b>ההזמנה ${no} נשמרה.</b><br>בעמוד התשלום, כתבי את מספר ההזמנה <b>${no}</b> בשדה "הערה למוכר".<br><a class="cta" id="paygo" href="${link}" style="display:inline-block;margin-top:10px">להעתקת המספר ומעבר לתשלום</a>`;
