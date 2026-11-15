@@ -654,7 +654,7 @@ function legal(k){
 // הזמנות: נשלחות למייל דרך FormSubmit, ואז מעבר לעמוד סליקה לפי הסכום
 const ORDER_TO='https://formsubmit.co/ajax/fanny.ra@gmail.com';
 const PB='https://www.paperless.tax/invoice?sID=3wR0dOAkWQg6lDf1w-95K';
-const PAYLINKS={5:'', /* קישור עמוד בדיקה 5 ש"ח */ 189:PB+'RWRxP7Vjt7RnkPKu5L0cISoEtLkn2DkvA',289:PB+'TCfD9kwUJMnMvjmjm-kq2JlfGCX76bmnQ',399:PB+'XE7R6WUx9eMMJN0TEHzitHEvVV-7L7_lw',
+const PAYLINKS={5:PB+'W9TybJKAzqSdysLLeWGFlQmJ2RISmykMA', /* בדיקה זמנית */ 189:PB+'RWRxP7Vjt7RnkPKu5L0cISoEtLkn2DkvA',289:PB+'TCfD9kwUJMnMvjmjm-kq2JlfGCX76bmnQ',399:PB+'XE7R6WUx9eMMJN0TEHzitHEvVV-7L7_lw',
   39:PB+'Yf8Za3RxxsZDALDmg3v94Y8Yc-GyLR5Cw',449:PB+'bA-4DPV9gVv5TVZCEcyffTIzpwcWdCSgQ',549:PB+'QJqP57OolLMn7yZHHJpm5mCRwB_kI_DfQ'}; // עמודי מכירה בפייפרלס לפי סכום
 function itemLine(x){
   if(x.kind==='test')return 'מוצר בדיקה ₪5';
