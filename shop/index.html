@@ -74,7 +74,7 @@ nav a:hover{color:var(--ink)}
 .item:hover img{transform:scale(1.03)}
 .item h3{font-size:28px;line-height:1.2}
 .item .sub{color:var(--ink-soft);font-size:15px;margin-top:-6px}
-.item .pr{font-size:16px;font-variant-numeric:tabular-nums}
+.item .pr{font-size:16px;font-variant-numeric:tabular-nums;display:flex;justify-content:space-between;align-items:baseline;gap:8px}.item .go{font-size:14px;color:var(--ink-soft);border-bottom:1px solid currentColor;white-space:nowrap}.item:hover .go{color:var(--accent)}
 .letter{font-family:var(--display);color:var(--sand);margin-inline-end:8px}
 
 /* עמוד מוצר */
@@ -193,7 +193,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </head>
 <body>
 
-<div class="demo">גרסת תצוגה · התשלום יחובר בקרוב</div>
+<div class="demo">החנות בהרצה · נפתחת בקרוב</div>
 <header><div class="wrap">
   <a class="brand" href="#shop">המרקט המסורתי<small>מילים שגדלנו עליהן</small></a>
   <nav>
@@ -304,7 +304,7 @@ function shop(){
   V.innerHTML=`
   <section class="wrap hero">
     <div>
-      <h1>פיוטים ושירים של הבית, ממוסגרים לקיר</h1>
+      <h1>פיוטים, שירים ומילים של הבית, ממוסגרים לקיר</h1>
       <p>שורות מהפיוטים והשירים שליוו את הבתים שלנו, בעיצוב נקי ובאות עברית מסורתית. כל הדפס מגיע ממוסגר עם פספרטו, מוכן לתלייה.</p>
       <a class="cta" href="#prints">בוחרים 2 או 3 הדפסים</a>
       <div class="facts"><span>זכוכית ופספרטו</span><span>מסגרת 20×30 ס״מ</span><span>משלוח חינם מ־2 תמונות</span></div>
@@ -322,7 +322,7 @@ function shop(){
       <p>השפה שלה, השפה שלו, ובאמצע קיבוץ גלויות בצבע שנולד משניהם. בוחרים שתי מילים מהבית ושני צבעים, והצבע השלישי מתערבב לבד.</p>
       <span class="cta">לבניית הסט</span></div>
   </a>
-  <section class="wrap sec" id="lang" style="padding-top:0">
+  <section class="wrap sec" id="lang" style="padding-top:28px">
     <div class="sec-h"><h2>שפות מהבית</h2><p>מילה אחת מכל בית, בצבעים</p></div>
     <div class="grid">${P.filter(p=>p.s==='lang').map(card).join('')}</div>
   </section>
@@ -343,9 +343,9 @@ function shop(){
 const card=p=>`
       <a class="item" href="#${p.id}">
         <div class="ph"><img loading="lazy" src="${img(p.id,p.def||'natural')}" alt="${p.plain} ממוסגר"></div>
-        <h3><span class="letter">${p.l}</span>${p.name}</h3>
+        <h3>${p.name}</h3>
         <div class="sub">${p.sub}</div>
-        <div class="pr">${nis(PRICE_FRAMED)} · כל 2 הדפסים ${nis(PAIR)}</div>
+        <div class="pr"><span>${nis(PRICE_FRAMED)}</span><span class="go">לבחירה ←</span></div>
       </a>`;
 
 function product(p){
