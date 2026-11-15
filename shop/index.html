@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="color-scheme" content="only light">
 <meta name="robots" content="noindex">
 <title>המרקט המסורתי</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,8 +16,14 @@
   --ok:#3E6B4A;
   --display:'Keter YG','Frank Ruhl Libre',serif;
   --body:'Assistant','Arial Hebrew',Arial,sans-serif;
-  color-scheme:only light; /* חנות בהירה בלבד: ההדפסים נראים כמו על קיר אמיתי */
+  color-scheme:light;
 }
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#1C1A17; --wall:#24211D; --ink:#EFE8DC; --ink-soft:#B3A895; --sand:#C2A77C;
+  --line:rgba(239,232,220,.14); --card:#26231F; --accent:#D2B585; --ok:#8DBB97; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#1C1A17; --wall:#24211D; --ink:#EFE8DC; --ink-soft:#B3A895; --sand:#C2A77C;
+  --line:rgba(239,232,220,.14); --card:#26231F; --accent:#D2B585; --ok:#8DBB97; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;direction:rtl;font-synthesis:none}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
@@ -64,8 +69,8 @@ nav a:hover{color:var(--ink)}
 .sec-h p{margin:0;color:var(--ink-soft)}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 28px}
 .item{text-decoration:none;display:flex;flex-direction:column;gap:12px}
-.item .ph{background:var(--wall);overflow:hidden}
-.item img{width:100%;aspect-ratio:898/1238;object-fit:cover;display:block;transition:transform .5s ease}
+.item .ph{overflow:hidden}
+.item img{width:100%;aspect-ratio:832/1171;object-fit:cover;display:block;transition:transform .5s ease}
 .item:hover img{transform:scale(1.03)}
 .item h3{font-size:28px;line-height:1.2}
 .item .sub{color:var(--ink-soft);font-size:15px;margin-top:-6px}
@@ -75,10 +80,10 @@ nav a:hover{color:var(--ink)}
 /* עמוד מוצר */
 .pp{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;padding-block:40px 64px;align-items:start}
 .pp>div{min-width:0}
-.pp .main{background:var(--wall)}
-.pp .main img{width:100%;aspect-ratio:898/1238;object-fit:cover;display:block}
+.pp .main{}
+.pp .main img{width:100%;aspect-ratio:832/1171;object-fit:cover;display:block}
 .pp .main a{display:block;cursor:zoom-in}
-.singles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.singles img{width:100%;aspect-ratio:898/1238;object-fit:cover;display:block}
+.singles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.singles img{width:100%;aspect-ratio:832/1171;object-fit:cover;display:block}
 @media (max-width:700px){.singles{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;-webkit-overflow-scrolling:touch}.singles a{flex:0 0 82%;scroll-snap-align:center}}
 .thumbs{display:flex;gap:10px;margin-top:10px}
 .thumbs button{padding:0;border:1px solid transparent;background:none;width:76px}
@@ -259,7 +264,7 @@ function shop(){
       <a class="cta" href="#prints">בוחרים 2 או 3 הדפסים</a>
       <div class="facts"><span>זכוכית ופספרטו</span><span>מסגרת 20×30 ס״מ</span><span>משלוח חינם מ־2 תמונות</span></div>
     </div>
-    <a href="#trip"><img src="img/trip.jpg" alt="טריפטיך ממוסגר: אעופה אשכונה, צללית ילד ושמח בני" style="aspect-ratio:auto"></a>
+    <a href="#trip"><img src="img/trip.webp" alt="טריפטיך ממוסגר: אעופה אשכונה, צללית ילד ושמח בני" style="aspect-ratio:auto"></a>
   </section>
   <div class="deal"><div class="wrap">
     <div class="d"><span class="dn">הדפס 1</span><b>${nis(PRICE_FRAMED)}</b><span class="ds">ועוד משלוח</span></div>
@@ -278,7 +283,7 @@ function shop(){
   </section>
   <section class="wrap sec" id="joy" style="padding-top:0">
     <div class="sec-h"><h2>סדרת השמחות</h2><p>חתונה · בר מצווה · זוג ${nis(PAIR)}</p></div>
-    <img src="img/wedding.jpg" alt="בואי כלה במסגרת לבנה וישמח חתני במסגרת חומה כהה" style="width:100%;display:block;margin-bottom:28px">
+    <img src="img/wedding.webp" alt="בואי כלה במסגרת לבנה וישמח חתני במסגרת חומה כהה" style="width:100%;display:block;margin-bottom:28px">
     <div class="grid">${P.filter(p=>p.s==='joy').map(card).join('')}</div>
   </section>`;
 }
@@ -356,7 +361,7 @@ function cartView(){
     <div>
       <h1>העגלה</h1>
       ${cart.length?cart.map((x,i)=>{if(x.kind==='trip')return`
-        <div class="line"><img src="img/trip.jpg" alt=""><div><div class="n">טריפטיך אעופה אשכונה · הילד · שמח בני</div><div class="m">שלוש מסגרות עץ טבעי עם פספרטו · כמות ${x.q}</div></div><div class="r"><span>${nis(TRIPLE*x.q)}</span><button class="rm" type="button" data-i="${i}">הסרה</button></div></div>`;if(x.kind==='set'){const m=mixOf(x.c1,x.c2);return`
+        <div class="line"><img src="img/trip.webp" alt=""><div><div class="n">טריפטיך אעופה אשכונה · הילד · שמח בני</div><div class="m">שלוש מסגרות עץ טבעי עם פספרטו · כמות ${x.q}</div></div><div class="r"><span>${nis(TRIPLE*x.q)}</span><button class="rm" type="button" data-i="${i}">הסרה</button></div></div>`;if(x.kind==='set'){const m=mixOf(x.c1,x.c2);return`
         <div class="line">
           <img src="img/set.jpg" alt="">
           <div><div class="n">צבע + צבע</div>
@@ -468,7 +473,7 @@ function tripView(){
   let q=1;
   V.innerHTML=`
   <section class="wrap pp">
-    <div><div class="main"><img src="img/trip.jpg" alt="טריפטיך ממוסגר על הקיר" style="aspect-ratio:auto"></div>
+    <div><div class="main"><img src="img/trip.webp" alt="טריפטיך ממוסגר על הקיר" style="aspect-ratio:auto"></div>
       <div class="singles" aria-label="שלושת ההדפסים מקרוב">${[1,2,3].map(i=>`<a href="img/trip-${i}.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/trip-${i}.jpg" alt="${['אעופה אשכונה','הילד','שמח בני'][i-1]} במסגרת"></a>`).join('')}</div>
       <a class="back" href="#shop">חזרה לחנות</a></div>
     <div>
