@@ -126,7 +126,7 @@ nav a:hover{color:var(--ink)}
 .sum{background:var(--card);border:1px solid var(--line);padding:24px;display:grid;gap:10px;position:sticky;top:calc(80px + env(safe-area-inset-top,0px))}
 .sum .l{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}
 .sum .l.tot{border-top:1px solid var(--line);padding-top:12px;font-size:20px;font-weight:600}
-.sum .save{color:var(--ok)}
+.sum .save{color:var(--ok)}.sum .saved{font-weight:600;margin-top:-4px}
 .sum small{color:var(--ink-soft)}
 .empty{padding:40px 0;color:var(--ink-soft)}
 form.co{display:grid;gap:12px;margin-top:8px}
@@ -257,7 +257,8 @@ function totals(){
   const sets=cart.filter(x=>x.kind==='set'||x.kind==='trip'), setSum=sets.reduce((a,b)=>a+(b.kind==='trip'?TRIPLE:SET_PRICE[b.size])*b.q,0);
   const full=nF*PRICE_FRAMED+nP*POSTER+setSum, fr=framedTotal(nF);
   const ship=(nF===1&&!sets.length)?SHIP:0, sub=fr+nP*POSTER+setSum; // משלוח חינם מ־2 תמונות או בסט
-  return {nF,nP,full,save:nF*PRICE_FRAMED-fr,sub,ship,total:sub+ship};
+  const save=nF*PRICE_FRAMED-fr, saved=save+((!ship&&(nF>1||sets.length))?SHIP:0);
+  return {nF,nP,full,save,saved,sub,ship,total:sub+ship};
 }
 function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;d.setAttribute('role','status');document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
 
@@ -393,6 +394,7 @@ function cartView(){
       ${t.save>0?`<div class="l save"><span>הנחה על כמה הדפסים</span><span><bdi dir="ltr">−${nis(t.save)}</bdi></span></div>`:''}
       <div class="l"><span>משלוח</span><span>${t.ship?nis(t.ship):((t.nF>1||cart.some(x=>x.kind==='set'||x.kind==='trip'))?'חינם':'—')}</span></div>
       <div class="l tot"><span>לתשלום</span><span>${nis(t.total)}</span></div>
+      ${t.saved>0?`<div class="l save saved"><span>חסכת, כולל המשלוח</span><span>${nis(t.saved)}</span></div>`:''}
       ${t.nF===1&&!t.ship?'':''}${t.nF===1&&t.ship?`<small>עוד הדפס אחד לבחירתך: שניהם ב־${nis(PAIR)} והמשלוח חינם.</small>`:''}${t.nF===4?`<small>עוד הדפס אחד, ושני האחרונים יחושבו ב־${nis(PAIR)}.</small>`:''}
       ${cart.length?`
       <form class="co" id="co" novalidate>
