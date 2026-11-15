@@ -649,7 +649,9 @@ function legal(k){
 
 // הזמנות: נשלחות למייל דרך FormSubmit, ואז מעבר לעמוד סליקה לפי הסכום
 const ORDER_TO='https://formsubmit.co/ajax/fanny.ra@gmail.com';
-const PAYLINKS={}; // סכום -> קישור עמוד מכירה בפייפרלס, למשל 189:'https://...'
+const PB='https://www.paperless.tax/invoice?sID=3wR0dOAkWQg6lDf1w-95K';
+const PAYLINKS={189:PB+'RWRxP7Vjt7RnkPKu5L0cISoEtLkn2DkvA',289:PB+'TCfD9kwUJMnMvjmjm-kq2JlfGCX76bmnQ',399:PB+'XE7R6WUx9eMMJN0TEHzitHEvVV-7L7_lw',
+  39:PB+'Yf8Za3RxxsZDALDmg3v94Y8Yc-GyLR5Cw',449:PB+'bA-4DPV9gVv5TVZCEcyffTIzpwcWdCSgQ',549:PB+'QJqP57OolLMn7yZHHJpm5mCRwB_kI_DfQ'}; // עמודי מכירה בפייפרלס לפי סכום
 function itemLine(x){
   if(x.kind==='trip')return `טריפטיך אעופה · הילד · שמח בני · כמות ${x.q}`;
   if(x.kind==='set')return `צבע + צבע: ${WORDS[x.w1].w} (${PRIM[x.c1].n}) · קיבוץ גלויות · ${WORDS[x.w2].w} (${PRIM[x.c2].n}) · ${SIZES[x.size].n} · כמות ${x.q}`;
@@ -668,16 +670,22 @@ function sendOrder(f,m){
     .then(()=>{
       const link=PAYLINKS[t.total];
       cart.length=0; save();
-      if(link){m.textContent=`ההזמנה ${no} נשמרה. מעבירים לתשלום מאובטח...`;setTimeout(()=>location.href=link,900)}
+      try{localStorage.setItem('mm-last',no)}catch(e){}
+      if(link){m.innerHTML=`<b>ההזמנה ${no} נשמרה.</b><br>בעמוד התשלום, כתבי את מספר ההזמנה <b>${no}</b> בשדה "הערה למוכר".<br><a class="cta" id="paygo" href="${link}" style="display:inline-block;margin-top:10px">להעתקת המספר ומעבר לתשלום</a>`;
+        document.getElementById('paygo').onclick=()=>{try{navigator.clipboard.writeText(no)}catch(e){}};}
       else m.textContent=`תודה! ההזמנה ${no} התקבלה. קישור לתשלום מאובטח יישלח אלייך תוך כמה שעות.`;
     })
     .catch(()=>{btn.disabled=false;m.textContent='משהו לא עבד בשליחה. נסי שוב בעוד רגע.'});
 }
 
+function thanks(){
+  let no='';try{no=localStorage.getItem('mm-last')||''}catch(e){}
+  V.innerHTML=`<section class="wrap sec legal"><h2>תודה!</h2><p>התשלום התקבל${no?` עבור הזמנה ${no}`:''}. קבלה נשלחה אלייך למייל.</p><p>ההדפסים מודפסים וממוסגרים במיוחד בשבילך, ויגיעו עד 5 ימי עסקים.</p><p><a href="#shop">חזרה לחנות</a></p></section>`;
+}
 function route(){
   const h=location.hash.slice(1);
   const p=P.find(x=>x.id===h);
-  if(p)product(p);else if(h==='trip')tripView();else if(h==='set')setView();else if(h==='cart')cartView();else if(h==='about')about();else if(LEGAL[h])legal(h);else{shop();if(h==='prints')document.getElementById('prints').scrollIntoView()}
+  if(p)product(p);else if(h==='trip')tripView();else if(h==='set')setView();else if(h==='cart')cartView();else if(h==='about')about();else if(LEGAL[h])legal(h);else if(h==='thanks')thanks();else{shop();if(h==='prints')document.getElementById('prints').scrollIntoView()}
   if(!(h==='prints'))window.scrollTo(0,0);
 }
 document.getElementById('cartbtn').onclick=()=>{location.hash='cart'};
