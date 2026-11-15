@@ -210,13 +210,14 @@ const PRICE_FRAMED=150, PAIR=279, TRIPLE=399, POSTER=39, SHIP=39; // מחיר פ
 const COLORS=[
   {id:'natural',name:'עץ טבעי',hex:'#C9A878'},
   {id:'white',name:'לבן',hex:'#F4F1EA'},
-  {id:'honey',name:'חום כהה',hex:'#7A5434'}
+  {id:'honey',name:'חום כהה',hex:'#7A5434'},
+  {id:'black',name:'שחור · הדפס מלא',hex:'#1E1B18'}
 ];
 const P=[
   {id:'p1',l:'א',name:'אָעוּפָה אֶשְׁכּוֹנָה',plain:'אעופה אשכונה',sub:'עם להקת הציפורים',by:'מתוך פיוט של ר׳ יצחק אביחצירא',
-   text:'שורה מתוך הפיוט, עם להקת ציפורים שעולה אל הכותרת. הדפס בגווני נייר חמים שמתאים לסלון, למסדרון ולחדר עבודה.'},
+   text:'הבית הראשון של הפיוט, עם להקת ציפורים שעולה אל המילים. הדפס בגווני נייר חמים שמתאים לסלון, למסדרון ולחדר עבודה.'},
   {id:'p2',l:'ב',name:'אָעוּפָה אֶשְׁכּוֹנָה',plain:'אעופה אשכונה · מינימליסטי',sub:'גרסה מינימליסטית',by:'מתוך פיוט של ר׳ יצחק אביחצירא',
-   text:'אותה שורה בלי איור. טיפוגרפיה בכתר, הרבה אוויר סביב. משתלב יפה בזוג עם הגרסה עם הציפורים.'},
+   text:'אותו בית בלי איור. טיפוגרפיה בכתר, הרבה אוויר סביב. משתלב יפה בזוג עם הגרסה עם הציפורים.'},
   {id:'p3',l:'ג',name:'שְׂמַח בְּנִי בְּחֶלְקְךָ',plain:'שמח בני בחלקך',sub:'ר׳ יצחק סונה',by:'מילים: ר׳ יצחק סונה',
    text:'חמש שורות על שמחה בחלק ועל העולם שפתוח לפניך. מתנה טובה לבר מצווה, לחדר של ילד או לבית חדש.'},
   {id:'p4',l:'ד',name:'חֲשׂוֹף זְרוֹעֲךָ',plain:'חשוף זרועך',sub:'לקבץ פזורים · מפת ישראל',by:'מתוך פיוט של ר׳ יצחק אביחצירא',
@@ -324,8 +325,8 @@ function product(p){
       <p class="pairhint" id="pairhint">כל 2 הדפסים מהחנות, לבחירתך, ב־${nis(PAIR)} עם משלוח חינם. כל 3 ב־${nis(TRIPLE)}. אפשר לשלב הדפסים וצבעי מסגרת שונים.</p>
       <dl class="spec">
         <div><dt>2 או 3 הדפסים</dt><dd>כל 2 לבחירתך ${nis(PAIR)} · כל 3 ${nis(TRIPLE)}, משלוח חינם</dd></div>
-        <div><dt>הדפסה</dt><dd>15×21 ס״מ</dd></div>
-        <div><dt>מסגרת</dt><dd>עץ 20×30 ס״מ, עם זכוכית ופספרטו לבן</dd></div>
+        <div><dt>הדפסה</dt><dd id="sp-print">15×21 ס״מ</dd></div>
+        <div><dt>מסגרת</dt><dd id="sp-frame">עץ 20×30 ס״מ, עם זכוכית ופספרטו לבן</dd></div>
         <div><dt>משלוח</dt><dd>שליח עד הבית. חינם מ־2 תמונות, ולתמונה בודדת ${nis(SHIP)}</dd></div>
       </dl>
     </div>
@@ -336,6 +337,7 @@ function product(p){
     document.getElementById('colorset').hidden=kind!=='framed';
     const m=document.getElementById('mainimg');m.src=img(p.id,color);document.getElementById('zoomlink').href=img(p.id,color);
     m.alt=`${p.plain} במסגרת ${COLORS.find(c=>c.id===color).name}`;
+    const bl=color==='black';document.getElementById('sp-print').textContent=bl?'20×30 ס״מ, ממלא את כל המסגרת':'15×21 ס״מ';document.getElementById('sp-frame').textContent=bl?'עץ שחור 20×30 ס״מ, עם זכוכית, בלי פספרטו':'עץ 20×30 ס״מ, עם זכוכית ופספרטו לבן';
     document.getElementById('q').textContent=q;
   };
   V.querySelectorAll('.choice').forEach(b=>b.onclick=()=>{kind=b.dataset.k;sync()});
