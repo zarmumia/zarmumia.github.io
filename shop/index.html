@@ -83,7 +83,8 @@ nav a:hover{color:var(--ink)}
 .pp .main{background:var(--wall)}
 .pp .main img{width:100%;aspect-ratio:898/1238;object-fit:cover;display:block}
 .pp .main a{display:block;cursor:zoom-in}
-@media (max-width:700px){.hero{grid-template-columns:minmax(0,1fr)}.hero>a{display:block;min-width:0;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.hero>a img{width:170%;max-width:none}}
+.singles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.singles img{width:100%;aspect-ratio:898/1238;object-fit:cover;display:block}
+@media (max-width:700px){.singles{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;-webkit-overflow-scrolling:touch}.singles a{flex:0 0 82%;scroll-snap-align:center}}
 .thumbs{display:flex;gap:10px;margin-top:10px}
 .thumbs button{padding:0;border:1px solid transparent;background:none;width:76px}
 .thumbs button[aria-pressed="true"]{border-color:var(--ink)}
@@ -472,7 +473,9 @@ function tripView(){
   let q=1;
   V.innerHTML=`
   <section class="wrap pp">
-    <div><div class="main"><img src="img/trip.jpg" alt="טריפטיך ממוסגר על הקיר" style="aspect-ratio:auto"></div><a class="back" href="#shop">חזרה לחנות</a></div>
+    <div><div class="main"><img src="img/trip.jpg" alt="טריפטיך ממוסגר על הקיר" style="aspect-ratio:auto"></div>
+      <div class="singles" aria-label="שלושת ההדפסים מקרוב">${[1,2,3].map(i=>`<a href="img/trip-${i}.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/trip-${i}.jpg" alt="${['אעופה אשכונה','הילד','שמח בני'][i-1]} במסגרת"></a>`).join('')}</div>
+      <a class="back" href="#shop">חזרה לחנות</a></div>
     <div>
       <h1>אָעוּפָה · הַיֶּלֶד · שְׂמַח בְּנִי</h1>
       <div class="by">טריפטיך · שלושה הדפסים ממוסגרים עם פספרטו</div>
