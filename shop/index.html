@@ -122,6 +122,8 @@ nav a:hover{color:var(--ink)}
 .line .n{font-family:var(--display);font-size:22px;line-height:1.2}
 .line .m{font-size:14px;color:var(--ink-soft)}
 .line .r{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-variant-numeric:tabular-nums}
+.payframe{display:block;width:100%;height:1050px;border:1px solid var(--line);border-radius:10px;background:#fff;margin:12px 0 8px}
+.qs{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px}.qs button{background:none;border:0;color:var(--ink);font-size:18px;width:34px;height:32px;cursor:pointer}.qs b{min-width:20px;text-align:center;font-weight:600}
 .rm{background:none;border:0;color:var(--ink-soft);font-size:13px;text-decoration:underline;padding:0}
 .sum{background:var(--card);border:1px solid var(--line);padding:24px;display:grid;gap:10px;position:sticky;top:calc(80px + env(safe-area-inset-top,0px))}
 .sum .l{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}
@@ -410,18 +412,18 @@ function cartView(){
     <div>
       <h1>העגלה</h1>
       ${cart.length?cart.map((x,i)=>{if(x.kind==='trip')return`
-        <div class="line"><img src="img/trip.webp" alt=""><div><div class="n">טריפטיך אעופה אשכונה · הילד · שמח בני</div><div class="m">שלוש מסגרות עץ טבעי עם פספרטו · כמות ${x.q}</div></div><div class="r"><span>${nis(TRIPLE*x.q)}</span><button class="rm" type="button" data-i="${i}">הסרה</button></div></div>`;if(x.kind==='set'){const m=mixOf(x.c1,x.c2);return`
+        <div class="line"><img src="img/trip.webp" alt=""><div><div class="n">טריפטיך אעופה אשכונה · הילד · שמח בני</div><div class="m">שלוש מסגרות עץ טבעי עם פספרטו</div></div><div class="r"><span>${nis(TRIPLE*x.q)}</span><span class="qs"><button type="button" class="qd" data-i="${i}" data-d="-1" aria-label="פחות">−</button><b>${x.q}</b><button type="button" class="qd" data-i="${i}" data-d="1" aria-label="עוד">+</button></span><button class="rm" type="button" data-i="${i}">הסרה</button></div></div>`;if(x.kind==='set'){const m=mixOf(x.c1,x.c2);return`
         <div class="line">
           <img src="img/set.jpg" alt="">
           <div><div class="n">צבע + צבע</div>
-            <div class="m">${WORDS[x.w1].w} (${PRIM[x.c1].n}) · קיבוץ גלויות (${m.n}) · ${WORDS[x.w2].w} (${PRIM[x.c2].n}) · ${SIZES[x.size].n} · כמות ${x.q}</div></div>
-          <div class="r"><span>${nis(SET_PRICE[x.size]*x.q)}</span><button class="rm" type="button" data-i="${i}">הסרה</button></div>
+            <div class="m">${WORDS[x.w1].w} (${PRIM[x.c1].n}) · קיבוץ גלויות (${m.n}) · ${WORDS[x.w2].w} (${PRIM[x.c2].n}) · ${SIZES[x.size].n}</div></div>
+          <div class="r"><span>${nis(SET_PRICE[x.size]*x.q)}</span><span class="qs"><button type="button" class="qd" data-i="${i}" data-d="-1" aria-label="פחות">−</button><b>${x.q}</b><button type="button" class="qd" data-i="${i}" data-d="1" aria-label="עוד">+</button></span><button class="rm" type="button" data-i="${i}">הסרה</button></div>
         </div>`}const p=P.find(y=>y.id===x.id);return`
         <div class="line">
           <img src="${img(p.id,x.color||'white')}" alt="">
           <div><div class="n">${p.name}</div>
-            <div class="m">${x.kind==='framed'?'ממוסגר · '+COLORS.find(c=>c.id===x.color).name:'פוסטר להדפסה (קובץ)'} · כמות ${x.q}</div></div>
-          <div class="r"><span>${nis((x.kind==='framed'?PRICE_FRAMED:POSTER)*x.q)}</span><button class="rm" type="button" data-i="${i}">הסרה</button></div>
+            <div class="m">${x.kind==='framed'?'ממוסגר · '+COLORS.find(c=>c.id===x.color).name:'פוסטר להדפסה (קובץ)'}</div></div>
+          <div class="r"><span>${nis((x.kind==='framed'?PRICE_FRAMED:POSTER)*x.q)}</span><span class="qs"><button type="button" class="qd" data-i="${i}" data-d="-1" aria-label="פחות">−</button><b>${x.q}</b><button type="button" class="qd" data-i="${i}" data-d="1" aria-label="עוד">+</button></span><button class="rm" type="button" data-i="${i}">הסרה</button></div>
         </div>`}).join(''):`<div class="empty">העגלה ריקה. <a href="#prints">לכל ההדפסים</a></div>`}
     </div>
     <aside class="sum" aria-label="סיכום הזמנה">
@@ -449,6 +451,7 @@ function cartView(){
     </aside>
   </section>`;
   V.querySelectorAll('.rm').forEach(b=>b.onclick=()=>{cart.splice(+b.dataset.i,1);save();cartView()});
+  V.querySelectorAll('.qd').forEach(b=>b.onclick=()=>{const x=cart[+b.dataset.i];x.q+=+b.dataset.d;if(x.q<1)cart.splice(+b.dataset.i,1);save();cartView()});
   const f=document.getElementById('co');
   if(f)f.addEventListener('submit',e=>{
     e.preventDefault();
@@ -674,14 +677,21 @@ function sendOrder(f,m){
       const link=ok?PAYLINKS[t.total]:null;
       cart.length=0; save();
       try{localStorage.setItem('mm-last',no)}catch(e){}
-      if(link){m.innerHTML=`<b>ההזמנה ${no} נשמרה.</b><br>בעמוד התשלום, כתבי את מספר ההזמנה <b>${no}</b> בשדה "הערה למוכר".<br><a class="cta" id="paygo" href="${link}" style="display:inline-block;margin-top:10px">להעתקת המספר ומעבר לתשלום</a>`;
-        document.getElementById('paygo').onclick=()=>{try{navigator.clipboard.writeText(no)}catch(e){}};}
+      if(link){
+        f.querySelectorAll('.f,.two,button[type=submit]').forEach(e=>e.hidden=true);
+        m.innerHTML=`<b>ההזמנה ${no} נשמרה.</b> נשאר רק לשלם. בשדה "הערה למוכר" כתבי <b>${no}</b> <button type="button" class="rm" id="cpno">העתקה</button>
+          <iframe class="payframe" src="${link}" title="תשלום מאובטח"></iframe>
+          <a class="rm" id="paygo" href="${link}" target="_blank" rel="noopener">לא נטען? לפתיחת עמוד התשלום בחלון חדש</a>`;
+        document.getElementById('cpno').onclick=()=>{try{navigator.clipboard.writeText(no)}catch(e){}};
+        document.getElementById('paygo').onclick=()=>{try{navigator.clipboard.writeText(no)}catch(e){}};
+        m.scrollIntoView({behavior:'smooth',block:'start'});}
       else m.textContent=`תודה! ההזמנה ${no} התקבלה. קישור לתשלום מאובטח יישלח אלייך תוך כמה שעות.`;
     })
     .catch(()=>{btn.disabled=false;m.textContent='משהו לא עבד בשליחה. נסי שוב בעוד רגע.'});
 }
 
 function thanks(){
+  if(window.top!==window){try{window.top.location.hash='thanks';return}catch(e){}}
   let no='';try{no=localStorage.getItem('mm-last')||''}catch(e){}
   V.innerHTML=`<section class="wrap sec legal"><h2>תודה!</h2><p>התשלום התקבל${no?` עבור הזמנה ${no}`:''}. קבלה נשלחה אלייך למייל.</p><p>ההדפסים מודפסים וממוסגרים במיוחד בשבילך, ויגיעו עד 5 ימי עסקים.</p><p><a href="#shop">חזרה לחנות</a></p></section>`;
 }
