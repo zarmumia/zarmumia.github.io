@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="only light">
 <meta name="robots" content="noindex">
 <title>המרקט המסורתי</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,14 +17,8 @@
   --ok:#3E6B4A;
   --display:'Keter YG','Frank Ruhl Libre',serif;
   --body:'Assistant','Arial Hebrew',Arial,sans-serif;
-  color-scheme:light;
+  color-scheme:only light; /* חנות בהירה בלבד: ההדפסים נראים כמו על קיר אמיתי */
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#1C1A17; --wall:#24211D; --ink:#EFE8DC; --ink-soft:#B3A895; --sand:#C2A77C;
-  --line:rgba(239,232,220,.14); --card:#26231F; --accent:#D2B585; --ok:#8DBB97; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --paper:#1C1A17; --wall:#24211D; --ink:#EFE8DC; --ink-soft:#B3A895; --sand:#C2A77C;
-  --line:rgba(239,232,220,.14); --card:#26231F; --accent:#D2B585; --ok:#8DBB97; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;direction:rtl;font-synthesis:none}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
