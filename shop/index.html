@@ -663,7 +663,7 @@ function itemLine(x){
   const p=P.find(y=>y.id===x.id);
   return `${p.plain} · ${x.kind==='framed'?'ממוסגר, מסגרת '+COLORS.find(c=>c.id===x.color).name:'פוסטר להדפסה (קובץ)'} · כמות ${x.q}`;
 }
-const WORKER='';  // כתובת ה-Worker ב-Cloudflare, למשל https://mm-pay.xxx.workers.dev
+const WORKER='https://mm-pay.fanny-ra.workers.dev';  // כתובת ה-Worker ב-Cloudflare, למשל https://mm-pay.xxx.workers.dev
 function payModal(no,url,note){
   const d=document.createElement('div');d.className='paymodal';d.setAttribute('role','dialog');d.setAttribute('aria-label','תשלום מאובטח');
   d.innerHTML=`<div class="pm"><div class="pmh"><span>הזמנה ${no}${note?' · כתבי את המספר ב"הערה למוכר"':' · תשלום מאובטח'}</span><button type="button" aria-label="סגירה">✕</button></div><iframe src="${url}" title="תשלום מאובטח" allow="payment"></iframe></div>`;
