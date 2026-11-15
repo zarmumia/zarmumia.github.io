@@ -652,8 +652,8 @@ function legal(k){
   <p class="lnav"><a href="#shipping">משלוחים ושירות</a> · <a href="#terms">תקנון וביטולים</a> · <a href="#privacy">פרטיות</a> · <a href="#access">נגישות</a></p></section>`;
 }
 
-// הזמנות: נשלחות למייל דרך FormSubmit, ואז מעבר לעמוד סליקה לפי הסכום
-const ORDER_TO='https://formsubmit.co/ajax/fanny.ra@gmail.com';
+// הזמנות: ליד נשלח למייל דרך ה-Worker, ואז תשלום בתוך הדף
+const ORDER_TO='https://mm-pay.fanny-ra.workers.dev/lead';
 const PB='https://www.paperless.tax/invoice?sID=3wR0dOAkWQg6lDf1w-95K';
 const PAYLINKS={5:PB+'W9TybJKAzqSdysLLeWGFlQmJ2RISmykMA', /* בדיקה זמנית */ 189:PB+'RWRxP7Vjt7RnkPKu5L0cISoEtLkn2DkvA',289:PB+'TCfD9kwUJMnMvjmjm-kq2JlfGCX76bmnQ',399:PB+'XE7R6WUx9eMMJN0TEHzitHEvVV-7L7_lw',
   39:PB+'Yf8Za3RxxsZDALDmg3v94Y8Yc-GyLR5Cw',449:PB+'bA-4DPV9gVv5TVZCEcyffTIzpwcWdCSgQ',549:PB+'QJqP57OolLMn7yZHHJpm5mCRwB_kI_DfQ'}; // עמודי מכירה בפייפרלס לפי סכום
@@ -688,7 +688,7 @@ function sendOrder(f,m){
     'הערות':v('nt')||'—','פריטים':cart.map(itemLine).join(' | '),'משלוח':t.ship?nis(t.ship):'חינם','לתשלום':nis(t.total)};
   try{localStorage.setItem('mm-last',no)}catch(e){}
   const tfetch=(u,o,ms)=>{const c=new AbortController();const t=setTimeout(()=>c.abort(),ms);return fetch(u,Object.assign({signal:c.signal},o)).finally(()=>clearTimeout(t))};
-  const mail=tfetch(ORDER_TO,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)},9000).then(r=>r.ok).catch(()=>false);
+  const mail=tfetch(ORDER_TO,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)},9000).then(r=>r.ok?r.json():{}).then(j=>!!j.ok).catch(()=>false);
   // 1) תשלום לסכום המדויק דרך ה-Worker (פייפרלס API)
   const viaWorker=!WORKER?Promise.resolve(null):tfetch(WORKER+'/checkout',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({no,cart:cart.map(x=>({kind:x.kind,q:x.q,size:x.size||null})),buyer:{name:v('fn'),email:v('em'),phone:v('ph'),address:addr},
