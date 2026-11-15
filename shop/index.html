@@ -456,7 +456,7 @@ function cartView(){
     const bad=[...f.querySelectorAll('[required]')].filter(i=>!i.value.trim()||!i.checkValidity());
     const m=document.getElementById('msg');m.hidden=false;
     if(bad.length){m.textContent='חסרים פרטים: '+bad.map(i=>f.querySelector(`label[for="${i.id}"]`).textContent).join(', ');bad[0].focus();return}
-    m.textContent='זו גרסת תצוגה. בגרסה החיה הכפתור הזה יעביר לעמוד התשלום של פיימי, והחשבונית תצא אוטומטית.';
+    sendOrder(f,m);
   });
 }
 
@@ -645,6 +645,33 @@ function legal(k){
   const L=LEGAL[k];
   V.innerHTML=`<section class="wrap sec legal"><h2>${L.t}</h2>${L.b}
   <p class="lnav"><a href="#shipping">משלוחים ושירות</a> · <a href="#terms">תקנון וביטולים</a> · <a href="#privacy">פרטיות</a> · <a href="#access">נגישות</a></p></section>`;
+}
+
+// הזמנות: נשלחות למייל דרך FormSubmit, ואז מעבר לעמוד סליקה לפי הסכום
+const ORDER_TO='https://formsubmit.co/ajax/fanny.ra@gmail.com';
+const PAYLINKS={}; // סכום -> קישור עמוד מכירה בפייפרלס, למשל 189:'https://...'
+function itemLine(x){
+  if(x.kind==='trip')return `טריפטיך אעופה · הילד · שמח בני · כמות ${x.q}`;
+  if(x.kind==='set')return `צבע + צבע: ${WORDS[x.w1].w} (${PRIM[x.c1].n}) · קיבוץ גלויות · ${WORDS[x.w2].w} (${PRIM[x.c2].n}) · ${SIZES[x.size].n} · כמות ${x.q}`;
+  const p=P.find(y=>y.id===x.id);
+  return `${p.plain} · ${x.kind==='framed'?'ממוסגר, מסגרת '+COLORS.find(c=>c.id===x.color).name:'פוסטר להדפסה (קובץ)'} · כמות ${x.q}`;
+}
+function sendOrder(f,m){
+  const t=totals(), v=id=>{const e=f.querySelector('#'+id);return e?e.value.trim():''};
+  const d=new Date(), no=`${String(d.getFullYear()).slice(2)}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}-${Math.floor(100+Math.random()*900)}`;
+  const btn=f.querySelector('button[type=submit]'); btn.disabled=true; m.textContent='שולחים את ההזמנה...';
+  const body={_subject:`הזמנה ${no} · ${nis(t.total)}`,_template:'table',_captcha:'false',
+    'מספר הזמנה':no,'שם':v('fn'),'טלפון':v('ph'),'מייל':v('em'),'כתובת':[v('st'),v('ct')].filter(Boolean).join(', ')||'—',
+    'הערות':v('nt')||'—','פריטים':cart.map(itemLine).join(' | '),'משלוח':t.ship?nis(t.ship):'חינם','לתשלום':nis(t.total)};
+  fetch(ORDER_TO,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)})
+    .then(r=>{if(!r.ok)throw 0;return r.json()})
+    .then(()=>{
+      const link=PAYLINKS[t.total];
+      cart.length=0; save();
+      if(link){m.textContent=`ההזמנה ${no} נשמרה. מעבירים לתשלום מאובטח...`;setTimeout(()=>location.href=link,900)}
+      else m.textContent=`תודה! ההזמנה ${no} התקבלה. קישור לתשלום מאובטח יישלח אלייך תוך כמה שעות.`;
+    })
+    .catch(()=>{btn.disabled=false;m.textContent='משהו לא עבד בשליחה. נסי שוב בעוד רגע.'});
 }
 
 function route(){
