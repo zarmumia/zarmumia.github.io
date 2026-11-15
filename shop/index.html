@@ -441,11 +441,11 @@ function cartView(){
           <div class="f"><label for="ph">טלפון</label><input id="ph" type="tel" required autocomplete="tel"></div>
           <div class="f"><label for="em">אימייל</label><input id="em" type="email" required autocomplete="email"></div>
         </div>
-        ${t.nF?`<div class="two">
+        ${(t.nF||cart.some(x=>x.kind==='set'||x.kind==='trip'))?`<div class="two">
           <div class="f"><label for="st">רחוב ומספר</label><input id="st" required autocomplete="street-address"></div>
           <div class="f"><label for="ct">עיר</label><input id="ct" required autocomplete="address-level2"></div>
         </div>`:''}
-        <div class="f"><label for="nt">הערות למשלוח (לא חובה)</label><textarea id="nt" rows="2"></textarea></div>
+        <div class="f"><label for="nt">ברכה או הערות למשלוח (לא חובה)</label><textarea id="nt" rows="2"></textarea></div>
         <button class="cta" type="submit">מעבר לתשלום מאובטח</button>
         <div id="msg" class="note" hidden></div>
       </form>`:''}
@@ -663,38 +663,48 @@ function itemLine(x){
   const p=P.find(y=>y.id===x.id);
   return `${p.plain} · ${x.kind==='framed'?'ממוסגר, מסגרת '+COLORS.find(c=>c.id===x.color).name:'פוסטר להדפסה (קובץ)'} · כמות ${x.q}`;
 }
+const WORKER='';  // כתובת ה-Worker ב-Cloudflare, למשל https://mm-pay.xxx.workers.dev
+function payModal(no,url,note){
+  const d=document.createElement('div');d.className='paymodal';d.setAttribute('role','dialog');d.setAttribute('aria-label','תשלום מאובטח');
+  d.innerHTML=`<div class="pm"><div class="pmh"><span>הזמנה ${no}${note?' · כתבי את המספר ב"הערה למוכר"':' · תשלום מאובטח'}</span><button type="button" aria-label="סגירה">✕</button></div><iframe src="${url}" title="תשלום מאובטח" allow="payment"></iframe></div>`;
+  d.querySelector('button').onclick=()=>d.remove(); document.body.appendChild(d);
+}
+function showPay(f,m,no,url,note){
+  f.querySelectorAll('.f,.two,button[type=submit]').forEach(e=>e.hidden=true);
+  const cp=()=>{try{navigator.clipboard.writeText(no).catch(()=>{})}catch(e){}};
+  m.innerHTML=`<b>ההזמנה ${no} נשמרה.</b> נשאר רק לשלם.${note?` בשדה "הערה למוכר" כתבי <b>${no}</b> <button type="button" class="rm" id="cpno">העתקה</button>`:''}
+    <br><button type="button" class="cta" id="payopen" style="margin-top:10px">לתשלום מאובטח</button>
+    <a class="rm" id="paygo" href="${url}" target="_blank" rel="noopener" style="display:block;margin-top:8px">לא נפתח? לעמוד התשלום בחלון חדש</a>`;
+  const open=()=>{if(note)cp();payModal(no,url,note)};
+  document.getElementById('payopen').onclick=open; if(note){document.getElementById('cpno').onclick=cp;document.getElementById('paygo').onclick=cp;} open();
+}
 function sendOrder(f,m){
   const t=totals(), v=id=>{const e=f.querySelector('#'+id);return e?e.value.trim():''};
   const d=new Date(), no=`${String(d.getFullYear()).slice(2)}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}-${Math.floor(100+Math.random()*900)}`;
   const btn=f.querySelector('button[type=submit]'); btn.disabled=true; m.textContent='שולחים את ההזמנה...';
+  const addr=[v('st'),v('ct')].filter(Boolean).join(', ');
   const body={_subject:`הזמנה ${no} · ${nis(t.total)}`,_template:'table',_captcha:'false',
-    'מספר הזמנה':no,'שם':v('fn'),'טלפון':v('ph'),'מייל':v('em'),'כתובת':[v('st'),v('ct')].filter(Boolean).join(', ')||'—',
+    'מספר הזמנה':no,'שם':v('fn'),'טלפון':v('ph'),'מייל':v('em'),'כתובת':addr||'—',
     'הערות':v('nt')||'—','פריטים':cart.map(itemLine).join(' | '),'משלוח':t.ship?nis(t.ship):'חינם','לתשלום':nis(t.total)};
-  fetch(ORDER_TO,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)})
-    .then(r=>{if(!r.ok)throw 0;return r.json()})
-    .then(()=>{
-      const q=k=>cart.filter(x=>x.kind===k).reduce((s,x)=>s+x.q,0), nF=q('framed'),nP=q('poster'),nS=q('set'),nT=q('trip');
-      // קישור רק כשההזמנה תואמת בדיוק את המוצר שבעמוד התשלום, אחרת קישור ידני
-      const nX=q('test');
-      const ok=(nX===1&&cart.length===1)||(!nX&&nF>=1&&nF<=3&&!nP&&!nS&&!nT)||(nT===1&&!nF&&!nP&&!nS)||(nP===1&&!nF&&!nS&&!nT)||(nS===1&&!nF&&!nP&&!nT);
-      const link=ok?PAYLINKS[t.total]:null;
-      try{localStorage.setItem('mm-last',no)}catch(e){}
-      if(!link){cart.length=0;save();}
-      if(link){
-        f.querySelectorAll('.f,.two,button[type=submit]').forEach(e=>e.hidden=true);
-        m.innerHTML=`<b>ההזמנה ${no} נשמרה.</b> נשאר רק לשלם. בשדה "הערה למוכר" כתבי <b>${no}</b> <button type="button" class="rm" id="cpno">העתקה</button>
-          <br><button type="button" class="cta" id="payopen" style="margin-top:10px">לתשלום מאובטח</button>
-          <a class="rm" id="paygo" href="${link}" target="_blank" rel="noopener" style="display:block;margin-top:8px">לא נפתח? לעמוד התשלום בחלון חדש</a>`;
-        const open=()=>{try{navigator.clipboard.writeText(no).catch(()=>{})}catch(e){}
-          const d=document.createElement('div');d.className='paymodal';d.setAttribute('role','dialog');d.setAttribute('aria-label','תשלום מאובטח');
-          d.innerHTML=`<div class="pm"><div class="pmh"><span>הזמנה ${no} · כתבי את המספר ב"הערה למוכר"</span><button type="button" aria-label="סגירה">✕</button></div><iframe src="${link}" title="תשלום מאובטח"></iframe></div>`;
-          d.querySelector('button').onclick=()=>d.remove(); document.body.appendChild(d);};
-        document.getElementById('payopen').onclick=open; open();
-        document.getElementById('cpno').onclick=()=>{try{navigator.clipboard.writeText(no).catch(()=>{})}catch(e){}};
-        document.getElementById('paygo').onclick=()=>{try{navigator.clipboard.writeText(no).catch(()=>{})}catch(e){}};}
-      else m.textContent=`תודה! ההזמנה ${no} התקבלה. קישור לתשלום מאובטח יישלח אלייך תוך כמה שעות.`;
-    })
-    .catch(()=>{btn.disabled=false;m.textContent='משהו לא עבד בשליחה. נסי שוב בעוד רגע.'});
+  try{localStorage.setItem('mm-last',no)}catch(e){}
+  const mail=fetch(ORDER_TO,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)}).then(r=>r.ok).catch(()=>false);
+  // 1) תשלום לסכום המדויק דרך ה-Worker (פייפרלס API)
+  const viaWorker=!WORKER?Promise.resolve(null):fetch(WORKER+'/checkout',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({no,cart:cart.map(x=>({kind:x.kind,q:x.q,size:x.size||null})),buyer:{name:v('fn'),email:v('em'),phone:v('ph'),address:addr},
+        remark:`הזמנה ${no}: ${cart.map(itemLine).join(' | ')}${v('nt')?' | הערות: '+v('nt'):''}`.slice(0,480),total:t.total})})
+    .then(r=>r.ok?r.json():null).then(j=>j&&j.url&&j.amount===t.total?j.url:null).catch(()=>null);
+  Promise.all([mail,viaWorker]).then(([sent,url])=>{
+    if(url)return showPay(f,m,no,url,false);
+    // 2) גיבוי: עמודי מכירה קבועים לפי סכום
+    const q=k=>cart.filter(x=>x.kind===k).reduce((s,x)=>s+x.q,0), nF=q('framed'),nP=q('poster'),nS=q('set'),nT=q('trip'),nX=q('test');
+    const ok=(nX===1&&cart.length===1)||(!nX&&nF>=1&&nF<=3&&!nP&&!nS&&!nT)||(nT===1&&!nF&&!nP&&!nS)||(nP===1&&!nF&&!nS&&!nT)||(nS===1&&!nF&&!nP&&!nT);
+    const link=ok?PAYLINKS[t.total]:null;
+    if(link)return showPay(f,m,no,link,true);
+    // 3) גיבוי אחרון: הזמנה במייל וקישור ידני
+    if(!sent){btn.disabled=false;m.textContent='משהו לא עבד בשליחה. נסי שוב בעוד רגע.';return}
+    cart.length=0;save();
+    m.textContent=`תודה! ההזמנה ${no} התקבלה. קישור לתשלום מאובטח יישלח אלייך תוך כמה שעות.`;
+  });
 }
 
 function thanks(){
