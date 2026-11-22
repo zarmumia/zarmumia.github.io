@@ -61,10 +61,10 @@ nav a:hover{color:var(--ink)}
 
 
 /* פתיח נעביבשק */
-.bhero{position:relative;background:#1C7FA6 url(img/hero.jpg) center 72%/cover no-repeat;padding:clamp(28px,6vw,72px) 16px}
-.bhero .card{max-width:760px;margin:0 auto;background:var(--paper);border:3px solid var(--teal);outline:6px solid var(--paper);border-radius:18px;padding:clamp(24px,4vw,44px) clamp(20px,4vw,48px);display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,3vw,36px);align-items:center;box-shadow:0 18px 40px rgba(6,30,56,.35)}
-.bhero img{width:clamp(120px,18vw,190px);height:auto;display:block}
-.bhero h1{font-size:clamp(46px,7vw,82px);line-height:1;color:var(--ink)}
+.bhero{position:relative;background:#1C7FA6 url(img/hero.jpg) center 84%/cover no-repeat;min-height:min(78vh,640px);display:flex;align-items:center;padding:clamp(28px,6vw,72px) 16px}
+.bhero .card{width:100%;max-width:540px;margin:0;margin-inline-start:max(0px,calc((100% - 1180px)/2));background:var(--paper);border:3px solid var(--teal);outline:6px solid var(--paper);border-radius:18px;padding:clamp(24px,4vw,44px) clamp(20px,4vw,48px);display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,3vw,36px);align-items:center;box-shadow:0 18px 40px rgba(6,30,56,.35)}
+.bhero img{width:clamp(96px,11vw,130px);height:auto;display:block}
+.bhero h1{font-size:clamp(44px,5.5vw,68px);line-height:1;color:var(--ink)}
 .bhero .tag{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);color:var(--accent);margin:6px 0 14px}
 .bhero p{margin:0 0 22px;color:var(--ink-soft);max-width:28em}
 .bhero .btns{display:flex;gap:12px;flex-wrap:wrap}
@@ -221,7 +221,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <button class="cartbtn" id="cartbtn" type="button" aria-label="לעגלה">עגלה <b id="count">0</b></button>
   </nav>
 </div></header>
-<div class="zellige" aria-hidden="true"></div>
 
 <main id="view"></main>
 
@@ -336,7 +335,7 @@ function shop(){
   </section>
   <section class="wrap hero">
     <div>
-      <h2 class="disp" style="font-size:clamp(34px,5vw,58px);line-height:1.08">פיוטים, שירים ומילים של הבית, ממוסגרים לקיר</h2>
+      <h2 class="disp" style="font-size:clamp(28px,3.4vw,40px);line-height:1.15">פיוטים, שירים ומילים של הבית, ממוסגרים לקיר</h2>
       <p>שורות מהפיוטים והשירים שליוו את הבתים שלנו, בעיצוב נקי ובאות עברית מסורתית. כל הדפס מגיע ממוסגר עם פספרטו, מוכן לתלייה.</p>
       <a class="cta" href="#prints">בוחרים 2 או 3 הדפסים</a>
       <div class="facts"><span>זכוכית ופספרטו</span><span>מסגרת 20×30 ס״מ</span><span>משלוח חינם מ־2 תמונות</span></div>
