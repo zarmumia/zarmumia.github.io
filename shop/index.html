@@ -70,6 +70,8 @@ nav a:hover{color:var(--ink)}
 .bhero .btns{display:flex;gap:12px;flex-wrap:wrap}
 @media (max-width:620px){.bhero .card{grid-template-columns:1fr;text-align:center;justify-items:center}.bhero .btns{justify-content:center}}
 
+.banner{width:100%;aspect-ratio:16/5;object-fit:cover;display:block;margin-bottom:28px;border-radius:4px}
+@media (max-width:620px){.banner{aspect-ratio:16/8}}
 /* מבצע */
 .deal{background:var(--wall);border-block:1px solid var(--line)}
 .deal .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding-block:18px 10px;font-size:15px;max-width:640px;margin-inline:auto}
@@ -355,6 +357,7 @@ function shop(){
   </a>
   <section class="wrap sec" id="moroccan" style="padding-top:40px">
     <div class="sec-h"><h2>קולקציה מרוקאית</h2><p>מילים, פיוטים ושירי חינה מהבית המרוקאי</p></div>
+    <img class="banner" src="img/sec-moroccan.jpg" alt="מגש נחושת מרוקאי עם ורדים מיובשים ועשבי תיבול" loading="lazy" style="object-position:center 45%">
     <div class="grid">${['p18','p19','p20','p26','p1','p2','p4','p3','p16','p17'].map(i=>P.find(p=>p.id===i)).map(card).join('')}</div>
   </section>
   <section class="wrap sec" id="lang" style="padding-top:0">
@@ -363,6 +366,7 @@ function shop(){
   </section>
   <section class="wrap sec" id="prints">
     <div class="sec-h"><h2>שולחן השבת ופיוטים</h2><p>זמירות, פיוטים ושירים מהבית</p></div>
+    <img class="banner" src="img/sec-shabbat.jpg" alt="שולחן שבת ערוך עם פמוטים, כיסוי חלה וכוס קידוש" loading="lazy" style="object-position:center 55%">
     <div class="grid">${['p1','p3','p2','p4','p8','p9'].map(i=>P.find(p=>p.id===i)).concat(P.filter(p=>!p.s&&!['p1','p3','p2','p4','p8','p9'].includes(p.id))).map(card).join('')}</div>
   </section>
   <section class="wrap sec" id="joy" style="padding-top:0">
@@ -613,7 +617,7 @@ function tripView(){
 function about(){
   V.innerHTML=`
   <section class="wrap sec about">
-    <img src="img/all.jpg" alt="כל חמשת ההדפסים בשלושת צבעי המסגרת">
+    <img src="img/about-tea.jpg" alt="סט תה מרוקאי עם כוסות צבעוניות" style="object-position:center 60%">
     <div>
       <h2>על המותג</h2>
       <p>נעביבשק מביא לקיר את המילים ששמענו בבית: שורות מפיוטים, משירי סבתא ומהשפות שהגיעו איתנו. כל טקסט נבדק מול מקור, עם ניקוד מלא וקרדיט למחבר.</p>
