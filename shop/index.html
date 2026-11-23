@@ -241,10 +241,8 @@ const COLORS=[
   {id:'honey',name:'חום כהה',hex:'#7A5434'}
 ];
 const P=[
-  {id:'p1',l:'א',name:'אָעוּפָה אֶשְׁכּוֹנָה',plain:'אעופה אשכונה',sub:'עם להקת הציפורים',by:'מתוך פיוט של ר׳ יצחק אביחצירא',
-   text:'הבית הראשון של הפיוט, עם להקת ציפורים שעולה אל המילים. הדפס בגווני נייר חמים שמתאים לסלון, למסדרון ולחדר עבודה.'},
   {id:'p2',l:'ב',name:'אָעוּפָה אֶשְׁכּוֹנָה',plain:'אעופה אשכונה · מינימליסטי',sub:'גרסה מינימליסטית',by:'מתוך פיוט של ר׳ יצחק אביחצירא',
-   text:'אותו בית בלי איור. טיפוגרפיה בכתר, הרבה אוויר סביב. משתלב יפה בזוג עם הגרסה עם הציפורים.'},
+   text:'הבית הראשון של הפיוט, בלי איור. טיפוגרפיה בכתר, הרבה אוויר סביב.'},
   {id:'p3',l:'ג',name:'שְׂמַח בְּנִי בְּחֶלְקְךָ',plain:'שמח בני בחלקך',sub:'ר׳ יצחק סונה',by:'מילים: ר׳ יצחק סונה',
    text:'חמש שורות על שמחה בחלק ועל העולם שפתוח לפניך. מתנה טובה לבר מצווה, לחדר של ילד או לבית חדש.'},
   {id:'p4',l:'ד',name:'חֲשׂוֹף זְרוֹעֲךָ',plain:'חשוף זרועך',sub:'לקבץ פזורים · מפת ישראל',by:'מתוך פיוט של ר׳ יצחק אביחצירא',
@@ -358,7 +356,7 @@ function shop(){
   <section class="wrap sec" id="moroccan" style="padding-top:40px">
     <div class="sec-h"><h2>קולקציה מרוקאית</h2><p>מילים, פיוטים ושירי חינה מהבית המרוקאי</p></div>
     <img class="banner" src="img/sec-moroccan.jpg" alt="מגש נחושת מרוקאי עם ורדים מיובשים ועשבי תיבול" loading="lazy" style="object-position:center 45%">
-    <div class="grid">${['p18','p19','p20','p26','p1','p2','p4','p3','p16','p17'].map(i=>P.find(p=>p.id===i)).map(card).join('')}</div>
+    <div class="grid">${['p18','p19','p20','p26','p2','p4','p3','p16','p17'].map(i=>P.find(p=>p.id===i)).map(card).join('')}</div>
   </section>
   <section class="wrap sec" id="lang" style="padding-top:0">
     <div class="sec-h"><h2>שפות מהבית</h2><p>מילה אחת מכל בית, בצבעים</p></div>
@@ -367,7 +365,7 @@ function shop(){
   <section class="wrap sec" id="prints">
     <div class="sec-h"><h2>שולחן השבת ופיוטים</h2><p>זמירות, פיוטים ושירים מהבית</p></div>
     <img class="banner" src="img/sec-shabbat.jpg" alt="שולחן שבת ערוך עם פמוטים, כיסוי חלה וכוס קידוש" loading="lazy" style="object-position:center 55%">
-    <div class="grid">${['p1','p3','p2','p4','p8','p9'].map(i=>P.find(p=>p.id===i)).concat(P.filter(p=>!p.s&&!['p1','p3','p2','p4','p8','p9'].includes(p.id))).map(card).join('')}</div>
+    <div class="grid">${['p3','p2','p4','p8','p9'].map(i=>P.find(p=>p.id===i)).concat(P.filter(p=>!p.s&&!['p3','p2','p4','p8','p9'].includes(p.id))).map(card).join('')}</div>
   </section>
   <section class="wrap sec" id="joy" style="padding-top:0">
     <div class="sec-h"><h2>סדרת השמחות</h2><p>חתונה · חינה · זוג ${nis(PAIR)}</p></div>
