@@ -13,18 +13,18 @@
 /* פריסה: חנות-גלריה, קיר טיח בהיר, תמונות ממוסגרות כמו בבית, טקסט מימין */
 :root{
   --paper:#FBF7F0; --wall:#E6F2F1; --ink:#0A2A4D; --ink-soft:#3D5672;
-  --sand:#C85A12; --line:rgba(10,42,77,.15); --card:#FFFFFF; --accent:#1C7FA6;
+  --sand:#C85A12; --line:rgba(10,42,77,.15); --card:#FFFFFF; --accent:#2C5DB0;
   --ok:#2E7D4F; --teal:#17B0AB; --magenta:#A51A78;
   --display:'Keter YG','Arial Hebrew',Arial,sans-serif;
   --body:'Assistant','Arial Hebrew',Arial,sans-serif;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#0A1F36; --wall:#0F2C4A; --ink:#F3F7F8; --ink-soft:#A9C3D3; --sand:#F5A25E;
-  --line:rgba(243,247,248,.15); --card:#10304F; --accent:#3CC4BF; --ok:#7FCB98; color-scheme:dark}}
+  --paper:#0B1A3A; --wall:#102654; --ink:#F3F7F8; --ink-soft:#B3C3E6; --sand:#F5A25E;
+  --line:rgba(243,247,248,.15); --card:#13295A; --accent:#7FA2EC; --ok:#7FCB98; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --paper:#0A1F36; --wall:#0F2C4A; --ink:#F3F7F8; --ink-soft:#A9C3D3; --sand:#F5A25E;
-  --line:rgba(243,247,248,.15); --card:#10304F; --accent:#3CC4BF; --ok:#7FCB98; color-scheme:dark}
+  --paper:#0B1A3A; --wall:#102654; --ink:#F3F7F8; --ink-soft:#B3C3E6; --sand:#F5A25E;
+  --line:rgba(243,247,248,.15); --card:#13295A; --accent:#7FA2EC; --ok:#7FCB98; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;direction:rtl;font-synthesis:none}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
@@ -61,8 +61,8 @@ nav a:hover{color:var(--ink)}
 
 
 /* פתיח נעביבשק */
-.bhero{position:relative;background:#1C7FA6 url(img/hero.jpg) center 84%/cover no-repeat;min-height:min(78vh,640px);display:flex;align-items:center;padding:clamp(28px,6vw,72px) 16px}
-.bhero .card{width:100%;max-width:540px;margin:0;margin-inline-start:max(0px,calc((100% - 1180px)/2));background:var(--paper);border:3px solid var(--teal);outline:6px solid var(--paper);border-radius:18px;padding:clamp(24px,4vw,44px) clamp(20px,4vw,48px);display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,3vw,36px);align-items:center;box-shadow:0 18px 40px rgba(6,30,56,.35)}
+.bhero{position:relative;background:#2C5DB0 url(img/hero.jpg) center 84%/cover no-repeat;min-height:min(78vh,640px);display:flex;align-items:center;padding:clamp(28px,6vw,72px) 16px}
+.bhero .card{width:100%;max-width:540px;margin:0;margin-inline-start:max(0px,calc((100% - 1180px)/2));background:var(--paper);border:3px solid var(--accent);outline:6px solid var(--paper);border-radius:18px;padding:clamp(24px,4vw,44px) clamp(20px,4vw,48px);display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,3vw,36px);align-items:center;box-shadow:0 18px 40px rgba(6,30,56,.35)}
 .bhero img{width:clamp(96px,11vw,130px);height:auto;display:block}
 .bhero h1{font-size:clamp(44px,5.5vw,68px);line-height:1;color:var(--ink)}
 .bhero .tag{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);color:var(--accent);margin:6px 0 14px}
